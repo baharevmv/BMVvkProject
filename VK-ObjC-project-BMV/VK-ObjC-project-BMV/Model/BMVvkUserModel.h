@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VKServerObject.h"
 
-@interface UserModel : VKServerObject
+@interface BMVvkUserModel : VKServerObject
 
 @property (strong, nonatomic) NSString* firstName;
 @property (strong, nonatomic) NSString* lastName;

@@ -6,9 +6,9 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "UserModel.h"
+#import "BMVvkUserModel.h"
 
-@implementation UserModel
+@implementation BMVvkUserModel
 
 - (id) initWithServerResponse:(NSDictionary*) responseObject
 {

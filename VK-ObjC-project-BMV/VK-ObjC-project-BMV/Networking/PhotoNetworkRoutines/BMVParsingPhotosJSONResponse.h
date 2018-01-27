@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-@class BMVvkUserModel;
+@class BMVvkPhotoModel;
 
-@interface BMVParsingFriendsJSONResponse : NSObject
+@interface BMVParsingPhotosJSONResponse : NSObject
 
-+ (NSMutableArray <BMVvkUserModel *> *)parsingWithJSON:(NSDictionary *) json;
++ (NSMutableArray <BMVvkPhotoModel *> *)parsingWithJSON:(NSDictionary *) json;
 
 @end

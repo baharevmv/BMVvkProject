@@ -8,7 +8,7 @@
 
 #import "VKFriendsViewController.h"
 #import "VKFriendsTableViewCellView.h"
-#import "UserModel.h"
+#import "BMVvkUserModel.h"
 #import "BMVgetFriendsJSONData.h"
 
 //static NSString *const cellIdentifier = @"cellIdentifier";
@@ -17,7 +17,7 @@
 
 @property (nonatomic, copy) NSMutableArray* friendsArray;
 @property (nonatomic, strong) VKFriendsTableViewCellView *tableViewCell;
-@property (nonatomic, copy) NSMutableArray <UserModel *> *usersArray;
+@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray;
 
 
 @property (assign, nonatomic) BOOL firstAppearance;
@@ -70,10 +70,10 @@
 
 
 - (void) getFriendsFromServer:(LocalVKToken *)token {
-    [BMVgetFriendsJSONData NetworkWorkingWithJSON:token completeBlock:^(NSMutableArray <UserModel *> *users) {
-        NSLog(@"HERE IS USER - %@",users);
+    [BMVgetFriendsJSONData NetworkWorkingWithFriendsJSON:token completeBlock:^(NSMutableArray <BMVvkUserModel *> *users) {
+//        NSLog(@"HERE IS USER - %@",users);
         self.usersArray = users;
-        NSLog(@"%lu", (unsigned long)self.usersArray.count);
+//        NSLog(@"%lu", (unsigned long)self.usersArray.count);
     }];
     [self.tableView reloadData];
 }

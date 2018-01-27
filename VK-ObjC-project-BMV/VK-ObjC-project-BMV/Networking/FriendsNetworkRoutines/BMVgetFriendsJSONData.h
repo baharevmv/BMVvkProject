@@ -8,15 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "LocalVKToken.h"
-#import "UserModel.h"
+#import "BMVvkUserModel.h"
 
 @interface BMVgetFriendsJSONData : NSObject
 
 
-+ (void) NetworkWorksWithJSON: (LocalVKToken *)token;
-
-
-+ (void) NetworkWorkingWithJSON: (LocalVKToken *)token completeBlock:(void(^)(NSMutableArray <UserModel *> *))completeBlock;
++ (void) NetworkWorkingWithFriendsJSON: (LocalVKToken *)token completeBlock:(void(^)(NSMutableArray <BMVvkUserModel *> *))completeBlock;
 
 
 

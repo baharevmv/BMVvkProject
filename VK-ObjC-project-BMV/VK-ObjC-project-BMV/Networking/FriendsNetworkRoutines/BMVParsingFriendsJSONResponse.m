@@ -8,23 +8,23 @@
 //  Сделано. Парсим ловко.
 
 #import "BMVParsingFriendsJSONResponse.h"
-#import "UserModel.h"
+#import "BMVvkUserModel.h"
 
 @implementation BMVParsingFriendsJSONResponse
 
 
-+ (NSMutableArray <UserModel *> *)parsingWithJSON:(NSDictionary *) json
++ (NSMutableArray <BMVvkUserModel *> *)parsingWithJSON:(NSDictionary *) json
 {
     if (!json)
     {
         return nil;
     }
     NSArray *usersArray = json[@"response"];
-    NSMutableArray <UserModel *> *readyUsersArray = [NSMutableArray new];
+    NSMutableArray <BMVvkUserModel *> *readyUsersArray = [NSMutableArray new];
     
     for (NSDictionary *netModelDictionary in usersArray)
     {
-        UserModel *startModel = [UserModel new];
+        BMVvkUserModel *startModel = [BMVvkUserModel new];
         startModel.firstName = netModelDictionary[@"first_name"];
         startModel.lastName = netModelDictionary[@"last_name"];
         startModel.userID = netModelDictionary[@"user_id"];

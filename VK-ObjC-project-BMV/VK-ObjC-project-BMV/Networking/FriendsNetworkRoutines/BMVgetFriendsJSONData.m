@@ -8,13 +8,13 @@
 
 #import "BMVgetFriendsJSONData.h"
 #import "LocalVKToken.h"
-#import "UserModel.h"
+#import "BMVvkUserModel.h"
 #import "BMVParsingFriendsJSONResponse.h"
 
 @interface BMVgetFriendsJSONData()
 
 //@property (nonatomic, copy) NSDictionary *jsonWithFriendsInfoDictionary;
-@property (nonatomic, copy) NSMutableArray <UserModel *> *networkModelArray;
+@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *networkModelArray;
 @property (nonatomic, strong) NSURLSession *urlSession;
 
 @end
@@ -35,35 +35,14 @@
 }
 
 
-+ (void) NetworkWorksWithJSON:(LocalVKToken *)token
-{
-    NSString *urlGettingFriendsListString = [[NSString alloc] initWithFormat:@"https://api.vk.com/method/friends.get?access_token=\%@&fields=first_name,last_name,nickname,domain,photo_50,photo_100,photo_max_orig&lang=ru&count=5000&version=5.69",token.tokenString];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlGettingFriendsListString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (!error)
-        {
-            NSDictionary *jsonWithFriendsInfoDictionary = [NSDictionary new];
-            jsonWithFriendsInfoDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSLog(@"%@", jsonWithFriendsInfoDictionary);
-        }
-        else
-        {
-            NSLog(@"Error occured!");
-        }
-    }];
-    [dataTask resume];
-}
-
-
-
-+ (void)NetworkWorkingWithJSON:(LocalVKToken *)token completeBlock:(void(^)(NSMutableArray <UserModel *> *))completeBlock
++ (void)NetworkWorkingWithFriendsJSON:(LocalVKToken *)token completeBlock:(void(^)(NSMutableArray <BMVvkUserModel *> *))completeBlock
 {
 
     NSString *urlGettingFriendsListString = [[NSString alloc] initWithFormat:@"https://api.vk.com/method/friends.get?access_token=\%@&fields=first_name,last_name,nickname,domain,photo_50,photo_100,photo_max_orig&lang=ru&count=5000&version=5.69",token.tokenString];
 //    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlGettingFriendsListString]];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlGettingFriendsListString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:1 error:nil];
         if (!error)
         {
             NSMutableArray *networkModelArray = [NSMutableArray new];

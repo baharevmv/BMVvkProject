@@ -10,6 +10,7 @@
 #import "VKLoginViewController.h"
 #import "VKFriendsViewController.h"
 #import "BMVgetFriendsJSONData.h"
+#import "BMVgetPhotosJSONData.h"
 #import "LocalVKToken.h"
 
 #import "VKAccessToken+CoreDataClass.h"
@@ -23,7 +24,7 @@
 @property (nonatomic, weak) UIWebView* webView;
 
 @property (nonatomic, strong) LocalVKToken *theToken;
-@property (nonatomic, copy) NSMutableArray <UserModel *> *usersArray;
+@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray;
 
 
 @property (nonatomic, strong) NSManagedObjectContext *coreDataContext;
@@ -167,11 +168,20 @@
 
 // ПРОБУЕМ РАБОТАТЬ С ДАННЫМИ
         
-        [self savingTokenToCoreData:_theToken];
+//        [self savingTokenToCoreData:_theToken];
         
 // ПРОБУЕМ РАБОТАТЬ С ДАННЫМИ
         
-//        [BMVgetFriendsJSONData NetworkWorkingWithJSON:self.theToken completeBlock:^(NSMutableArray <UserModel *> *users) {
+        [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:self.theToken completeBlock:^(NSMutableArray <BMVvkPhotoModel *> *photos) {
+                        NSLog(@"HERE IS PHOTOS - %@",photos);
+//                        self.usersArray = users;
+            //            NSLog(@"HERE %@",self.usersArray[2].firstName);
+            //            NSLog(@"HERE %@",self.usersArray[2].lastName);
+            //            NSLog(@"%lu", (unsigned long)self.usersArray.count);
+        }];
+            
+            
+            
 //            NSLog(@"HERE IS USER - %@",users);
 //            self.usersArray = users;
 //            NSLog(@"HERE %@",self.usersArray[2].firstName);
