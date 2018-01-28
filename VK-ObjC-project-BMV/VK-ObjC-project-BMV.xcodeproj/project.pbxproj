@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50118C7D201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50118C7C201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.m */; };
+		500ACEB3201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */; };
+		500ACEB6201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */; };
 		5017C198201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5017C195201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m */; };
 		5017C199201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5017C197201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m */; };
 		5039956C200BF255009E0161 /* BMVvkUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039956B200BF255009E0161 /* BMVvkUserModel.m */; };
@@ -50,8 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		50118C7B201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkAllFriendPhotoCollectionViewController.h; sourceTree = "<group>"; };
-		50118C7C201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkAllFriendPhotoCollectionViewController.m; sourceTree = "<group>"; };
+		500ACEB1201E636400EFE52F /* BMVvkPhotosCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkPhotosCollectionViewCell.h; sourceTree = "<group>"; };
+		500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkPhotosCollectionViewCell.m; sourceTree = "<group>"; };
+		500ACEB4201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkAllFriendPhotoCollectionView.h; sourceTree = "<group>"; };
+		500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkAllFriendPhotoCollectionView.m; sourceTree = "<group>"; };
 		5017C194201A0952006DC4F4 /* VKAccessToken+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKAccessToken+CoreDataClass.h"; sourceTree = "<group>"; };
 		5017C195201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "VKAccessToken+CoreDataClass.m"; sourceTree = "<group>"; };
 		5017C196201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKAccessToken+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -243,8 +246,10 @@
 				50A72BEA20078325002B6F1E /* VKLoginViewController.m */,
 				50A4AC4920121D880081364A /* BMVProgressView.h */,
 				50A4AC4A20121D880081364A /* BMVProgressView.m */,
-				50118C7B201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.h */,
-				50118C7C201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.m */,
+				500ACEB4201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.h */,
+				500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */,
+				500ACEB1201E636400EFE52F /* BMVvkPhotosCollectionViewCell.h */,
+				500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -403,12 +408,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500ACEB3201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m in Sources */,
 				50A72BEF200783DF002B6F1E /* LocalVKToken.m in Sources */,
 				50FD2D61201D0B650081D4AC /* BMVParsingPhotosJSONResponse.m in Sources */,
 				50A72BF22007978D002B6F1E /* VKFriendsViewController.m in Sources */,
 				50A72BB320073CCE002B6F1E /* AppDelegate.m in Sources */,
 				505A1045200C930100B8C17D /* VKServerObject.m in Sources */,
-				50118C7D201BEDDF00C081B3 /* BMVvkAllFriendPhotoCollectionViewController.m in Sources */,
 				5017C198201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m in Sources */,
 				50A72BEB20078325002B6F1E /* VKLoginViewController.m in Sources */,
 				50A72BC420073CCE002B6F1E /* main.m in Sources */,
@@ -421,6 +426,7 @@
 				5039956C200BF255009E0161 /* BMVvkUserModel.m in Sources */,
 				50A72BBC20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld in Sources */,
 				50F946EE201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m in Sources */,
+				500ACEB6201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m in Sources */,
 				505A1051200CC83000B8C17D /* VKFriendsTableViewCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -171,14 +171,14 @@
         
 // ПРОБУЕМ РАБОТАТЬ С ДАННЫМИ
         
-        [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:self.theToken completeBlock:^(NSMutableArray <BMVvkPhotoModel *> *photos) {
-                        NSLog(@"HERE IS PHOTOS - %@",photos);
+//        [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:self.theToken completeBlock:^(NSMutableArray <BMVvkPhotoModel *> *photos) {
+//                        NSLog(@"HERE IS PHOTOS - %@",photos);
 //                        self.usersArray = users;
             //            NSLog(@"HERE %@",self.usersArray[2].firstName);
             //            NSLog(@"HERE %@",self.usersArray[2].lastName);
             //            NSLog(@"%lu", (unsigned long)self.usersArray.count);
-        }];
-            
+//        }];
+        
             
             
 //            NSLog(@"HERE IS USER - %@",users);
