@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BMVvkUserModel.h"
 
 @interface BMVvkAllFriendPhotoCollectionViewController : UICollectionViewController
+
+@property (nonatomic, strong) BMVvkUserModel *intrestingUser;
 
 @end

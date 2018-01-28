@@ -42,21 +42,15 @@
     NSString *urlGettingPhotosListString = [[NSString alloc] initWithFormat:@"https://api.vk.com/method/photos.getAll?access_token=\%@&owner_id=57630&extended=0&photo_sizes=0&count=200",token.tokenString/*, currentFriend.userID*/];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlGettingPhotosListString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//        NSLog(@"%@", temp);
+        NSDictionary *jsonForParsingContainer = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//        NSLog(@"%@", jsonForParsingContainer);
         if (!error)
         {
             NSMutableArray *networkModelArray = [NSMutableArray new];
-            NSLog(@"ВЫВОЖУ TEMP %@", temp);
-            [networkModelArray addObjectsFromArray:[BMVParsingPhotosJSONResponse parsingWithJSON:temp]];
+            NSLog(@"ВЫВОЖУ TEMP %@", jsonForParsingContainer);
+            [networkModelArray addObjectsFromArray:[BMVParsingPhotosJSONResponse parsingWithJSON:jsonForParsingContainer]];
             NSLog(@"ВЫВОЖУ networkModelArray - %@", networkModelArray);
             completeBlock(networkModelArray);
-            
-//            for (NSInteger counter = 0; counter < networkModelArray.count; counter++)
-//            {
-//
-//            }
-//            NSLog(@"%@", networkModelArray);
         }
         else
         {

@@ -10,7 +10,7 @@
 
 @interface VKFriendsTableViewCellView : UITableViewCell
 
-@property (nonatomic,strong) UILabel *userNameLabel;
-@property (nonatomic,strong) UIImageView *userPhotoImageView;
+@property (nonatomic, strong) UILabel *userNameLabel;
+@property (nonatomic, strong) UIImageView *userPhotoImageView;
 
 @end

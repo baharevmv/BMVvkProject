@@ -12,9 +12,9 @@
 @interface BMVvkPhotoModel : VKServerObject
 
 @property (nonatomic) NSString *photoID;
-@property (strong, nonatomic) NSURL* previewImageURL;
-@property (strong, nonatomic) NSURL* mediumImageURL;
-@property (strong, nonatomic) NSURL* orinalImageURL;
+@property (nonatomic, strong) NSURL* previewImageURL;
+@property (nonatomic, strong) NSURL* mediumImageURL;
+@property (nonatomic, strong) NSURL* orinalImageURL;
 
 
 

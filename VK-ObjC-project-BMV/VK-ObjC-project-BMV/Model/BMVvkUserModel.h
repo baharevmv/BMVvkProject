@@ -11,12 +11,12 @@
 
 @interface BMVvkUserModel : VKServerObject
 
-@property (strong, nonatomic) NSString* firstName;
-@property (strong, nonatomic) NSString* lastName;
-@property (strong, nonatomic) NSURL* smallImageURL;
-@property (strong, nonatomic) NSURL* imageURL;
-@property (strong, nonatomic) NSURL* bigImageURL;
-@property (strong, nonatomic) NSString *userID;
+@property (nonatomic, strong) NSString* firstName;
+@property (nonatomic, strong) NSString* lastName;
+@property (nonatomic, strong) NSURL* smallImageURL;
+@property (nonatomic, strong) NSURL* imageURL;
+@property (nonatomic, strong) NSURL* bigImageURL;
+@property (nonatomic, strong) NSString *userID;
 
 @end
 

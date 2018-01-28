@@ -42,11 +42,11 @@
 //    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlGettingFriendsListString]];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlGettingFriendsListString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *temp = [NSJSONSerialization JSONObjectWithData:data options:1 error:nil];
+        NSDictionary *jsonForParsingContainer = [NSJSONSerialization JSONObjectWithData:data options:1 error:nil];
         if (!error)
         {
             NSMutableArray *networkModelArray = [NSMutableArray new];
-            [networkModelArray addObjectsFromArray:[BMVParsingFriendsJSONResponse parsingWithJSON:temp]];
+            [networkModelArray addObjectsFromArray:[BMVParsingFriendsJSONResponse parsingWithJSON:jsonForParsingContainer]];
             completeBlock(networkModelArray);
 //            for (NSInteger counter = 0; counter < networkModelArray.count; counter++)
 //            {

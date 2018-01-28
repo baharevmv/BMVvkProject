@@ -10,8 +10,8 @@
 
 @interface LocalVKToken : NSObject
 
-@property (strong, nonatomic) NSString* tokenString;
-@property (strong, nonatomic) NSDate* expirationDate;
-@property (strong, nonatomic) NSString* userIDString;
+@property (nonatomic, strong) NSString* tokenString;
+@property (nonatomic, strong) NSDate* expirationDate;
+@property (nonatomic, strong) NSString* userIDString;
 
 @end

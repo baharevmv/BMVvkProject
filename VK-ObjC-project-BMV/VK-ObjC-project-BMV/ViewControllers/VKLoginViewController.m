@@ -12,7 +12,7 @@
 #import "BMVgetFriendsJSONData.h"
 #import "BMVgetPhotosJSONData.h"
 #import "LocalVKToken.h"
-
+#import "BMVvkUserModel.h"
 #import "VKAccessToken+CoreDataClass.h"
 
 #import "AppDelegate.h"
@@ -25,7 +25,6 @@
 
 @property (nonatomic, strong) LocalVKToken *theToken;
 @property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray;
-
 
 @property (nonatomic, strong) NSManagedObjectContext *coreDataContext;
 
