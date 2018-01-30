@@ -51,6 +51,46 @@ NSInteger const offsetTop = 5;
     self.collectionView.allowsMultipleSelection = YES;
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error != NULL)
+    {
+        NSLog(@"We got an Error here - %@", error);
+    }
+    else
+    {
+        NSLog(@"DOWNLOADED");
+    }
+}
+
+- (void) downloadAllPhotos
+{
+    // network animation on
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    // save image from the web
+    for (BMVvkPhotoModel *photo in self.modelArray)
+    {
+        
+
+            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.orinalImageURL];
+                UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:NO ];
+    }
+}
+    
+- (void)imageDownloaded
+{
+    
+    // network animation off
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    // do whatever you need to do after
 }
 
 - (void)gettingAllUsersPhoto:(BMVvkUserModel *)currentUser token:(LocalVKToken *)token
