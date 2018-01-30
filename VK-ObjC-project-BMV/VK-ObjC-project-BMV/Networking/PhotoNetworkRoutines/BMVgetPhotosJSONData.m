@@ -38,7 +38,9 @@
 
 + (void)NetworkWorkingWithPhotosJSON:(LocalVKToken *)token currentFriend:(BMVvkUserModel *)currentFriend completeBlock:(void(^)(NSMutableArray <BMVvkPhotoModel *> *))completeBlock
 {
-    NSString *urlGettingPhotosListString = [[NSString alloc] initWithFormat:@"https://api.vk.com/method/photos.getAll?access_token=\%@&owner_id=57630&extended=0&photo_sizes=0&count=200",token.tokenString, currentFriend.userID];
+    NSLog(@"%@",currentFriend.userID);
+    NSString *urlGettingPhotosListString = [[NSString alloc] initWithFormat:@"https://api.vk.com/method/photos.getAll?access_token=\%@&owner_id=%@&extended=0&photo_sizes=0&count=200",token.tokenString, currentFriend.userID];
+    NSLog(@"%@", urlGettingPhotosListString);
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlGettingPhotosListString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *jsonForParsingContainer = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];

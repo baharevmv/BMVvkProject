@@ -8,6 +8,40 @@
 
 #import "BMVvkPhotosCollectionViewCell.h"
 
+@interface BMVvkPhotosCollectionViewCell ()
+
+@property (nonatomic, strong) UIImageView *imageToShow;
+
+
+@end
+
+
 @implementation BMVvkPhotosCollectionViewCell
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+self = [super initWithFrame:frame];
+if (self)
+{
+    self.backgroundColor = [UIColor whiteColor];
+    self.imageToShow = [[UIImageView alloc] initWithFrame:self.bounds];
+    [self.contentView addSubview:self.imageToShow];
+}
+return self;
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    self.image = nil;
+    
+}
+
+- (void)setImage:(UIImage *)image
+{
+    self.imageToShow.image = image;
+    _image = image;
+}
+
 
 @end

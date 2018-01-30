@@ -10,7 +10,7 @@
 #import "BMVvkUserModel.h"
 #import "LocalVKToken.h"
 
-@interface BMVvkAllFriendPhotoCollectionView : UICollectionView
+@interface BMVvkAllFriendPhotoCollectionView : UICollectionViewController
 
 @property (nonatomic, strong) BMVvkUserModel *interestingUser;
 @property (nonatomic, weak) LocalVKToken *tokenForFriendsController;

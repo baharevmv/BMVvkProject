@@ -10,4 +10,6 @@
 
 @interface BMVvkPhotosCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic,strong) UIImage *image;
+
 @end

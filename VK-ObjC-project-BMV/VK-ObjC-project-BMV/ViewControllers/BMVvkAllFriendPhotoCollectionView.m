@@ -6,56 +6,51 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVvkAllFriendPhotoCollectionView.h"
+#import "BMVvkPhotosCollectionViewCell.h"
 #import "BMVvkPhotoModel.h"
 #import "BMVvkUserModel.h"
-#import "BMVvkPhotosCollectionViewCell.h"
 #import "LocalVKToken.h"
 #import "BMVgetPhotosJSONData.h"
 
-
-
-NSString * const identifierCell = @"identifierCellSelf";
+static NSString *cellIdentifier = @"CellIdentifier";
 NSInteger const offsetLeft = 20;
 NSInteger const offsetTop = 5;
 
-@interface BMVvkAllFriendPhotoCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface BMVvkAllFriendPhotoCollectionView ()
 
+//@property (nonatomic, strong) UICollectionView* collectionView;
 @property (nonatomic, assign) NSUInteger numberPage;
 @property (nonatomic, copy) BMVvkUserModel *viewedUser;
 @property (nonatomic, copy) NSMutableArray <BMVvkPhotoModel *> *modelArray;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
-//@property (nonatomic, strong) NetworkSession *networkSession;
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
 
 @end
 
 @implementation BMVvkAllFriendPhotoCollectionView
 
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
+
+- (void) viewDidLoad
 {
-    self = [super initWithFrame:frame collectionViewLayout:layout];
-    if (self)
-    {
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        _numberPage = 1;
-        _modelArray = [NSMutableArray new];
-        _viewedUser = [BMVvkUserModel new];
-        self.backgroundColor = UIColor.whiteColor;
-        
-        self.delegate = self;
-        self.dataSource = self;
-        
-        UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
-        flowLayout.minimumInteritemSpacing = 2.f;
-        flowLayout.minimumLineSpacing = 2.f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(1, 1, 1, 1);
-        flowLayout.itemSize = CGSizeMake(CGRectGetWidth(self.bounds)/3-2, CGRectGetWidth(self.bounds)/3-2);
-        self.collectionViewLayout = flowLayout;
-        [self registerClass:[BMVvkPhotosCollectionViewCell class] forCellWithReuseIdentifier:identifierCell];
-    }
-    return self;
+    [super viewDidLoad];
+    // Собираем модель
+    [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
+    // Настраиваем flowLayout
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumInteritemSpacing = 2.0f;
+    flowLayout.minimumLineSpacing = 2.0f;
+    flowLayout.sectionInset = UIEdgeInsetsMake(1, 1, 1, 1);
+    flowLayout.itemSize = CGSizeMake(100, 100);
+    self.collectionView.collectionViewLayout = flowLayout;
+    
+    // Настраиваем collectionView
+    [self.collectionView registerClass:[BMVvkPhotosCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
+    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    self.collectionView.allowsMultipleSelection = YES;
+    
+    self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)gettingAllUsersPhoto:(BMVvkUserModel *)currentUser token:(LocalVKToken *)token
@@ -66,70 +61,36 @@ NSInteger const offsetTop = 5;
     [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVvkPhotoModel *> *photos)
      {
          self.modelArray = photos;
-         [self reloadData];
+         [self.collectionView reloadData];
      }];
-    
-    
+}
 
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.modelArray.count;
 }
 
 
 
-
-
-
-
-#pragma mark <UICollectionViewDataSource>
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
-}
-
-- (UICollectionView *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    BMVvkPhotosCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+//    [collectionViewCell prepareForReuse];
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        NSString *previewPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.modelArray[indexPath.row].previewImageURL];
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: previewPhotoPath]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                collectionViewCell.image = [UIImage imageWithData: imageData];
+            });
+    });
     
-    // Configure the cell
-    
-    return cell;
+    return collectionViewCell;
 }
-
-#pragma mark <UICollectionViewDelegate>
-
-/*
- // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
- return YES;
- }
- */
-
-/*
- // Uncomment this method to specify if the specified item should be selected
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
- return YES;
- }
- */
-
-/*
- // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
- return NO;
- }
- 
- - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
- return NO;
- }
- 
- - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
- 
- }
- */
 
 @end
 

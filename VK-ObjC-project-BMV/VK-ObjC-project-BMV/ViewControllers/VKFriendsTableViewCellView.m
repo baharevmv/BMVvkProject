@@ -62,12 +62,12 @@ static const CGFloat lineSizeImageView = 44.f;
                                                                           multiplier:1
                                                                             constant:lineSizeImageView];
     
-    NSArray *verticalConstraints =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[_userPhotoImageView]-20-[_userNameLabel]-20-|"
+    NSArray *verticalConstraints =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_userPhotoImageView]-20-[_userNameLabel]-30-|"
                                                                           options:0
                                                                           metrics:nil
                                                                             views:dictionary];
     
-    NSArray *verticalConstraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[_userNameLabel]-30-|"
+    NSArray *verticalConstraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[_userNameLabel]-40-|"
                                                                           options:0
                                                                           metrics:nil
                                                                              views:dictionary];

@@ -10,14 +10,18 @@
 #import "VKFriendsTableViewCellView.h"
 #import "BMVvkUserModel.h"
 #import "BMVgetFriendsJSONData.h"
+#import "BMVvkAllFriendPhotoCollectionView.h"
 
-//static NSString *const cellIdentifier = @"cellIdentifier";
+CGFloat const offsetNavBar = 76;
+static NSString *const cellIdentifier = @"cellIdentifier";
 
 @interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, copy) NSMutableArray* friendsArray;
 @property (nonatomic, strong) VKFriendsTableViewCellView *tableViewCell;
 @property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray;
+@property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
+//@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 
 
 @property (assign, nonatomic) BOOL firstAppearance;
@@ -31,8 +35,8 @@
     self = [super init];
     if(self)
     {
-//        [[VKFriendsViewController alloc ] initToken:self.theToken]
-//        [[VKFriendsViewController класс alloc ] initToken:self.theToken]
+        //        [[VKFriendsViewController alloc ] initToken:self.theToken]
+        //        [[VKFriendsViewController класс alloc ] initToken:self.theToken]
     }
     return self;
 }
@@ -49,13 +53,13 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerClass:[VKFriendsTableViewCellView class] forCellReuseIdentifier:@"cellIdentifier"];
-
+    
     self.navigationItem.title = @"Friends";
     self.firstAppearance = YES;
-
     
-//    [self.tableView reloadData];
-
+    
+    //    [self.tableView reloadData];
+    
 }
 
 
@@ -71,9 +75,9 @@
 
 - (void) getFriendsFromServer:(LocalVKToken *)token {
     [BMVgetFriendsJSONData NetworkWorkingWithFriendsJSON:token completeBlock:^(NSMutableArray <BMVvkUserModel *> *users) {
-//        NSLog(@"HERE IS USER - %@",users);
+        //        NSLog(@"HERE IS USER - %@",users);
         self.usersArray = users;
-//        NSLog(@"%lu", (unsigned long)self.usersArray.count);
+        //        NSLog(@"%lu", (unsigned long)self.usersArray.count);
     }];
     [self.tableView reloadData];
 }
@@ -85,7 +89,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-//    return [self.usersArray count] + 1;
+    //    return [self.usersArray count] + 1;
     return 980;
 }
 
@@ -93,7 +97,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     VKFriendsTableViewCellView *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-//    [tableView[indexPath] VKFriendsTableViewCellView:prepareForReuse]
+    //    [tableView[indexPath] VKFriendsTableViewCellView:prepareForReuse]
     // Забираем имя
     NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName, self.usersArray[indexPath.row].lastName];
     tableViewCell.userNameLabel.text = friendFullName;
@@ -102,34 +106,33 @@
         NSString *friendPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.usersArray[indexPath.row].smallImageURL];
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: friendPhotoPath]];
         dispatch_async(dispatch_get_main_queue(), ^{
-        tableViewCell.userPhotoImageView.image = [UIImage imageWithData: imageData];
-            });
-//        [data release];
+            tableViewCell.userPhotoImageView.image = [UIImage imageWithData: imageData];
+        });
+        //        [data release];
     });
-//    [imageData release];
-//    tableViewCell.userPhotoImage.image = [UIImage imageNamed:self.dataSourceForTable[indexPath.row].imageString];
-//    tableViewCell.userPhotoImageView.image = [UIImage imageNamed:@"user"];
     return tableViewCell;
 }
 
 #pragma mark - UITableViewDelegate
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//
-//    if (indexPath.row == [self.friendsArray count]) {
-//        [self getFriendsFromServer];
-//    }else{
-//        FriendInfoTableViewController *friendsInfo = [FriendInfoTableViewController new];
-//        User* user = [self.friendsArray objectAtIndex:indexPath.row];
-//        friendsInfo.friendID = user.userID;
-//
-//        [self.navigationController pushViewController:friendsInfo animated:YES];
-//    }
-//
-//}
-//
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UICollectionViewFlowLayout* flowLayout = [UICollectionViewFlowLayout new];
+    flowLayout.itemSize = CGSizeMake(100, 100);
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc] initWithCollectionViewLayout:flowLayout];
+    BMVvkUserModel* user = [self.usersArray objectAtIndex:indexPath.row];
+    photosOfThisFriend.interestingUser = user;
+    photosOfThisFriend.tokenForFriendsController = self.tokenForFriendsController;
+    [self.navigationController pushViewController:photosOfThisFriend animated:YES];
+}
+
+
+
+
+
 @end
 
 
