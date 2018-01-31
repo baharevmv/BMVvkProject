@@ -24,8 +24,11 @@ NSInteger const offsetTop = 5;
 @property (nonatomic, assign) NSUInteger numberPage;
 @property (nonatomic, copy) BMVvkUserModel *viewedUser;
 @property (nonatomic, copy) NSMutableArray <BMVvkPhotoModel *> *modelArray;
+@property (nonatomic, retain) NSMutableArray <BMVvkPhotoModel *> *selectedModelArray;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
+@property (nonatomic) NSMutableArray  *arrayWithSelectedIndexPath;
+
 
 @end
 
@@ -34,6 +37,8 @@ NSInteger const offsetTop = 5;
 
 - (void) viewDidLoad
 {
+    self.arrayWithSelectedIndexPath = [NSMutableArray new];
+    self.selectedModelArray = [NSMutableArray <BMVvkPhotoModel *> new];
     [super viewDidLoad];
     // Собираем модель
     [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
@@ -49,12 +54,21 @@ NSInteger const offsetTop = 5;
     [self.collectionView registerClass:[BMVvkPhotosCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.allowsMultipleSelection = YES;
-    
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
+
+//-(instancetype)init
+//{
+//    self = [super init];
+//    if (self)
+//    {
+//        _selectedModelArray = [NSMutableArray new];
+//    }
+//    return self;
+//}
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
@@ -70,27 +84,51 @@ NSInteger const offsetTop = 5;
 
 - (void) downloadAllPhotos
 {
+    //    if(self.arrayIndexPath.count > 0)
+    //    {
+    //        [self.collectionView performBatchUpdates:^{
+    //            [self.collectionView deleteItemsAtIndexPaths:self.arrayIndexPath];
+    //            [self.arrayIndexPath removeAllObjects];
+    //        } completion:nil];
+    //    }
+    
     // network animation on
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     // save image from the web
-    for (BMVvkPhotoModel *photo in self.modelArray)
+    NSLog(@"КОЛИЧЕСТВО %lu",(unsigned long)self.selectedModelArray.count);
+    if (self.selectedModelArray.count != 0 )
     {
-        
-
+        for (BMVvkPhotoModel *photo in self.selectedModelArray)
+        {
             NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.orinalImageURL];
+            UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:YES ];
+        }
+        
+        
+    } else {
+        for (BMVvkPhotoModel *photo in self.modelArray)
+        {
+            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.orinalImageURL];
+            
+            dispatch_async(dispatch_get_global_queue(0,0), ^{
                 UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-                [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:NO ];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:NO ];
+                });
+            });
+            
+
+        }
     }
 }
     
 - (void)imageDownloaded
 {
     
-    // network animation off
+    // network animation on
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
-    // do whatever you need to do after
 }
 
 - (void)gettingAllUsersPhoto:(BMVvkUserModel *)currentUser token:(LocalVKToken *)token
@@ -131,6 +169,14 @@ NSInteger const offsetTop = 5;
     
     return collectionViewCell;
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [self.arrayWithSelectedIndexPath addObject:indexPath];
+    [self.selectedModelArray addObject:self.modelArray[indexPath.item]];
+}
+
 
 @end
 
