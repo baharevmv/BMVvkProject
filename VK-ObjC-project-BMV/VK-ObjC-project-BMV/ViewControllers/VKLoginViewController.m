@@ -24,13 +24,26 @@
 @property (nonatomic, weak) UIWebView* webView;
 
 @property (nonatomic, strong) LocalVKToken *theToken;
-@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray;
+@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray; // strong, а вообще хорошо NSArray - copy
 
 @property (nonatomic, strong) NSManagedObjectContext *coreDataContext;
 
 @end
 
 @implementation VKLoginViewController
+
+
+- (void) dealloc {
+    self.webView.delegate = nil;
+}
+
+//
+//-(void) setUsersArray:(NSMutableArray<BMVvkUserModel *> *)userArray
+//{
+//   _usersArrat = [usersArray copy];
+//
+//}
+//
 
 - (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock {
     
@@ -55,7 +68,6 @@
     
     self.webView = webView;
     
-    
     self.navigationItem.title = @"Login";
     
     NSString* urlString = @"https://oauth.vk.com/authorize?"
@@ -77,9 +89,7 @@
 //    [self savingTokenToCoreData];
 }
 
-- (void) dealloc {
-    self.webView.delegate = nil;
-}
+
 
 - (NSManagedObjectContext *) coreDataContext
 {
@@ -98,8 +108,8 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     
-    if ([[[request URL] description] rangeOfString:@"#access_token="].location != NSNotFound) {
-        
+    if ([[[request URL] description] rangeOfString:@"#access_token="].location != NSNotFound) {  // == NSNotFound
+        // return YES
         LocalVKToken* token = [LocalVKToken new];
         
         NSString* query = [[request URL] description];
@@ -116,7 +126,13 @@
             
             NSArray* values = [pair componentsSeparatedByString:@"="];
             
-            if ([values count] == 2) {
+            if ([values count] == 2) { // поменять на guard
+                
+                //if ([values count] !== 2) {
+                //continue;
+                //}
+                
+                //
                 
                 NSString* key = [values firstObject];
                 
@@ -142,7 +158,7 @@
     
         
         
-        self.webView.delegate = nil;
+        self.webView.delegate = nil; // так не надо -  лучше показать что произошла ошибка.
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -193,8 +209,8 @@
         
         return NO;
     }
-    return YES;
-}
+    return YES; // убиравем
+} // убираем
 
 
 
@@ -213,7 +229,7 @@
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     error = nil;
-    NSArray *result = [self.coreDataContext executeFetchRequest:[VKAccessToken fetchRequest] error:&error];
+    NSArray *result = [self.coreDataContext executeFetchRequest:[VKAccessToken fetchRequest] error:&error]; // error:nil
     for (VKAccessToken *thisToken in result)
     {
         NSLog(@"HEHEHE token - %@ user - %@, and expiration date is %@", thisToken.tokenString, thisToken.userIDString, tokenToCoreData.expirationDate);

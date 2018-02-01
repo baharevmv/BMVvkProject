@@ -36,6 +36,7 @@
 
 
 + (void)NetworkWorkingWithFriendsJSON:(LocalVKToken *)token completeBlock:(void(^)(NSMutableArray <BMVvkUserModel *> *))completeBlock
+//+ (void)NetworkWorkingWithFriendsJSON:(LocalVKToken *)token completeBlock:(void(^)(BMVvkUserModel *))completeBlock
 {
 
     NSString *urlGettingFriendsListString = [[NSString alloc] initWithFormat:@"https://api.vk.com/method/friends.get?access_token=\%@&fields=first_name,last_name,nickname,domain,photo_50,photo_100,photo_max_orig&lang=ru&count=5000&version=5.69",token.tokenString];
@@ -50,9 +51,9 @@
             completeBlock(networkModelArray);
 //            for (NSInteger counter = 0; counter < networkModelArray.count; counter++)
 //            {
-//
+//                [self downloadPhotoWithSize: BMVvkUserModel:networkModelArray[counter] completeBlock:completeBlock];
 //            }
-//            NSLog(@"%@", networkModelArray);
+            NSLog(@"%@", networkModelArray);
         }
         else
         {
@@ -61,5 +62,18 @@
     }];
     [dataTask resume];
 }
+
+//- (void)DownloadPhotoWithSize:(BMVvkUserModel *)bmvVKUser completeBlock:(void(^)(BMVvkUserModel *))completeBlock
+//{
+//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:bmvVKUser.smallImageURL]];
+//    NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+//                                      {
+//                                          bmvVKUser.previewPhotoImage = [UIImage imageWithData:data];
+//                                          dispatch_async(dispatch_get_main_queue(), ^{
+//                                              completeBlock(bmvVKUser);
+//                                          });
+//                                      }];
+//    [dataTask resume];
+//}
 
 @end

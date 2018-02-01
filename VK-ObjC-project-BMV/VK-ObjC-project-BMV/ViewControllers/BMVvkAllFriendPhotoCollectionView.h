@@ -13,6 +13,6 @@
 @interface BMVvkAllFriendPhotoCollectionView : UICollectionViewController
 
 @property (nonatomic, strong) BMVvkUserModel *interestingUser;
-@property (nonatomic, weak) LocalVKToken *tokenForFriendsController;
+@property (nonatomic, weak) LocalVKToken *tokenForFriendsController; // точно - strong
 
 @end

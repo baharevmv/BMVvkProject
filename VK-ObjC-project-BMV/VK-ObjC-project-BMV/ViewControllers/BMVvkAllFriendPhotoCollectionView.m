@@ -23,7 +23,7 @@ NSInteger const offsetTop = 5;
 //@property (nonatomic, strong) UICollectionView* collectionView;
 @property (nonatomic, assign) NSUInteger numberPage;
 @property (nonatomic, copy) BMVvkUserModel *viewedUser;
-@property (nonatomic, copy) NSMutableArray <BMVvkPhotoModel *> *modelArray;
+@property (nonatomic, copy) NSMutableArray <BMVvkPhotoModel *> *modelArray;  // strong - NSArray
 @property (nonatomic, retain) NSMutableArray <BMVvkPhotoModel *> *selectedModelArray;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
@@ -72,16 +72,14 @@ NSInteger const offsetTop = 5;
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    if (error != NULL)
-    {
-        NSLog(@"We got an Error here - %@", error);
-    }
-    else
+    if (!error)
     {
         NSLog(@"DOWNLOADED");
+        return;
     }
+    
+    NSLog(@"We got an Error here - %@", error);
 }
-
 - (void) downloadAllPhotos
 {
     //    if(self.arrayIndexPath.count > 0)
@@ -99,30 +97,49 @@ NSInteger const offsetTop = 5;
     NSLog(@"КОЛИЧЕСТВО %lu",(unsigned long)self.selectedModelArray.count);
     if (self.selectedModelArray.count != 0 )
     {
+        NSLog(@"%@", self.selectedModelArray);
         for (BMVvkPhotoModel *photo in self.selectedModelArray)
         {
-            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.orinalImageURL];
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)), ^{
+            
+//            UIImage *щкшпштфдЗрщещЗфер = [[NSString alloc] initWithFormat:@"%@",photo.orinalImageURL];
+//            SEL __imageDownloaded = @selector(image:didFinishSavingWithError:contextInfo:
+            // и заменить их
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
+            NSLog(@"%@", originalPhotoPath);
             UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-            [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:YES ];
-        }
-        
+                
+//            [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:YES ];  // это делать нельзя!!! - удаляем.
+            // делвемм вот так
+            //            dispatch_async(dispatch_getmain_queue(), ^{
+            //            [self imageDownloaded];
+//
+            //
+            });
+            }
+//        }
+//                           }
+    
         
     } else {
+        NSLog(@"%@", self.modelArray);
         for (BMVvkPhotoModel *photo in self.modelArray)
         {
-            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.orinalImageURL];
             
-            dispatch_async(dispatch_get_global_queue(0,0), ^{
-                UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                    [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:NO ];
-                });
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
+                NSLog(@"%@", originalPhotoPath);
+                UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]], self, /*@selector(image:didFinishSavingWithError:contextInfo:)*/nil, nil);
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:YES ];
+//                });
             });
-            
-
         }
     }
 }
+
     
 - (void)imageDownloaded
 {
@@ -139,8 +156,9 @@ NSInteger const offsetTop = 5;
     [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVvkPhotoModel *> *photos)
      {
          self.modelArray = photos;
-         [self.collectionView reloadData];
+        [self.collectionView reloadData];
      }];
+
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -166,7 +184,6 @@ NSInteger const offsetTop = 5;
                 collectionViewCell.image = [UIImage imageWithData: imageData];
             });
     });
-    
     return collectionViewCell;
 }
 
@@ -175,6 +192,8 @@ NSInteger const offsetTop = 5;
     
     [self.arrayWithSelectedIndexPath addObject:indexPath];
     [self.selectedModelArray addObject:self.modelArray[indexPath.item]];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 

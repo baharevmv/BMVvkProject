@@ -81,17 +81,4 @@ static const CGFloat lineSizeImageView = 44.f;
 }
 
 
-//- (void) prepareForReuse
-//{
-//    [super prepareForReuse];
-//    self.userNameLabel = nil;
-//    self.userPhotoImageView = nil;
-//}
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-}
-
 @end

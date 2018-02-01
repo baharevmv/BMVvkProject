@@ -12,10 +12,12 @@
 
 @interface BMVgetFriendsJSONData : NSObject
 
-
+// методы с маленькой буквы
+//+ (void) NetworkWorkingWithFriendsJSON: (LocalVKToken *)token completeBlock:(void(^)(BMVvkUserModel *))completeBlock;
 + (void) NetworkWorkingWithFriendsJSON: (LocalVKToken *)token completeBlock:(void(^)(NSMutableArray <BMVvkUserModel *> *))completeBlock;
 
 
+//- (void)DownloadPhotoWithSize:(BMVvkUserModel *)bmvVKUser completeBlock:(void(^)(BMVvkUserModel *))completeBlock;
 
 
 @end

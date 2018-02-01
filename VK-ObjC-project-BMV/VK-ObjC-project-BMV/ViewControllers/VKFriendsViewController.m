@@ -76,10 +76,11 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 - (void) getFriendsFromServer:(LocalVKToken *)token {
     [BMVgetFriendsJSONData NetworkWorkingWithFriendsJSON:token completeBlock:^(NSMutableArray <BMVvkUserModel *> *users) {
         //        NSLog(@"HERE IS USER - %@",users);
+        
         self.usersArray = users;
         //        NSLog(@"%lu", (unsigned long)self.usersArray.count);
     }];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
 
@@ -108,7 +109,6 @@ static NSString *const cellIdentifier = @"cellIdentifier";
         dispatch_async(dispatch_get_main_queue(), ^{
             tableViewCell.userPhotoImageView.image = [UIImage imageWithData: imageData];
         });
-        //        [data release];
     });
     return tableViewCell;
 }
