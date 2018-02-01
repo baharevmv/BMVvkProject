@@ -16,6 +16,4 @@
 @property (nonatomic, strong) NSURL* mediumImageURL;
 @property (nonatomic, strong) NSURL* orinalImageURL;
 
-
-
 @end

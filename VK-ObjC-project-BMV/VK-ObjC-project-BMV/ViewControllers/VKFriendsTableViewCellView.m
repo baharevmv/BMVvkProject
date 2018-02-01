@@ -80,5 +80,4 @@ static const CGFloat lineSizeImageView = 44.f;
     [self.contentView addConstraints:verticalConstraints1];
 }
 
-
 @end

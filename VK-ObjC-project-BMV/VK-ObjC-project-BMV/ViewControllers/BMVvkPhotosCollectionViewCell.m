@@ -21,29 +21,19 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-self = [super initWithFrame:frame];
-if (self)
-{
-    self.backgroundColor = [UIColor whiteColor];
-//    self.imageToShow = [[UIImageView alloc] initWithFrame:self.bounds];
-    self.imageToShow = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, 1, 1)];
-    [self.contentView addSubview:self.imageToShow];
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.backgroundColor = [UIColor whiteColor];
+        self.imageToShow = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, 1, 1)];
+        [self.contentView addSubview:self.imageToShow];
     
-    UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-    selectedBackgroundView.backgroundColor = [UIColor redColor];
-    self.selectedBackgroundView = selectedBackgroundView;
+        UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        selectedBackgroundView.backgroundColor = [UIColor redColor];
+        self.selectedBackgroundView = selectedBackgroundView;
+    }
+    return self;
 }
-return self;
-}
-
-//- (void)prepareForReuse
-//{
-//    [super prepareForReuse];
-//    // сбрасываем цвета и image
-//    self.backgroundColor = [UIColor whiteColor];
-//    self.imageToShow = nil;
-//}
-
 
 
 -(void)setHighlighted:(BOOL)highlighted
@@ -60,7 +50,14 @@ return self;
     }
 }
 
-#pragma mark - Overridden Properties
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    self.image = nil;
+    
+}
+
 
 - (void)setImage:(UIImage *)image
 {

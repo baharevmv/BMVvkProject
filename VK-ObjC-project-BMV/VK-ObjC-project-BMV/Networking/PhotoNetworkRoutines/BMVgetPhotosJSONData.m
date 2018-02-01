@@ -21,20 +21,17 @@
 
 @implementation BMVgetPhotosJSONData
 
+
 - (instancetype)init
 {
     self = [super init];
     if (self)
     {
         _networkModelArray = [NSMutableArray new];
-//        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//        [sessionConfiguration setHTTPAdditionalHeaders:@{ @"Accept" : @"application/json" }];
-//        _urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
     }
     return self;
 }
 
-//"https://api.vk.com/method/photos.getAll?access_token=\%@&owner_id=\(uid)&extended=0"
 
 + (void)NetworkWorkingWithPhotosJSON:(LocalVKToken *)token currentFriend:(BMVvkUserModel *)currentFriend completeBlock:(void(^)(NSMutableArray <BMVvkPhotoModel *> *))completeBlock
 {
@@ -44,7 +41,6 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlGettingPhotosListString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *jsonForParsingContainer = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//        NSLog(@"%@", jsonForParsingContainer);
         if (!error)
         {
             NSMutableArray *networkModelArray = [NSMutableArray new];

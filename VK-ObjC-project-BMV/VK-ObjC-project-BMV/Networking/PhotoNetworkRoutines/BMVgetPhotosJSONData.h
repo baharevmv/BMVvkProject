@@ -17,6 +17,3 @@
 + (void) NetworkWorkingWithPhotosJSON: (LocalVKToken *)token currentFriend:(BMVvkUserModel *)currentFriend completeBlock:(void(^)(NSMutableArray <BMVvkPhotoModel *> *))completeBlock;
 
 @end
-
-
-

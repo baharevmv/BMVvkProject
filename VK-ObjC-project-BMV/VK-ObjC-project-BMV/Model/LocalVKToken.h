@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VKServerObject.h"
 
-@interface LocalVKToken : NSObject
+@interface LocalVKToken : VKServerObject
 
-@property (nonatomic, strong) NSString* tokenString;
+@property (nonatomic, copy) NSString* tokenString;
 @property (nonatomic, strong) NSDate* expirationDate;
-@property (nonatomic, strong) NSString* userIDString;
+@property (nonatomic, copy) NSString* userIDString;
 
 @end

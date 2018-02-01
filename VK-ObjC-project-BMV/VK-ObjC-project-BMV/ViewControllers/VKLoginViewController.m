@@ -24,7 +24,7 @@
 @property (nonatomic, weak) UIWebView* webView;
 
 @property (nonatomic, strong) LocalVKToken *theToken;
-@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray; // strong, а вообще хорошо NSArray - copy
+@property (nonatomic, copy) NSArray <BMVvkUserModel *> *usersArray;
 
 @property (nonatomic, strong) NSManagedObjectContext *coreDataContext;
 
@@ -37,13 +37,6 @@
     self.webView.delegate = nil;
 }
 
-//
-//-(void) setUsersArray:(NSMutableArray<BMVvkUserModel *> *)userArray
-//{
-//   _usersArrat = [usersArray copy];
-//
-//}
-//
 
 - (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock {
     
@@ -54,22 +47,16 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     CGRect r = self.view.bounds;
     r.origin = CGPointZero;
-    
     UIWebView* webView = [[UIWebView alloc] initWithFrame:r];
-    
     webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    
     [self.view addSubview:webView];
-    
     self.webView = webView;
-    
     self.navigationItem.title = @"Login";
-    
     NSString* urlString = @"https://oauth.vk.com/authorize?"
                                                         "client_id=6244609&"
                                                         "scope=274438&"
@@ -80,86 +67,55 @@
                                                         "response_type=token";
     
     NSURL* url = [NSURL URLWithString:urlString];
-    
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    
     webView.delegate = self;
-    
     [webView loadRequest:request];
-//    [self savingTokenToCoreData];
 }
 
 
 
-- (NSManagedObjectContext *) coreDataContext
-{
-    if (_coreDataContext)
-    {
-        return _coreDataContext;
-    }
-    UIApplication *application = [UIApplication sharedApplication];
-    NSPersistentContainer *container = ((AppDelegate *) (application.delegate)).persistentContainer;
-    NSManagedObjectContext *context = container.viewContext;
-    return context;
-}
 
 
 #pragma mark - UIWebViewDelegete
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     
-    if ([[[request URL] description] rangeOfString:@"#access_token="].location != NSNotFound) {  // == NSNotFound
-        // return YES
-        LocalVKToken* token = [LocalVKToken new];
-        
-        NSString* query = [[request URL] description];
-        
-        NSArray* array = [query componentsSeparatedByString:@"#"];
+    if ([[[request URL] description] rangeOfString:@"#access_token="].location == NSNotFound)
+    {
+        return YES;
+    }
 
-        if ([array count] > 1) {
+        LocalVKToken* token = [LocalVKToken new];
+        NSString* query = [[request URL] description];
+        NSArray* array = [query componentsSeparatedByString:@"#"];
+        if ([array count] > 1)
+        {
             query = [array lastObject];
         }
-        
         NSArray* pairs = [query componentsSeparatedByString:@"&"];
-        
-        for (NSString* pair in pairs) {
+        for (NSString* pair in pairs)
+        {
             
             NSArray* values = [pair componentsSeparatedByString:@"="];
-            
-            if ([values count] == 2) { // поменять на guard
-                
-                //if ([values count] !== 2) {
-                //continue;
-                //}
-                
-                //
+            if ([values count] != 2) {
+                continue;
+            }
                 
                 NSString* key = [values firstObject];
-                
                 if ([key isEqualToString:@"access_token"]) {
                     token.tokenString = [values lastObject];
                 } else if ([key isEqualToString:@"expires_in"]) {
-                    
                     NSTimeInterval interval = [[values lastObject] doubleValue];
-                    
                     token.expirationDate = [NSDate dateWithTimeIntervalSinceNow:interval];
-                    
                 } else if ([key isEqualToString:@"user_id"]) {
-                    
                     token.userIDString = [values lastObject];
                     NSLog(@"!!!HERE IS TOKEN %@", token.tokenString);
-//
                     self.theToken = token;
                     NSLog(@"!!!HERE IS SELFTOKEN1 %@", self.theToken.tokenString);
                 }
                 NSLog(@"!!!HERE IS SELFTOKEN2 %@", self.theToken.tokenString);
             }
-        }
-    
-        
-        
         self.webView.delegate = nil; // так не надо -  лучше показать что произошла ошибка.
-        
         [self dismissViewControllerAnimated:YES completion:nil];
         
         UIViewController *groupWallVC = [[UIViewController alloc] init];
@@ -180,38 +136,21 @@
 
         [self presentViewController:tabBarContr animated:YES completion:nil];
         NSLog(@"!!!HERE IS TOKEN %@", self.theToken.tokenString);
-
-// ПРОБУЕМ РАБОТАТЬ С ДАННЫМИ
-        
-//        [self savingTokenToCoreData:_theToken];
-        
-// ПРОБУЕМ РАБОТАТЬ С ДАННЫМИ
-        
-//        [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:self.theToken completeBlock:^(NSMutableArray <BMVvkPhotoModel *> *photos) {
-//                        NSLog(@"HERE IS PHOTOS - %@",photos);
-//                        self.usersArray = users;
-            //            NSLog(@"HERE %@",self.usersArray[2].firstName);
-            //            NSLog(@"HERE %@",self.usersArray[2].lastName);
-            //            NSLog(@"%lu", (unsigned long)self.usersArray.count);
-//        }];
-        
-            
-            
-//            NSLog(@"HERE IS USER - %@",users);
-//            self.usersArray = users;
-//            NSLog(@"HERE %@",self.usersArray[2].firstName);
-//            NSLog(@"HERE %@",self.usersArray[2].lastName);
-//            NSLog(@"%lu", (unsigned long)self.usersArray.count);
-//        }];
-//        NSLog(@"OR HERE %@",self.usersArray[2]);
-//        NSLog(@"!!!!!!!!!!!!!HERE IS SELFTOKEN3 %@", self.theToken.tokenString);
-
         
         return NO;
-    }
-    return YES; // убиравем
-} // убираем
+}
 
+- (NSManagedObjectContext *) coreDataContext
+{
+    if (_coreDataContext)
+    {
+        return _coreDataContext;
+    }
+    UIApplication *application = [UIApplication sharedApplication];
+    NSPersistentContainer *container = ((AppDelegate *) (application.delegate)).persistentContainer;
+    NSManagedObjectContext *context = container.viewContext;
+    return context;
+}
 
 
 - (void) savingTokenToCoreData: (LocalVKToken *)superToken

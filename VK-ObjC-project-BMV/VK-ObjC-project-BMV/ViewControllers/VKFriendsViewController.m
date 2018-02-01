@@ -15,33 +15,19 @@
 CGFloat const offsetNavBar = 76;
 static NSString *const cellIdentifier = @"cellIdentifier";
 
+
 @interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, copy) NSMutableArray* friendsArray;
+@property (nonatomic, copy) NSArray *friendsArray;
 @property (nonatomic, strong) VKFriendsTableViewCellView *tableViewCell;
-@property (nonatomic, copy) NSMutableArray <BMVvkUserModel *> *usersArray;
+@property (nonatomic, copy) NSArray <BMVvkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
-//@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
-
 @property (assign, nonatomic) BOOL firstAppearance;
 
 @end
 
+
 @implementation VKFriendsViewController
-
-- (instancetype)init
-{
-    self = [super init];
-    if(self)
-    {
-        //        [[VKFriendsViewController alloc ] initToken:self.theToken]
-        //        [[VKFriendsViewController класс alloc ] initToken:self.theToken]
-    }
-    return self;
-}
-
-
 
 
 - (void)viewDidLoad
@@ -63,15 +49,7 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - API
-
-
-
 
 - (void) getFriendsFromServer:(LocalVKToken *)token {
     [BMVgetFriendsJSONData NetworkWorkingWithFriendsJSON:token completeBlock:^(NSMutableArray <BMVvkUserModel *> *users) {
@@ -129,11 +107,4 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     [self.navigationController pushViewController:photosOfThisFriend animated:YES];
 }
 
-
-
-
-
 @end
-
-
-
