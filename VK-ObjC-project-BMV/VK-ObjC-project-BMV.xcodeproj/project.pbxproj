@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08FEA3EA5BD7B7C3F6B584F0 /* libPods-VK-ObjC-project-BMV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E68FE70C2D69263F7CC1F380 /* libPods-VK-ObjC-project-BMV.a */; };
+		2ACD4FA9DDF52E1C77C26E49 /* libPods-VK-ObjC-project-BMVUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56D70E2D42C8F3635EA5A436 /* libPods-VK-ObjC-project-BMVUITests.a */; };
+		39974258A5CECAB952D2B2E5 /* libPods-VK-ObjC-project-BMVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA2506277F2A76BCBF7884A /* libPods-VK-ObjC-project-BMVTests.a */; };
 		500ACEB3201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */; };
 		500ACEB6201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */; };
 		5017C198201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5017C195201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m */; };
 		5017C199201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5017C197201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m */; };
-		5039956C200BF255009E0161 /* BMVvkUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039956B200BF255009E0161 /* BMVvkUserModel.m */; };
-		505A1045200C930100B8C17D /* VKServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 505A1044200C930100B8C17D /* VKServerObject.m */; };
-		505A1051200CC83000B8C17D /* VKFriendsTableViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 505A1050200CC83000B8C17D /* VKFriendsTableViewCellView.m */; };
-		50648A69201CFD1F007EB756 /* BMVvkPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50648A68201CFD1F007EB756 /* BMVvkPhotoModel.m */; };
+		5039956C200BF255009E0161 /* BMVVkUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039956B200BF255009E0161 /* BMVVkUserModel.m */; };
+		505A1051200CC83000B8C17D /* VKFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 505A1050200CC83000B8C17D /* VKFriendsTableViewCell.m */; };
+		50648A69201CFD1F007EB756 /* BMVVkPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50648A68201CFD1F007EB756 /* BMVVkPhotoModel.m */; };
 		50A4AC4B20121D880081364A /* BMVProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4AC4A20121D880081364A /* BMVProgressView.m */; };
 		50A72BB320073CCE002B6F1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BB220073CCE002B6F1E /* AppDelegate.m */; };
 		50A72BBC20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BBA20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld */; };
@@ -24,7 +26,7 @@
 		50A72BD920073CCE002B6F1E /* VK_ObjC_project_BMVUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BD820073CCE002B6F1E /* VK_ObjC_project_BMVUITests.m */; };
 		50A72BE72007688F002B6F1E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A72BE62007688F002B6F1E /* Default-568h@2x.png */; };
 		50A72BEB20078325002B6F1E /* VKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BEA20078325002B6F1E /* VKLoginViewController.m */; };
-		50A72BEF200783DF002B6F1E /* LocalVKToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BEE200783DF002B6F1E /* LocalVKToken.m */; };
+		50A72BEF200783DF002B6F1E /* BMVVkTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BEE200783DF002B6F1E /* BMVVkTokenModel.m */; };
 		50A72BF22007978D002B6F1E /* VKFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BF12007978D002B6F1E /* VKFriendsViewController.m */; };
 		50F946EB2015C22F00D89BB4 /* BMVgetFriendsJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F946EA2015C22F00D89BB4 /* BMVgetFriendsJSONData.m */; };
 		50F946EE201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F946ED201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m */; };
@@ -50,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CD0AE4339994DE6BC5C02CF /* Pods-VK-ObjC-project-BMVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMVTests/Pods-VK-ObjC-project-BMVTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1BA96DC773E13431F1F72E5D /* Pods-VK-ObjC-project-BMV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMV/Pods-VK-ObjC-project-BMV.debug.xcconfig"; sourceTree = "<group>"; };
+		1EB4D31884EC63379AEAA03D /* Pods-VK-ObjC-project-BMVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMVTests/Pods-VK-ObjC-project-BMVTests.release.xcconfig"; sourceTree = "<group>"; };
+		4F68DC8F40008E37B7EDD085 /* Pods-VK-ObjC-project-BMV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMV.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMV/Pods-VK-ObjC-project-BMV.release.xcconfig"; sourceTree = "<group>"; };
 		500ACEB1201E636400EFE52F /* BMVvkPhotosCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkPhotosCollectionViewCell.h; sourceTree = "<group>"; };
 		500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkPhotosCollectionViewCell.m; sourceTree = "<group>"; };
 		500ACEB4201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkAllFriendPhotoCollectionView.h; sourceTree = "<group>"; };
@@ -58,16 +64,14 @@
 		5017C195201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "VKAccessToken+CoreDataClass.m"; sourceTree = "<group>"; };
 		5017C196201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKAccessToken+CoreDataProperties.h"; sourceTree = "<group>"; };
 		5017C197201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "VKAccessToken+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5039956A200BF255009E0161 /* BMVvkUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkUserModel.h; sourceTree = "<group>"; };
-		5039956B200BF255009E0161 /* BMVvkUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkUserModel.m; sourceTree = "<group>"; };
-		505A1043200C930100B8C17D /* VKServerObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VKServerObject.h; path = "VK-ObjC-project-BMV/Networking/VKServerObject.h"; sourceTree = SOURCE_ROOT; };
-		505A1044200C930100B8C17D /* VKServerObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VKServerObject.m; path = "VK-ObjC-project-BMV/Networking/VKServerObject.m"; sourceTree = SOURCE_ROOT; };
-		505A104F200CC83000B8C17D /* VKFriendsTableViewCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKFriendsTableViewCellView.h; sourceTree = "<group>"; };
-		505A1050200CC83000B8C17D /* VKFriendsTableViewCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKFriendsTableViewCellView.m; sourceTree = "<group>"; };
+		5039956A200BF255009E0161 /* BMVVkUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVVkUserModel.h; sourceTree = "<group>"; };
+		5039956B200BF255009E0161 /* BMVVkUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVVkUserModel.m; sourceTree = "<group>"; };
+		505A104F200CC83000B8C17D /* VKFriendsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKFriendsTableViewCell.h; sourceTree = "<group>"; };
+		505A1050200CC83000B8C17D /* VKFriendsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKFriendsTableViewCell.m; sourceTree = "<group>"; };
 		50648A65201CF60F007EB756 /* BMVgetPhotosJSONData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVgetPhotosJSONData.h; sourceTree = "<group>"; };
 		50648A66201CF60F007EB756 /* BMVgetPhotosJSONData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVgetPhotosJSONData.m; sourceTree = "<group>"; };
-		50648A67201CFD1F007EB756 /* BMVvkPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkPhotoModel.h; sourceTree = "<group>"; };
-		50648A68201CFD1F007EB756 /* BMVvkPhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkPhotoModel.m; sourceTree = "<group>"; };
+		50648A67201CFD1F007EB756 /* BMVVkPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVVkPhotoModel.h; sourceTree = "<group>"; };
+		50648A68201CFD1F007EB756 /* BMVVkPhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVVkPhotoModel.m; sourceTree = "<group>"; };
 		50A4AC4920121D880081364A /* BMVProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVProgressView.h; sourceTree = "<group>"; };
 		50A4AC4A20121D880081364A /* BMVProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVProgressView.m; sourceTree = "<group>"; };
 		50A72BAE20073CCE002B6F1E /* VK-ObjC-project-BMV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VK-ObjC-project-BMV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,8 +90,8 @@
 		50A72BE62007688F002B6F1E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		50A72BE920078325002B6F1E /* VKLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKLoginViewController.h; sourceTree = "<group>"; };
 		50A72BEA20078325002B6F1E /* VKLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKLoginViewController.m; sourceTree = "<group>"; };
-		50A72BED200783DF002B6F1E /* LocalVKToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalVKToken.h; sourceTree = "<group>"; };
-		50A72BEE200783DF002B6F1E /* LocalVKToken.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalVKToken.m; sourceTree = "<group>"; };
+		50A72BED200783DF002B6F1E /* BMVVkTokenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVVkTokenModel.h; sourceTree = "<group>"; };
+		50A72BEE200783DF002B6F1E /* BMVVkTokenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVVkTokenModel.m; sourceTree = "<group>"; };
 		50A72BF02007978D002B6F1E /* VKFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKFriendsViewController.h; sourceTree = "<group>"; };
 		50A72BF12007978D002B6F1E /* VKFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKFriendsViewController.m; sourceTree = "<group>"; };
 		50F946E92015C22F00D89BB4 /* BMVgetFriendsJSONData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVgetFriendsJSONData.h; sourceTree = "<group>"; };
@@ -96,6 +100,11 @@
 		50F946ED201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingFriendsJSONResponse.m; sourceTree = "<group>"; };
 		50FD2D5F201D0B650081D4AC /* BMVParsingPhotosJSONResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingPhotosJSONResponse.h; sourceTree = "<group>"; };
 		50FD2D60201D0B650081D4AC /* BMVParsingPhotosJSONResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingPhotosJSONResponse.m; sourceTree = "<group>"; };
+		56D70E2D42C8F3635EA5A436 /* libPods-VK-ObjC-project-BMVUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VK-ObjC-project-BMVUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		87A84E38A27F92B82EE7F444 /* Pods-VK-ObjC-project-BMVUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMVUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMVUITests/Pods-VK-ObjC-project-BMVUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AAA2506277F2A76BCBF7884A /* libPods-VK-ObjC-project-BMVTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VK-ObjC-project-BMVTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E68FE70C2D69263F7CC1F380 /* libPods-VK-ObjC-project-BMV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VK-ObjC-project-BMV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7E859FA7066EE4248B0821F /* Pods-VK-ObjC-project-BMVUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMVUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMVUITests/Pods-VK-ObjC-project-BMVUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FEA3EA5BD7B7C3F6B584F0 /* libPods-VK-ObjC-project-BMV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39974258A5CECAB952D2B2E5 /* libPods-VK-ObjC-project-BMVTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,54 +128,76 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ACD4FA9DDF52E1C77C26E49 /* libPods-VK-ObjC-project-BMVUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B1811F9C5CD5867D3ECB471 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BA96DC773E13431F1F72E5D /* Pods-VK-ObjC-project-BMV.debug.xcconfig */,
+				4F68DC8F40008E37B7EDD085 /* Pods-VK-ObjC-project-BMV.release.xcconfig */,
+				0CD0AE4339994DE6BC5C02CF /* Pods-VK-ObjC-project-BMVTests.debug.xcconfig */,
+				1EB4D31884EC63379AEAA03D /* Pods-VK-ObjC-project-BMVTests.release.xcconfig */,
+				87A84E38A27F92B82EE7F444 /* Pods-VK-ObjC-project-BMVUITests.debug.xcconfig */,
+				E7E859FA7066EE4248B0821F /* Pods-VK-ObjC-project-BMVUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		504828522017792F00A09786 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				5017C194201A0952006DC4F4 /* VKAccessToken+CoreDataClass.h */,
-				5017C195201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m */,
 				5017C196201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.h */,
 				5017C197201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m */,
+				5017C194201A0952006DC4F4 /* VKAccessToken+CoreDataClass.h */,
+				5017C195201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		50483717201CF0C800783462 /* FriendsNetworkRoutines */ = {
+		506AB829202467EB0025E610 /* FriendsController */ = {
 			isa = PBXGroup;
 			children = (
+				50A72BF02007978D002B6F1E /* VKFriendsViewController.h */,
+				50A72BF12007978D002B6F1E /* VKFriendsViewController.m */,
+				505A104F200CC83000B8C17D /* VKFriendsTableViewCell.h */,
+				505A1050200CC83000B8C17D /* VKFriendsTableViewCell.m */,
 				50F946E92015C22F00D89BB4 /* BMVgetFriendsJSONData.h */,
 				50F946EA2015C22F00D89BB4 /* BMVgetFriendsJSONData.m */,
 				50F946EC201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.h */,
 				50F946ED201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m */,
+				5039956A200BF255009E0161 /* BMVVkUserModel.h */,
+				5039956B200BF255009E0161 /* BMVVkUserModel.m */,
 			);
-			path = FriendsNetworkRoutines;
+			path = FriendsController;
 			sourceTree = "<group>";
 		};
-		505A1046200C938600B8C17D /* Networking */ = {
+		506AB82B2024682E0025E610 /* PhotosController */ = {
 			isa = PBXGroup;
 			children = (
-				50648A64201CF35C007EB756 /* PhotoNetworkRoutines */,
-				50483717201CF0C800783462 /* FriendsNetworkRoutines */,
-				505A1043200C930100B8C17D /* VKServerObject.h */,
-				505A1044200C930100B8C17D /* VKServerObject.m */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		50648A64201CF35C007EB756 /* PhotoNetworkRoutines */ = {
-			isa = PBXGroup;
-			children = (
+				500ACEB4201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.h */,
+				500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */,
+				500ACEB1201E636400EFE52F /* BMVvkPhotosCollectionViewCell.h */,
+				500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */,
 				50648A65201CF60F007EB756 /* BMVgetPhotosJSONData.h */,
 				50648A66201CF60F007EB756 /* BMVgetPhotosJSONData.m */,
 				50FD2D5F201D0B650081D4AC /* BMVParsingPhotosJSONResponse.h */,
 				50FD2D60201D0B650081D4AC /* BMVParsingPhotosJSONResponse.m */,
+				50648A67201CFD1F007EB756 /* BMVVkPhotoModel.h */,
+				50648A68201CFD1F007EB756 /* BMVVkPhotoModel.m */,
 			);
-			path = PhotoNetworkRoutines;
+			path = PhotosController;
+			sourceTree = "<group>";
+		};
+		506AB82C20247B7A0025E610 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		50A72BA520073CCE002B6F1E = {
@@ -174,6 +207,8 @@
 				50A72BB020073CCE002B6F1E /* VK-ObjC-project-BMV */,
 				50A72BD720073CCE002B6F1E /* VK-ObjC-project-BMVUITests */,
 				50A72BAF20073CCE002B6F1E /* Products */,
+				3B1811F9C5CD5867D3ECB471 /* Pods */,
+				B2B6B2F1065736BD3799977D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,9 +225,11 @@
 		50A72BB020073CCE002B6F1E /* VK-ObjC-project-BMV */ = {
 			isa = PBXGroup;
 			children = (
+				506AB82C20247B7A0025E610 /* Services */,
+				506AB829202467EB0025E610 /* FriendsController */,
+				506AB82B2024682E0025E610 /* PhotosController */,
+				50ED241320244FCE00DA6213 /* BMVAuthorizationController */,
 				504828522017792F00A09786 /* CoreData */,
-				505A1046200C938600B8C17D /* Networking */,
-				50A72BF320079B1F002B6F1E /* Model */,
 				50A72BE820077B5B002B6F1E /* ViewControllers */,
 				50A72BB120073CCE002B6F1E /* AppDelegate.h */,
 				50A72BB220073CCE002B6F1E /* AppDelegate.m */,
@@ -226,33 +263,31 @@
 		50A72BE820077B5B002B6F1E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				50A72BF02007978D002B6F1E /* VKFriendsViewController.h */,
-				50A72BF12007978D002B6F1E /* VKFriendsViewController.m */,
-				505A104F200CC83000B8C17D /* VKFriendsTableViewCellView.h */,
-				505A1050200CC83000B8C17D /* VKFriendsTableViewCellView.m */,
-				50A72BE920078325002B6F1E /* VKLoginViewController.h */,
-				50A72BEA20078325002B6F1E /* VKLoginViewController.m */,
 				50A4AC4920121D880081364A /* BMVProgressView.h */,
 				50A4AC4A20121D880081364A /* BMVProgressView.m */,
-				500ACEB4201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.h */,
-				500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */,
-				500ACEB1201E636400EFE52F /* BMVvkPhotosCollectionViewCell.h */,
-				500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		50A72BF320079B1F002B6F1E /* Model */ = {
+		50ED241320244FCE00DA6213 /* BMVAuthorizationController */ = {
 			isa = PBXGroup;
 			children = (
-				50A72BED200783DF002B6F1E /* LocalVKToken.h */,
-				50A72BEE200783DF002B6F1E /* LocalVKToken.m */,
-				5039956A200BF255009E0161 /* BMVvkUserModel.h */,
-				5039956B200BF255009E0161 /* BMVvkUserModel.m */,
-				50648A67201CFD1F007EB756 /* BMVvkPhotoModel.h */,
-				50648A68201CFD1F007EB756 /* BMVvkPhotoModel.m */,
+				50A72BE920078325002B6F1E /* VKLoginViewController.h */,
+				50A72BEA20078325002B6F1E /* VKLoginViewController.m */,
+				50A72BED200783DF002B6F1E /* BMVVkTokenModel.h */,
+				50A72BEE200783DF002B6F1E /* BMVVkTokenModel.m */,
 			);
-			path = Model;
+			path = BMVAuthorizationController;
+			sourceTree = "<group>";
+		};
+		B2B6B2F1065736BD3799977D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E68FE70C2D69263F7CC1F380 /* libPods-VK-ObjC-project-BMV.a */,
+				AAA2506277F2A76BCBF7884A /* libPods-VK-ObjC-project-BMVTests.a */,
+				56D70E2D42C8F3635EA5A436 /* libPods-VK-ObjC-project-BMVUITests.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +297,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50A72BDD20073CCE002B6F1E /* Build configuration list for PBXNativeTarget "VK-ObjC-project-BMV" */;
 			buildPhases = (
+				4940BD140514316A3407633B /* [CP] Check Pods Manifest.lock */,
 				50A72BAA20073CCE002B6F1E /* Sources */,
 				50A72BAB20073CCE002B6F1E /* Frameworks */,
 				50A72BAC20073CCE002B6F1E /* Resources */,
+				FB8BFFADE14F4E5030982F21 /* [CP] Embed Pods Frameworks */,
+				EA2812991DF21FC47792AEE4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,9 +317,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50A72BE020073CCE002B6F1E /* Build configuration list for PBXNativeTarget "VK-ObjC-project-BMVTests" */;
 			buildPhases = (
+				59DC96AB9E7C98F6793039C8 /* [CP] Check Pods Manifest.lock */,
 				50A72BC520073CCE002B6F1E /* Sources */,
 				50A72BC620073CCE002B6F1E /* Frameworks */,
 				50A72BC720073CCE002B6F1E /* Resources */,
+				8488CFD7514E5FA51A6F6A5E /* [CP] Embed Pods Frameworks */,
+				5435B2E3D485D44040BBCD2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,9 +338,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50A72BE320073CCE002B6F1E /* Build configuration list for PBXNativeTarget "VK-ObjC-project-BMVUITests" */;
 			buildPhases = (
+				E4E24FF43562AE79E928F8AB /* [CP] Check Pods Manifest.lock */,
 				50A72BD020073CCE002B6F1E /* Sources */,
 				50A72BD120073CCE002B6F1E /* Frameworks */,
 				50A72BD220073CCE002B6F1E /* Resources */,
+				9E13D9CAC2E2F1E8BBA04B2A /* [CP] Embed Pods Frameworks */,
+				C3ACAA43EE6EB89D9FCAD8A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -382,30 +426,176 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4940BD140514316A3407633B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VK-ObjC-project-BMV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5435B2E3D485D44040BBCD2A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VK-ObjC-project-BMVTests/Pods-VK-ObjC-project-BMVTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59DC96AB9E7C98F6793039C8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VK-ObjC-project-BMVTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8488CFD7514E5FA51A6F6A5E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VK-ObjC-project-BMVTests/Pods-VK-ObjC-project-BMVTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E13D9CAC2E2F1E8BBA04B2A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VK-ObjC-project-BMVUITests/Pods-VK-ObjC-project-BMVUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3ACAA43EE6EB89D9FCAD8A2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VK-ObjC-project-BMVUITests/Pods-VK-ObjC-project-BMVUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4E24FF43562AE79E928F8AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VK-ObjC-project-BMVUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA2812991DF21FC47792AEE4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VK-ObjC-project-BMV/Pods-VK-ObjC-project-BMV-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB8BFFADE14F4E5030982F21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VK-ObjC-project-BMV/Pods-VK-ObjC-project-BMV-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		50A72BAA20073CCE002B6F1E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				500ACEB3201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m in Sources */,
-				50A72BEF200783DF002B6F1E /* LocalVKToken.m in Sources */,
+				50A72BEF200783DF002B6F1E /* BMVVkTokenModel.m in Sources */,
 				50FD2D61201D0B650081D4AC /* BMVParsingPhotosJSONResponse.m in Sources */,
 				50A72BF22007978D002B6F1E /* VKFriendsViewController.m in Sources */,
 				50A72BB320073CCE002B6F1E /* AppDelegate.m in Sources */,
-				505A1045200C930100B8C17D /* VKServerObject.m in Sources */,
 				5017C198201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m in Sources */,
 				50A72BEB20078325002B6F1E /* VKLoginViewController.m in Sources */,
 				50A72BC420073CCE002B6F1E /* main.m in Sources */,
 				50F946EB2015C22F00D89BB4 /* BMVgetFriendsJSONData.m in Sources */,
 				50FD2D5E201D04A90081D4AC /* BMVgetPhotosJSONData.m in Sources */,
 				50A4AC4B20121D880081364A /* BMVProgressView.m in Sources */,
-				50648A69201CFD1F007EB756 /* BMVvkPhotoModel.m in Sources */,
+				50648A69201CFD1F007EB756 /* BMVVkPhotoModel.m in Sources */,
 				5017C199201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m in Sources */,
-				5039956C200BF255009E0161 /* BMVvkUserModel.m in Sources */,
+				5039956C200BF255009E0161 /* BMVVkUserModel.m in Sources */,
 				50A72BBC20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld in Sources */,
 				50F946EE201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m in Sources */,
 				500ACEB6201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m in Sources */,
-				505A1051200CC83000B8C17D /* VKFriendsTableViewCellView.m in Sources */,
+				505A1051200CC83000B8C17D /* VKFriendsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +737,7 @@
 		};
 		50A72BDE20073CCE002B6F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BA96DC773E13431F1F72E5D /* Pods-VK-ObjC-project-BMV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -554,12 +745,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Maksim-Bakharev.VK-ObjC-project-BMV";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		50A72BDF20073CCE002B6F1E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F68DC8F40008E37B7EDD085 /* Pods-VK-ObjC-project-BMV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -567,12 +759,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Maksim-Bakharev.VK-ObjC-project-BMV";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		50A72BE120073CCE002B6F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CD0AE4339994DE6BC5C02CF /* Pods-VK-ObjC-project-BMVTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -587,6 +780,7 @@
 		};
 		50A72BE220073CCE002B6F1E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EB4D31884EC63379AEAA03D /* Pods-VK-ObjC-project-BMVTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -601,6 +795,7 @@
 		};
 		50A72BE420073CCE002B6F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87A84E38A27F92B82EE7F444 /* Pods-VK-ObjC-project-BMVUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "VK-ObjC-project-BMVUITests/Info.plist";
@@ -614,6 +809,7 @@
 		};
 		50A72BE520073CCE002B6F1E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7E859FA7066EE4248B0821F /* Pods-VK-ObjC-project-BMVUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "VK-ObjC-project-BMVUITests/Info.plist";
