@@ -23,7 +23,8 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 @property (nonatomic, strong) NSMutableArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
 //@property (nonatomic, strong) BMVgetFriendsJSONData *BMVgetFriendsJSONData;
-@property (assign, nonatomic) BOOL firstAppearance;
+@property (nonatomic, assign) BOOL firstAppearance;
+
 
 @end
 
@@ -43,61 +44,51 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     // prepare UI
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Reload" style:UIBarButtonItemStylePlain target:self action:@selector(reloadTable)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    
+
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
     
     [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
     
     self.navigationItem.title = @"Friends";
     self.firstAppearance = YES;
-//    NSLog(@"%@",self.usersArray);
     [self getFriendsFromServer:self.tokenForFriendsController];
-//    NSLog(@"%@",self.usersArray);
     [self.tableView reloadData];
-    
-//        [self.tableView reloadData];
-    
 }
 
-- (void)reloadTable {
-    NSLog(@"%@",self.usersArray);
+- (void)refresh:(UIRefreshControl *)refreshControl
+{
+    [self getFriendsFromServer:self.tokenForFriendsController];
     [self.tableView reloadData];
+    [refreshControl endRefreshing];
 }
 
 #pragma mark - API
 
-- (void) getFriendsFromServer:(BMVVkTokenModel *)token {
-    
+- (void) getFriendsFromServer:(BMVVkTokenModel *)token
+{
     [BMVgetFriendsJSONData networkWorkingWithFriendsJSON:token completeBlock:^(NSMutableArray <BMVVkUserModel *> *users) {
         self.usersArray = users;
         [self.tableView reloadData];
-//        NSLog(@"%@", self.usersArray);
-//        });
-        
-        
-        //        NSLog(@"%lu", (unsigned long)self.usersArray.count);
     }];
-//
-//                NSLog(@"%@", self.usersArray);  // тут он нил
 }
-
-
 
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSLog(@"%lu",(unsigned long)self.usersArray.count);
-        return [self.usersArray count];
-//    return 980;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.usersArray count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     VKFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    //    [tableView[indexPath] VKFriendsTableViewCellView:prepareForReuse]
     // Забираем имя
     NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName, self.usersArray[indexPath.row].lastName];
     tableViewCell.userNameLabel.text = friendFullName;
@@ -107,7 +98,6 @@ static NSString *const cellIdentifier = @"cellIdentifier";
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: friendPhotoPath]];
         dispatch_async(dispatch_get_main_queue(), ^{
             tableViewCell.userPhotoImageView.image = [UIImage imageWithData: imageData];
-//    tableViewCell.userPhotoImageView.image = self.usersArray[indexPath.row].previewPhotoImage;
         });
     });
     return tableViewCell;

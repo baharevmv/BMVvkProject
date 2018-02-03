@@ -37,11 +37,20 @@ NSInteger const offsetTop = 5;
 
 - (void) viewDidLoad
 {
+    // Pull-to-Refresh Feature
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
+    [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:refreshControl];
+    
     self.arrayWithSelectedIndexPath = [NSMutableArray new];
     self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
+    
+    
     [super viewDidLoad];
     // Собираем модель
     [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
+    
     // Настраиваем flowLayout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 2.0f;
@@ -58,6 +67,13 @@ NSInteger const offsetTop = 5;
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
     self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+- (void)refreshWithPull:(UIRefreshControl *)refreshControl
+{
+    [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
+    [self.collectionView reloadData];
+    [refreshControl endRefreshing];
 }
 
 
@@ -112,17 +128,15 @@ NSInteger const offsetTop = 5;
 
 - (void)gettingAllUsersPhoto:(BMVVkUserModel *)currentUser token:(BMVVkTokenModel *)token
 {
-    [self.modelArray removeAllObjects];
-    
     [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVVkPhotoModel *> *photos)
      {
-         self.modelArray = photos;
+        self.modelArray = photos;
         [self.collectionView reloadData];
      }];
 
 }
 
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
@@ -155,9 +169,15 @@ NSInteger const offsetTop = 5;
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
--(void) collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.selectedModelArray removeObject:self.modelArray[indexPath.item]];
+    if (self.selectedModelArray.count == 0)
+    {
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
+        
 }
 
 @end
