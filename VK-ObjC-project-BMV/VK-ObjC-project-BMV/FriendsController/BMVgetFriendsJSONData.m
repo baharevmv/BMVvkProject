@@ -31,7 +31,10 @@
         {
             NSMutableArray *networkModelArray = [NSMutableArray new];
             [networkModelArray addObjectsFromArray:[BMVParsingFriendsJSONResponse parsingWithJSON:jsonForParsingContainer]];
-            completeBlock(networkModelArray);
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(networkModelArray);
+            });
         }
         else
         {
@@ -41,29 +44,4 @@
     [dataTask resume];
 }
 
-
-//- (void)downloadPhotoForUser:(BMVVkUserModel *)userModel completeBlock:(void(^)(BMVVkUserModel *))completeBlock
-//{
-//    NSURLRequest *request;
-//
-////    NSLog(@"THIS IS YOUR REQUEST %@", userModel.smallImageURL);
-//    request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:userModel.smallImageURL]];
-////    NSLog(@"THIS IS YOUR REQUEST %@", request);
-//
-//
-//    NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-//                                      {
-//                                          if (!error){
-//                                          userModel.previewPhotoImage = [UIImage imageWithData:data];
-//                                          NSLog(@"ФОТКА - %@",userModel.previewPhotoImage);
-////                                          dispatch_async(dispatch_get_main_queue(), ^{
-//                                              completeBlock(userModel);
-////                                          });
-//                                          }
-//                                          else {
-//                                          }
-//                                      }];
-//
-//    [dataTask resume];
-//}
 @end

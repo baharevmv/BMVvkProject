@@ -72,14 +72,6 @@ NSInteger const offsetTop = 5;
 }
 - (void) downloadAllPhotos
 {
-    //    if(self.arrayIndexPath.count > 0)
-    //    {
-    //        [self.collectionView performBatchUpdates:^{
-    //            [self.collectionView deleteItemsAtIndexPaths:self.arrayIndexPath];
-    //            [self.arrayIndexPath removeAllObjects];
-    //        } completion:nil];
-    //    }
-    
     // network animation on
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -96,7 +88,6 @@ NSInteger const offsetTop = 5;
                 UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
                 SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
                 UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
-//            [self performSelectorOnMainThread:@selector(imageDownloaded) withObject:nil waitUntilDone:YES ];  // это делать нельзя!!! - удаляем.
             });
         }
     } else {
@@ -104,11 +95,14 @@ NSInteger const offsetTop = 5;
         for (BMVVkPhotoModel *photo in self.modelArray)
         {
             NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
+            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                dispatch_async(dispatch_get_main_queue(), ^(void){
                 NSLog(@"%@", originalPhotoPath);
                 UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
                 SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
                 UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+                });
             });
         }
     }
@@ -119,7 +113,6 @@ NSInteger const offsetTop = 5;
 - (void)gettingAllUsersPhoto:(BMVVkUserModel *)currentUser token:(BMVVkTokenModel *)token
 {
     [self.modelArray removeAllObjects];
-    self.numberPage = 1;
     
     [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVVkPhotoModel *> *photos)
      {
