@@ -9,11 +9,10 @@
 
 #import "VKLoginViewController.h"
 #import "VKFriendsViewController.h"
-#import "BMVgetFriendsJSONData.h"
-#import "BMVgetPhotosJSONData.h"
 #import "BMVVkTokenModel.h"
 #import "BMVVkUserModel.h"
 #import "VKAccessToken+CoreDataClass.h"
+#import "BMVDownloadDataService.h"
 
 #import "AppDelegate.h"
 
@@ -27,6 +26,7 @@
 @property (nonatomic, copy) NSArray <BMVVkUserModel *> *usersArray;
 
 @property (nonatomic, strong) NSManagedObjectContext *coreDataContext;
+@property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 
 @end
 
@@ -43,6 +43,7 @@
     self = [super init];
     if (self) {
         self.completionBlock = completionBlock;
+        _downloadDataService = [BMVDownloadDataService new];
     }
     return self;
 }
@@ -58,7 +59,7 @@
     self.webView = webView;
     self.navigationItem.title = @"Login";
     NSString* urlString = @"https://oauth.vk.com/authorize?"
-                                                        "client_id=6244609&"
+                                                        "client_id=6355197&"
                                                         "scope=274438&"
                                                         "redirect_uri=https://oauth.vk.com/blank.html&"
                                                         "display=mobile&"
@@ -118,7 +119,8 @@
         groupNavCon.tabBarItem.title = @"Groups";
 //        groupNavCon.tabBarItem.image = [UIImage imageNamed:@"Wall.png"];
         
-        VKFriendsViewController *friendsViewController = [VKFriendsViewController new];
+      VKFriendsViewController *friendsViewController = [VKFriendsViewController new];
+//        VKFriendsViewController *friendsViewController =  [[VKFriendsViewController alloc] initWithDownloadDataService:self.downloadDataService];
 //        NSLog(@"%@",self.theToken.tokenString);
         friendsViewController.tokenForFriendsController = self.theToken;
 //        NSLog(@"%@",friendsViewController.tokenForFriendsController.tokenString);

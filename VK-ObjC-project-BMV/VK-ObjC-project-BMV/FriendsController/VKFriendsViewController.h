@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BMVVkTokenModel.h"
 
+@class BMVDownloadDataService;
+
 @interface VKFriendsViewController : UITableViewController
 
 @property (nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;
-
 
 @end

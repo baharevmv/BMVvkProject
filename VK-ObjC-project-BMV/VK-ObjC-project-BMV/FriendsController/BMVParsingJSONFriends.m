@@ -1,26 +1,28 @@
 //
-//  BMVParsingJSONRequest.m
+//  BMVParsingJSONFriends.m
 //  VK-ObjC-project-BMV
 //
-//  Created by max on 22.01.18.
+//  Created by max on 04.02.18.
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "BMVParsingFriendsJSONResponse.h"
+#import "BMVParsingJSONFriends.h"
 #import "BMVVkUserModel.h"
 
-@implementation BMVParsingFriendsJSONResponse
+@implementation BMVParsingJSONFriends
 
-
-+ (NSMutableArray <BMVVkUserModel *> *)parsingWithJSON:(NSDictionary *) json
++ (NSArray *)jsonToModel:(NSDictionary *)json
 {
     if (!json)
     {
         return nil;
     }
-    NSArray *usersArray = json[@"response"];
+    if (json[@"error"])
+    {
+        return nil;
+    }
     NSMutableArray <BMVVkUserModel *> *readyUsersArray = [NSMutableArray new];
-    
+    NSArray *usersArray = json[@"response"];
     for (NSDictionary *netModelDictionary in usersArray)
     {
         BMVVkUserModel *startModel = [BMVVkUserModel new];
@@ -32,7 +34,7 @@
         startModel.bigImageURL = netModelDictionary[@"photo_max_orig"];
         [readyUsersArray addObject:startModel];
     }
-    return readyUsersArray;
+    return [readyUsersArray copy];
 }
 
 @end

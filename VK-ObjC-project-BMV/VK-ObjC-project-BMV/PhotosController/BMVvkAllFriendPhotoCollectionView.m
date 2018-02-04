@@ -12,7 +12,7 @@
 #import "BMVVkPhotoModel.h"
 #import "BMVVkUserModel.h"
 #import "BMVVkTokenModel.h"
-#import "BMVgetPhotosJSONData.h"
+#import "BMVDownloadDataService.h"
 
 static NSString *cellIdentifier = @"CellIdentifier";
 NSInteger const offsetLeft = 20;
@@ -21,18 +21,33 @@ NSInteger const offsetTop = 5;
 @interface BMVvkAllFriendPhotoCollectionView ()
 
 //@property (nonatomic, strong) UICollectionView* collectionView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, assign) NSUInteger numberPage;
 @property (nonatomic, copy) BMVVkUserModel *viewedUser;
-@property (nonatomic, copy) NSMutableArray <BMVVkPhotoModel *> *modelArray;
+@property (nonatomic, strong) NSMutableArray <BMVVkPhotoModel *> *modelArray;
 @property (nonatomic, retain) NSMutableArray <BMVVkPhotoModel *> *selectedModelArray;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
 @property (nonatomic) NSMutableArray  *arrayWithSelectedIndexPath;
+@property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
+
+
 
 
 @end
 
 @implementation BMVvkAllFriendPhotoCollectionView
+
+//- (instancetype)initWithCollectionViewLayout
+//{
+//    self = [super init];
+//    if (self)
+//    {
+//        _downloadDataService = [BMVDownloadDataService new];
+//    }
+//    return self;
+//}
+
 
 
 - (void) viewDidLoad
@@ -49,7 +64,14 @@ NSInteger const offsetTop = 5;
     
     [super viewDidLoad];
     // Собираем модель
-    [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
+//    [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
+
+    self.downloadDataService = [BMVDownloadDataService new];
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil localToken:self.tokenForFriendsController currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
+        self.modelArray = photoModelArray;
+        [self.activityIndicatorView stopAnimating];
+        [self.collectionView reloadData];
+    }];
     
     // Настраиваем flowLayout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -71,8 +93,11 @@ NSInteger const offsetTop = 5;
 
 - (void)refreshWithPull:(UIRefreshControl *)refreshControl
 {
-    [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
-    [self.collectionView reloadData];
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil localToken:self.tokenForFriendsController currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
+        self.modelArray = photoModelArray;
+        [self.activityIndicatorView stopAnimating];
+        [self.collectionView reloadData];
+    }];
     [refreshControl endRefreshing];
 }
 
@@ -126,15 +151,15 @@ NSInteger const offsetTop = 5;
 }
 
 
-- (void)gettingAllUsersPhoto:(BMVVkUserModel *)currentUser token:(BMVVkTokenModel *)token
-{
-    [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVVkPhotoModel *> *photos)
-     {
-        self.modelArray = photos;
-        [self.collectionView reloadData];
-     }];
-
-}
+//- (void)gettingAllUsersPhoto:(BMVVkUserModel *)currentUser token:(BMVVkTokenModel *)token
+//{
+//    [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVVkPhotoModel *> *photos)
+//     {
+//        self.modelArray = photos;
+//        [self.collectionView reloadData];
+//     }];
+//
+//}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
