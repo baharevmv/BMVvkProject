@@ -12,17 +12,20 @@
 #import "BMVgetFriendsJSONData.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
 
+#import "BMVDownloadDataService.h"
+
 CGFloat const offsetNavBar = 76;
 static NSString *const cellIdentifier = @"cellIdentifier";
 
 
 @interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 @property (nonatomic, copy) NSArray *friendsArray;
 @property (nonatomic, strong) VKFriendsTableViewCell *tableViewCell;
 @property (nonatomic, strong) NSMutableArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
-//@property (nonatomic, strong) BMVgetFriendsJSONData *BMVgetFriendsJSONData;
 @property (nonatomic, assign) BOOL firstAppearance;
 
 
@@ -31,21 +34,25 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 
 @implementation VKFriendsViewController
 
-- (void)viewWillAppear:(BOOL)animated
+
+- (instancetype)init
 {
-//    [self getFriendsFromServer:self.tokenForFriendsController];
+    self = [super init];
+    if (self)
+    {
+        _downloadDataService = [BMVDownloadDataService new];
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-//    [self getFriendsFromServer:self.tokenForFriendsController];
-    // prepare UI
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-
+    // PullToRefresh функция
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -55,25 +62,24 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     
     self.navigationItem.title = @"Friends";
     self.firstAppearance = YES;
-    [self getFriendsFromServer:self.tokenForFriendsController];
-    [self.tableView reloadData];
+    [self.activityIndicatorView startAnimating];
+    
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:self.tokenForFriendsController currentUserID:self.tokenForFriendsController.userIDString completeHandler:^(id modelArray) {
+        self.usersArray = modelArray;
+        [self.activityIndicatorView stopAnimating];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl
 {
-    [self getFriendsFromServer:self.tokenForFriendsController];
-    [self.tableView reloadData];
-    [refreshControl endRefreshing];
-}
-
-#pragma mark - API
-
-- (void) getFriendsFromServer:(BMVVkTokenModel *)token
-{
-    [BMVgetFriendsJSONData networkWorkingWithFriendsJSON:token completeBlock:^(NSMutableArray <BMVVkUserModel *> *users) {
-        self.usersArray = users;
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:self.tokenForFriendsController currentUserID:self.tokenForFriendsController.userIDString completeHandler:^(id modelArray) {
+        self.usersArray = modelArray;
+        [self.activityIndicatorView stopAnimating];
         [self.tableView reloadData];
     }];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
 }
 
 
@@ -112,7 +118,7 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     UICollectionViewFlowLayout* flowLayout = [UICollectionViewFlowLayout new];
     flowLayout.itemSize = CGSizeMake(100, 100);
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc] initWithCollectionViewLayout:flowLayout];
+    BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc]initWithCollectionViewLayout:flowLayout];
     BMVVkUserModel* user = [self.usersArray objectAtIndex:indexPath.row];
     photosOfThisFriend.interestingUser = user;
     photosOfThisFriend.tokenForFriendsController = self.tokenForFriendsController;

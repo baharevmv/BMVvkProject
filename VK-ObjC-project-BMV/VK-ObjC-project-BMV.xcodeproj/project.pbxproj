@@ -28,6 +28,11 @@
 		50A72BEB20078325002B6F1E /* VKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BEA20078325002B6F1E /* VKLoginViewController.m */; };
 		50A72BEF200783DF002B6F1E /* BMVVkTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BEE200783DF002B6F1E /* BMVVkTokenModel.m */; };
 		50A72BF22007978D002B6F1E /* VKFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BF12007978D002B6F1E /* VKFriendsViewController.m */; };
+		50B3FF9C20266883005DE6E8 /* BMVDownloadDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FF9B20266883005DE6E8 /* BMVDownloadDataService.m */; };
+		50B3FF9F20266A9F005DE6E8 /* BMVBuilderURLFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FF9E20266A9F005DE6E8 /* BMVBuilderURLFriend.m */; };
+		50B3FFA220266E24005DE6E8 /* BMVBuilderURLPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA120266E24005DE6E8 /* BMVBuilderURLPhotos.m */; };
+		50B3FFA5202675FE005DE6E8 /* BMVParsingJSONFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA4202675FE005DE6E8 /* BMVParsingJSONFriends.m */; };
+		50B3FFA820267A00005DE6E8 /* BMVParsingJSONPhotots.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotots.m */; };
 		50F946EB2015C22F00D89BB4 /* BMVgetFriendsJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F946EA2015C22F00D89BB4 /* BMVgetFriendsJSONData.m */; };
 		50F946EE201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F946ED201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m */; };
 		50FD2D5E201D04A90081D4AC /* BMVgetPhotosJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 50648A66201CF60F007EB756 /* BMVgetPhotosJSONData.m */; };
@@ -94,6 +99,16 @@
 		50A72BEE200783DF002B6F1E /* BMVVkTokenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVVkTokenModel.m; sourceTree = "<group>"; };
 		50A72BF02007978D002B6F1E /* VKFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKFriendsViewController.h; sourceTree = "<group>"; };
 		50A72BF12007978D002B6F1E /* VKFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKFriendsViewController.m; sourceTree = "<group>"; };
+		50B3FF9A20266883005DE6E8 /* BMVDownloadDataService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVDownloadDataService.h; sourceTree = "<group>"; };
+		50B3FF9B20266883005DE6E8 /* BMVDownloadDataService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVDownloadDataService.m; sourceTree = "<group>"; };
+		50B3FF9D20266A9F005DE6E8 /* BMVBuilderURLFriend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVBuilderURLFriend.h; sourceTree = "<group>"; };
+		50B3FF9E20266A9F005DE6E8 /* BMVBuilderURLFriend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVBuilderURLFriend.m; sourceTree = "<group>"; };
+		50B3FFA020266E24005DE6E8 /* BMVBuilderURLPhotos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVBuilderURLPhotos.h; sourceTree = "<group>"; };
+		50B3FFA120266E24005DE6E8 /* BMVBuilderURLPhotos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVBuilderURLPhotos.m; sourceTree = "<group>"; };
+		50B3FFA3202675FE005DE6E8 /* BMVParsingJSONFriends.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingJSONFriends.h; sourceTree = "<group>"; };
+		50B3FFA4202675FE005DE6E8 /* BMVParsingJSONFriends.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingJSONFriends.m; sourceTree = "<group>"; };
+		50B3FFA620267A00005DE6E8 /* BMVParsingJSONPhotots.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingJSONPhotots.h; sourceTree = "<group>"; };
+		50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotots.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingJSONPhotots.m; sourceTree = "<group>"; };
 		50F946E92015C22F00D89BB4 /* BMVgetFriendsJSONData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVgetFriendsJSONData.h; sourceTree = "<group>"; };
 		50F946EA2015C22F00D89BB4 /* BMVgetFriendsJSONData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVgetFriendsJSONData.m; sourceTree = "<group>"; };
 		50F946EC201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingFriendsJSONResponse.h; sourceTree = "<group>"; };
@@ -172,6 +187,10 @@
 				50F946ED201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m */,
 				5039956A200BF255009E0161 /* BMVVkUserModel.h */,
 				5039956B200BF255009E0161 /* BMVVkUserModel.m */,
+				50B3FF9D20266A9F005DE6E8 /* BMVBuilderURLFriend.h */,
+				50B3FF9E20266A9F005DE6E8 /* BMVBuilderURLFriend.m */,
+				50B3FFA3202675FE005DE6E8 /* BMVParsingJSONFriends.h */,
+				50B3FFA4202675FE005DE6E8 /* BMVParsingJSONFriends.m */,
 			);
 			path = FriendsController;
 			sourceTree = "<group>";
@@ -189,6 +208,10 @@
 				50FD2D60201D0B650081D4AC /* BMVParsingPhotosJSONResponse.m */,
 				50648A67201CFD1F007EB756 /* BMVVkPhotoModel.h */,
 				50648A68201CFD1F007EB756 /* BMVVkPhotoModel.m */,
+				50B3FFA020266E24005DE6E8 /* BMVBuilderURLPhotos.h */,
+				50B3FFA120266E24005DE6E8 /* BMVBuilderURLPhotos.m */,
+				50B3FFA620267A00005DE6E8 /* BMVParsingJSONPhotots.h */,
+				50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotots.m */,
 			);
 			path = PhotosController;
 			sourceTree = "<group>";
@@ -196,6 +219,8 @@
 		506AB82C20247B7A0025E610 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				50B3FF9A20266883005DE6E8 /* BMVDownloadDataService.h */,
+				50B3FF9B20266883005DE6E8 /* BMVDownloadDataService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -583,15 +608,20 @@
 				50FD2D61201D0B650081D4AC /* BMVParsingPhotosJSONResponse.m in Sources */,
 				50A72BF22007978D002B6F1E /* VKFriendsViewController.m in Sources */,
 				50A72BB320073CCE002B6F1E /* AppDelegate.m in Sources */,
+				50B3FF9C20266883005DE6E8 /* BMVDownloadDataService.m in Sources */,
+				50B3FFA5202675FE005DE6E8 /* BMVParsingJSONFriends.m in Sources */,
 				5017C198201A0952006DC4F4 /* VKAccessToken+CoreDataClass.m in Sources */,
 				50A72BEB20078325002B6F1E /* VKLoginViewController.m in Sources */,
 				50A72BC420073CCE002B6F1E /* main.m in Sources */,
 				50F946EB2015C22F00D89BB4 /* BMVgetFriendsJSONData.m in Sources */,
 				50FD2D5E201D04A90081D4AC /* BMVgetPhotosJSONData.m in Sources */,
+				50B3FFA820267A00005DE6E8 /* BMVParsingJSONPhotots.m in Sources */,
 				50A4AC4B20121D880081364A /* BMVProgressView.m in Sources */,
 				50648A69201CFD1F007EB756 /* BMVVkPhotoModel.m in Sources */,
 				5017C199201A0952006DC4F4 /* VKAccessToken+CoreDataProperties.m in Sources */,
 				5039956C200BF255009E0161 /* BMVVkUserModel.m in Sources */,
+				50B3FFA220266E24005DE6E8 /* BMVBuilderURLPhotos.m in Sources */,
+				50B3FF9F20266A9F005DE6E8 /* BMVBuilderURLFriend.m in Sources */,
 				50A72BBC20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld in Sources */,
 				50F946EE201607AC00D89BB4 /* BMVParsingFriendsJSONResponse.m in Sources */,
 				500ACEB6201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m in Sources */,
