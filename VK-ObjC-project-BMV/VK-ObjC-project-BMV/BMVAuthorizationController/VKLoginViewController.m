@@ -9,8 +9,6 @@
 
 #import "VKLoginViewController.h"
 #import "VKFriendsViewController.h"
-#import "BMVgetFriendsJSONData.h"
-#import "BMVgetPhotosJSONData.h"
 #import "BMVVkTokenModel.h"
 #import "BMVVkUserModel.h"
 #import "VKAccessToken+CoreDataClass.h"

@@ -9,7 +9,6 @@
 #import "VKFriendsViewController.h"
 #import "VKFriendsTableViewCell.h"
 #import "BMVVkUserModel.h"
-#import "BMVgetFriendsJSONData.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
 
 #import "BMVDownloadDataService.h"

@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VK-ObjC-project-BMV/PhotosController/BMVvkAllFriendPhotoCollectionView.m"
-            timestampString = "539473040.5108761"
+            timestampString = "539474394.910368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
             <Locations>
