@@ -124,4 +124,34 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     [self.navigationController pushViewController:photosOfThisFriend animated:YES];
 }
 
+
+// animations
+- (void)tableView:(UITableView *)tableView willDisplayCell:(VKFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row <= [self.tableView indexPathsForVisibleRows].firstObject.row)
+    {
+        CALayer *layer = [cell layer];
+        layer.position = CGPointMake(CGRectGetWidth(cell.frame), cell.frame.origin.y);
+        layer.anchorPoint = CGPointMake(1, 0);
+        CABasicAnimation *animation =[CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        animation.duration = 0.3;
+        animation.fromValue = @(M_PI_4*3);
+        animation.toValue = @(0);
+        animation.removedOnCompletion = YES;
+        [layer addAnimation:animation forKey:@"transform.rotation"];
+    }
+    if (indexPath.row >= [self.tableView indexPathsForVisibleRows].lastObject.row)
+    {
+        CALayer *layer = [cell layer];
+        layer.position = CGPointMake(cell.frame.origin.x, cell.frame.origin.y);
+        layer.anchorPoint = CGPointMake(0, 0);
+        CABasicAnimation *animation =[CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        animation.duration = 0.3;
+        animation.fromValue = @(M_PI_4*3);
+        animation.toValue = @(0);
+        animation.removedOnCompletion = YES;
+        [layer addAnimation:animation forKey:@"transform.rotation"];
+    }
+}
+
 @end
