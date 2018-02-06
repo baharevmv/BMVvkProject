@@ -8,16 +8,27 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-//#import "VKServerObject.h"
+@class VKFriend;
 
+
+/**
+ Модель для работы с данными о пользователях
+ */
 @interface BMVVkUserModel : NSObject
 
-@property (nonatomic, copy) NSString* firstName;  //copy
-@property (nonatomic, copy) NSString* lastName;//copy
-@property (nonatomic, copy) NSString* smallImageURL;
-@property (nonatomic, strong) NSURL* imageURL;
-@property (nonatomic, strong) NSURL* bigImageURL;
-@property (nonatomic, copy) NSString *userID;//copy
-@property (nonatomic, strong) UIImage *previewPhotoImage;
+@property (nonatomic, copy) NSString *userID;               /**< Уникальный идентифиактор друга */
+@property (nonatomic, copy) NSString *firstName;            /**< Имя Друга */
+@property (nonatomic, copy) NSString *lastName;             /**< Фамилия Друга */
+@property (nonatomic, strong) NSString *smallImageURL;         /**< URL c фотографией самого скромного размера для превью */
+@property (nonatomic, strong) NSString *imageURL;              /**< URL c полноразмерной фотографией */
+@property (nonatomic, strong) NSString *bigImageURL;           /**< URL с фотографией в большом разрешении */
+
+
+/**
+ Инициализирует модель с данными
+ @param vkFriendModel - сущность, из которой берутся данные для заполнения модели
+ @return экземпляр класса BMVVkUserModel
+ */
+- (instancetype)initWithVKFriend:(VKFriend *)vkFriendModel;
 
 @end

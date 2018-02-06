@@ -35,11 +35,11 @@
 }
 
 
-// НУЖНО НАПИСАТЬ РЕАЛИЗАЦИЮ.
 
 - (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(id))completeHandler
 {
+    NSLog(@"Зашли в экземпляр класса downloadDataWithDataTypeString");
     dispatch_queue_t queue_t = dispatch_get_main_queue();
     if (queue)
     {
@@ -51,6 +51,7 @@
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                          if (data)
                                                          {
+                                                             NSLog(@"Должен вернуться массив");
                                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                                              id dataModel = [self parsingByType:dataType json:json];
                                                              dispatch_async(queue_t, ^{
@@ -59,6 +60,7 @@
                                                          }
                                                          else
                                                          {
+                                                             NSLog(@"Должен вернуться НИЛ");
                                                              dispatch_async(queue_t, ^{
                                                                  completeHandler(nil);
                                                              });
@@ -89,11 +91,6 @@
         });
     });
 }
-
-
-// НАПИШИ РЕАЛИЗАЦИЮ. "РЕАЛИЗАЦИЮ". ХА-ХА ОЧЕНЬ СМЕШНО.
-
-
 
 
 - (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
