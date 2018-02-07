@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BMVVkTokenModel.h"
+#import "BMVVkPhotoModel.h"
 
 
 /**
@@ -50,5 +51,12 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType)
 - (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray downloadDataType:(BMVDownloadDataType)dataType
                           localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(NSArray *))completeHandler;
+
+
+/**
+ Обеспечивает загрузку фотографий из передаваемого массива
+ @param arrayToDownload - массив с элементами типа BMVVkPhotoModel
+ */
+- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload completeHandler:(void(^)(id))completeHandler;
 
 @end
