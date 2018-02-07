@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+//@class LocalVKToken;
 
-@class LocalVKToken;
+//typedef void(^LoginCompletionBlock)(LocalVKToken* token);
 
-typedef void(^LoginCompletionBlock)(LocalVKToken* token);
 
+/**
+ Класс для авторизации в соц. сети vk.com, и для получения Ключа доступа пользователя.
+ */
 @interface VKLoginViewController : UIViewController
 
-- (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock;
+//- (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock;
 
 @end

@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType) {
  Обеспечивает получение данных из сети
  @param dataType - постоянная из BMVDownloadDataType
  @param queue - очередь, на которой должен быть выполнен completeHandler
+ @param token - токен социальной сети Вконтакте, который необходим для построения обращений к API
+ @param userID - Строка  с идентификатором пользователя Вконтакте
  @param completeHandler - блок, для выполнения по-окончании загрузки
  */
 - (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
@@ -37,7 +39,9 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType) {
 
 /**
  Обеспечивает получение массива данных из сети
- @param dataType - постоянная из SBTDownloadDataType
+ @param dataType - постоянная из BMVDownloadDataType
+ @param token - Токен социальной сети Вконтакте, который необходим для построения обращений к API
+ @param userID - Строка  с идентификатором пользователя Вконтакте
  @param completeHandler - блок, который выполняется по окончании загрузки
  */
 - (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray downloadDataType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID

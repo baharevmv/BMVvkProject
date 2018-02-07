@@ -35,11 +35,11 @@
 }
 
 
-// НУЖНО НАПИСАТЬ РЕАЛИЗАЦИЮ.
 
 - (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(id))completeHandler
 {
+    NSLog(@"Зашли в экземпляр класса downloadDataWithDataTypeString");
     dispatch_queue_t queue_t = dispatch_get_main_queue();
     if (queue)
     {
@@ -91,11 +91,6 @@
 }
 
 
-// НАПИШИ РЕАЛИЗАЦИЮ. "РЕАЛИЗАЦИЮ". ХА-ХА ОЧЕНЬ СМЕШНО.
-
-
-
-
 - (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
 {
     NSURL *url;
@@ -104,8 +99,6 @@
         case BMVDownloadDataTypeFriends:
         {
             url = [BMVBuilderURLFriend urlWithAllFriendsString:token];
-            
-            NSLog(@"%@",url);
             break;
         }
         case BMVDownloadDataTypePhotos:

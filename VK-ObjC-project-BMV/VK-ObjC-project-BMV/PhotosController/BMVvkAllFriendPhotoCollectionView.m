@@ -64,8 +64,6 @@ NSInteger const offsetTop = 5;
     
     [super viewDidLoad];
     // Собираем модель
-//    [self gettingAllUsersPhoto:self.interestingUser token:self.tokenForFriendsController];
-
     self.downloadDataService = [BMVDownloadDataService new];
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil localToken:self.tokenForFriendsController currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
@@ -120,7 +118,6 @@ NSInteger const offsetTop = 5;
     NSLog(@"КОЛИЧЕСТВО %lu",(unsigned long)self.selectedModelArray.count);
     if (self.selectedModelArray.count != 0 )
     {
-        NSLog(@"%@", self.selectedModelArray);
         for (BMVVkPhotoModel *photo in self.selectedModelArray)
         {
             NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
@@ -132,7 +129,6 @@ NSInteger const offsetTop = 5;
             });
         }
     } else {
-        NSLog(@"%@", self.modelArray);
         for (BMVVkPhotoModel *photo in self.modelArray)
         {
             NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];

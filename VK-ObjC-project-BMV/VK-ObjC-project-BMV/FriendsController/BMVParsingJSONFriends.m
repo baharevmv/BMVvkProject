@@ -22,13 +22,13 @@
         return nil;
     }
     NSMutableArray <BMVVkUserModel *> *readyUsersArray = [NSMutableArray new];
-    NSArray *usersArray = json[@"response"];
+    NSArray *usersArray = json[@"response"][@"items"];
     for (NSDictionary *netModelDictionary in usersArray)
     {
         BMVVkUserModel *startModel = [BMVVkUserModel new];
         startModel.firstName = netModelDictionary[@"first_name"];
         startModel.lastName = netModelDictionary[@"last_name"];
-        startModel.userID = netModelDictionary[@"user_id"];
+        startModel.userID = netModelDictionary[@"id"];
         startModel.smallImageURL = netModelDictionary[@"photo_50"];
         startModel.imageURL = netModelDictionary[@"photo_100"];
         startModel.bigImageURL = netModelDictionary[@"photo_max_orig"];

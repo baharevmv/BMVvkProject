@@ -10,6 +10,8 @@
 #import "VKFriendsTableViewCell.h"
 #import "BMVVkUserModel.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
+#import "BMVCoreDataDownloadFunnel.h"
+#import "BMVCoreDataService.h"
 
 #import "BMVDownloadDataService.h"
 
@@ -20,13 +22,13 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 @interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) BMVCoreDataDownloadFunnel *coreDataDownloadFunnel;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
+@property (nonatomic, strong) BMVVkUserModel *dataFriendModel;
 @property (nonatomic, copy) NSArray *friendsArray;
 @property (nonatomic, strong) VKFriendsTableViewCell *tableViewCell;
-@property (nonatomic, strong) NSMutableArray <BMVVkUserModel *> *usersArray;
+@property (nonatomic, strong) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
-@property (nonatomic, assign) BOOL firstAppearance;
-
 
 @end
 
@@ -39,15 +41,16 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     self = [super init];
     if (self)
     {
+        _coreDataDownloadFunnel = [BMVCoreDataDownloadFunnel new];
         _downloadDataService = [BMVDownloadDataService new];
     }
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -60,20 +63,28 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
     
     self.navigationItem.title = @"Friends";
-    self.firstAppearance = YES;
     [self.activityIndicatorView startAnimating];
-    
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:self.tokenForFriendsController currentUserID:self.tokenForFriendsController.userIDString completeHandler:^(id modelArray) {
-        self.usersArray = modelArray;
-        [self.activityIndicatorView stopAnimating];
-        [self.tableView reloadData];
-    }];
+    [self downloadDataForFriendsTableView];
 }
+
+
+- (void)downloadDataForFriendsTableView
+{
+    [self.activityIndicatorView startAnimating];
+    [self.coreDataDownloadFunnel obtainVKFriendsWithLocalToken:self.tokenForFriendsController CompleteHandler:^(id dataModel) {
+                                                         self.usersArray = dataModel;
+                                                         [self.activityIndicatorView stopAnimating];
+                                                            [self.tableView reloadData];
+                                                     }];
+}
+
 
 - (void)refresh:(UIRefreshControl *)refreshControl
 {
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:self.tokenForFriendsController currentUserID:self.tokenForFriendsController.userIDString completeHandler:^(id modelArray) {
         self.usersArray = modelArray;
+        BMVCoreDataService *coreDataService = [BMVCoreDataService new];
+        [coreDataService saveFriendModel:modelArray];
         [self.activityIndicatorView stopAnimating];
         [self.tableView reloadData];
     }];
@@ -108,7 +119,9 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     return tableViewCell;
 }
 
+
 #pragma mark - UITableViewDelegate
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
