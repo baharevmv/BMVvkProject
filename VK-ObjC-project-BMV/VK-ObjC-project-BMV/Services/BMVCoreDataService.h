@@ -22,7 +22,8 @@
  @param context - контекст для настрокий сервиса
  @return экземпляр класса BMVCoreDataService
  */
-- (instancetype)initWithContext:(NSManagedObjectContext *)context andCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (instancetype)initWithContext:(NSManagedObjectContext *)context
+                 andCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 
 /**
@@ -51,6 +52,13 @@
  */
 - (BOOL)isItFirstTimeStarts;
 
+/**
+ Обеспечивает работу строки живого поиска.
+ @param searchString - строка поиска.
+ @return массив сущностей соответствующий поисковому запросу.
+ 
+ */
+- (NSArray *)searchingForFriendWithSearchString:(NSString *)searchString;
 
 
 @end

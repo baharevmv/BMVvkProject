@@ -37,28 +37,17 @@
 }
 
 
-//- (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock {
-//    
-//    self = [super init];
-//    if (self) {
-//        self.completionBlock = completionBlock;
-//        _downloadDataService = [BMVDownloadDataService new];
-//    }
-//    return self;
-//}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGRect r = self.view.bounds;
-    r.origin = CGPointZero;
-    UIWebView* webView = [[UIWebView alloc] initWithFrame:r];
+    CGRect typicalRectangle = self.view.bounds;
+    typicalRectangle.origin = CGPointZero;
+    UIWebView* webView = [[UIWebView alloc] initWithFrame:typicalRectangle];
     webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:webView];
     self.webView = webView;
     self.navigationItem.title = @"Login";
     NSString* urlString = @"https://oauth.vk.com/authorize?"
-                                                        "client_id=6244609&"
+                                                        "client_id=6355197&"
                                                         "scope=274438&"
                                                         "redirect_uri=https://oauth.vk.com/blank.html&"
                                                         "display=mobile&"

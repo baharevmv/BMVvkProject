@@ -16,12 +16,12 @@
  */
 @interface BMVVkUserModel : NSObject
 
-@property (nonatomic, copy) NSString *userID;               /**< Уникальный идентифиактор друга */
-@property (nonatomic, copy) NSString *firstName;            /**< Имя Друга */
-@property (nonatomic, copy) NSString *lastName;             /**< Фамилия Друга */
-@property (nonatomic, strong) NSString *smallImageURL;         /**< URL c фотографией самого скромного размера для превью */
-@property (nonatomic, strong) NSString *imageURL;              /**< URL c полноразмерной фотографией */
-@property (nonatomic, strong) NSString *bigImageURL;           /**< URL с фотографией в большом разрешении */
+@property (nonatomic, copy) NSString *userID;           /**< Уникальный идентифиактор друга */
+@property (nonatomic, copy) NSString *firstName;        /**< Имя Друга */
+@property (nonatomic, copy) NSString *lastName;         /**< Фамилия Друга */
+@property (nonatomic, strong) NSURL *smallImageURL;  /**< URL c фотографией самого скромного размера для превью */
+@property (nonatomic, strong) NSURL *imageURL;       /**< URL c полноразмерной фотографией */
+@property (nonatomic, strong) NSURL *bigImageURL;    /**< URL с фотографией в большом разрешении */
 
 
 /**

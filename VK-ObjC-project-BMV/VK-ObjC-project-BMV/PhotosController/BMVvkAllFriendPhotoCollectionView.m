@@ -18,9 +18,10 @@ static NSString *cellIdentifier = @"CellIdentifier";
 NSInteger const offsetLeft = 20;
 NSInteger const offsetTop = 5;
 
+
 @interface BMVvkAllFriendPhotoCollectionView ()
 
-//@property (nonatomic, strong) UICollectionView* collectionView;
+
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, assign) NSUInteger numberPage;
 @property (nonatomic, copy) BMVVkUserModel *viewedUser;
@@ -28,26 +29,12 @@ NSInteger const offsetTop = 5;
 @property (nonatomic, retain) NSMutableArray <BMVVkPhotoModel *> *selectedModelArray;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
-@property (nonatomic) NSMutableArray  *arrayWithSelectedIndexPath;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
-
-
 
 
 @end
 
 @implementation BMVvkAllFriendPhotoCollectionView
-
-//- (instancetype)initWithCollectionViewLayout
-//{
-//    self = [super init];
-//    if (self)
-//    {
-//        _downloadDataService = [BMVDownloadDataService new];
-//    }
-//    return self;
-//}
-
 
 
 - (void) viewDidLoad
@@ -57,15 +44,14 @@ NSInteger const offsetTop = 5;
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
-    
-    self.arrayWithSelectedIndexPath = [NSMutableArray new];
     self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
-    
-    
     [super viewDidLoad];
     // Собираем модель
     self.downloadDataService = [BMVDownloadDataService new];
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil localToken:self.tokenForFriendsController currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil
+                                                  localToken:self.tokenForFriendsController
+                                               currentUserID:self.interestingUser.userID
+                                             completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
         [self.activityIndicatorView stopAnimating];
         [self.collectionView reloadData];
@@ -85,13 +71,17 @@ NSInteger const offsetTop = 5;
     self.collectionView.allowsMultipleSelection = YES;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
+                                                                 target:self action:@selector(downloadAllPhotos)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)refreshWithPull:(UIRefreshControl *)refreshControl
 {
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil localToken:self.tokenForFriendsController currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil
+                                                  localToken:self.tokenForFriendsController
+                                               currentUserID:self.interestingUser.userID
+                                             completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
         [self.activityIndicatorView stopAnimating];
         [self.collectionView reloadData];
@@ -135,10 +125,10 @@ NSInteger const offsetTop = 5;
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 dispatch_async(dispatch_get_main_queue(), ^(void){
-                NSLog(@"%@", originalPhotoPath);
-                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
-                SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
-                UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+                    NSLog(@"%@", originalPhotoPath);
+                    UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
+                    SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
+                    UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
                 });
             });
         }
@@ -146,16 +136,6 @@ NSInteger const offsetTop = 5;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-
-//- (void)gettingAllUsersPhoto:(BMVVkUserModel *)currentUser token:(BMVVkTokenModel *)token
-//{
-//    [BMVgetPhotosJSONData NetworkWorkingWithPhotosJSON:token currentFriend:currentUser completeBlock:^(NSMutableArray <BMVVkPhotoModel *> *photos)
-//     {
-//        self.modelArray = photos;
-//        [self.collectionView reloadData];
-//     }];
-//
-//}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -172,7 +152,6 @@ NSInteger const offsetTop = 5;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-//    [collectionViewCell prepareForReuse];
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         NSString *previewPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.modelArray[indexPath.row].previewImageURL];
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: previewPhotoPath]];
@@ -186,7 +165,8 @@ NSInteger const offsetTop = 5;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.selectedModelArray addObject:self.modelArray[indexPath.item]];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain
+                                                                 target:self action:@selector(downloadAllPhotos)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
@@ -195,7 +175,9 @@ NSInteger const offsetTop = 5;
     [self.selectedModelArray removeObject:self.modelArray[indexPath.item]];
     if (self.selectedModelArray.count == 0)
     {
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain target:self action:@selector(downloadAllPhotos)];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
+                                                                     target:self
+                                                                     action:@selector(downloadAllPhotos)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
         

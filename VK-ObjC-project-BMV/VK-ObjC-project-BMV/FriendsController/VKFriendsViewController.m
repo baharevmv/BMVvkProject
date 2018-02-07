@@ -12,23 +12,25 @@
 #import "BMVvkAllFriendPhotoCollectionView.h"
 #import "BMVCoreDataDownloadFunnel.h"
 #import "BMVCoreDataService.h"
-
 #import "BMVDownloadDataService.h"
 
-CGFloat const offsetNavBar = 76;
-static NSString *const cellIdentifier = @"cellIdentifier";
+
+static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 
-@interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) BMVCoreDataDownloadFunnel *coreDataDownloadFunnel;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
+@property (nonatomic, strong) BMVCoreDataService *coreDataService;
 @property (nonatomic, strong) BMVVkUserModel *dataFriendModel;
 @property (nonatomic, copy) NSArray *friendsArray;
 @property (nonatomic, strong) VKFriendsTableViewCell *tableViewCell;
 @property (nonatomic, strong) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
+@property (nonatomic, strong) UISearchBar *lifeSearchBar;
 
 @end
 
@@ -43,35 +45,51 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     {
         _coreDataDownloadFunnel = [BMVCoreDataDownloadFunnel new];
         _downloadDataService = [BMVDownloadDataService new];
+        _coreDataService = [BMVCoreDataService new];
     }
     return self;
 }
 
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self createUI];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.lifeSearchBar.delegate = self;
+    [self downloadDataForFriendsTableView];
+}
+
     
+- (void) createUI
+{
     // PullToRefresh функция
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, CGRectGetWidth(self.view.frame),
+                                                                   (CGRectGetHeight(self.view.frame) - 40))];
+    [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:BMVCellIdentifier];
+    
+    self.lifeSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40)];
+    [self.view addSubview:self.lifeSearchBar];
     
     self.navigationItem.title = @"Friends";
     [self.activityIndicatorView startAnimating];
-    [self downloadDataForFriendsTableView];
 }
 
 
 - (void)downloadDataForFriendsTableView
 {
     [self.activityIndicatorView startAnimating];
-    [self.coreDataDownloadFunnel obtainVKFriendsWithLocalToken:self.tokenForFriendsController CompleteHandler:^(id dataModel) {
+    [self.coreDataDownloadFunnel obtainVKFriendsWithLocalToken:self.tokenForFriendsController
+                                               CompleteHandler:^(id dataModel) {
                                                          self.usersArray = dataModel;
                                                          [self.activityIndicatorView stopAnimating];
                                                             [self.tableView reloadData];
@@ -81,7 +99,10 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 
 - (void)refresh:(UIRefreshControl *)refreshControl
 {
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:self.tokenForFriendsController currentUserID:self.tokenForFriendsController.userIDString completeHandler:^(id modelArray) {
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil
+                                                  localToken:self.tokenForFriendsController
+                                               currentUserID:self.tokenForFriendsController.userIDString
+                                             completeHandler:^(id modelArray) {
         self.usersArray = modelArray;
         BMVCoreDataService *coreDataService = [BMVCoreDataService new];
         [coreDataService saveFriendModel:modelArray];
@@ -95,7 +116,6 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 
 #pragma mark - UITableViewDataSource
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.usersArray count];
@@ -104,7 +124,7 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    VKFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    VKFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier forIndexPath:indexPath];
     // Забираем имя
     NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName, self.usersArray[indexPath.row].lastName];
     tableViewCell.userNameLabel.text = friendFullName;
@@ -122,7 +142,6 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 
 #pragma mark - UITableViewDelegate
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -130,7 +149,8 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     UICollectionViewFlowLayout* flowLayout = [UICollectionViewFlowLayout new];
     flowLayout.itemSize = CGSizeMake(100, 100);
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc]initWithCollectionViewLayout:flowLayout];
+    BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc]
+                                                                initWithCollectionViewLayout:flowLayout];
     BMVVkUserModel* user = [self.usersArray objectAtIndex:indexPath.row];
     photosOfThisFriend.interestingUser = user;
     photosOfThisFriend.tokenForFriendsController = self.tokenForFriendsController;
@@ -138,7 +158,8 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 }
 
 
-// animations
+#pragma mark - Animations
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(VKFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row <= [self.tableView indexPathsForVisibleRows].firstObject.row)
@@ -164,6 +185,22 @@ static NSString *const cellIdentifier = @"cellIdentifier";
         animation.toValue = @(0);
         animation.removedOnCompletion = YES;
         [layer addAnimation:animation forKey:@"transform.rotation"];
+    }
+}
+
+
+#pragma mark - Search Bar Delegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if ([searchText  isEqual: @""]) {
+        [self downloadDataForFriendsTableView];
+        [self.tableView reloadData];
+    }
+    else
+    {
+        self.usersArray = [self.coreDataService searchingForFriendWithSearchString:searchText];
+        [self.tableView reloadData];
     }
 }
 

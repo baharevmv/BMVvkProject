@@ -17,9 +17,11 @@
 
 
 /**
- Enum для определения, какой тип данных мы запрашиваем, как должен быть создан URL и как необходимо парсить полученные данные из сети.
+ Enum для определения, какой тип данных мы запрашиваем, как должен быть создан URL и как необходимо парсить полученные
+ данные из сети.
  */
-typedef NS_ENUM(NSUInteger, BMVDownloadDataType) {
+typedef NS_ENUM(NSUInteger, BMVDownloadDataType)
+{
     BMVDownloadDataTypeFriends,
     BMVDownloadDataTypePhotos,
 };
@@ -33,8 +35,9 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType) {
  @param userID - Строка  с идентификатором пользователя Вконтакте
  @param completeHandler - блок, для выполнения по-окончании загрузки
  */
-- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
-                     completeHandler:(void(^)(id))completeHandler;
+- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue
+                            localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
+                       completeHandler:(void(^)(id))completeHandler;
 
 
 /**
@@ -44,7 +47,8 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType) {
  @param userID - Строка  с идентификатором пользователя Вконтакте
  @param completeHandler - блок, который выполняется по окончании загрузки
  */
-- (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray downloadDataType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
+- (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray downloadDataType:(BMVDownloadDataType)dataType
+                          localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(NSArray *))completeHandler;
 
 @end

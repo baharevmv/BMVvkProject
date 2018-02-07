@@ -42,7 +42,7 @@
         
         
         BOOL isFirstTime = [self.coreDataService isItFirstTimeStarts];
-        if (isFirstTime == NO)
+        if (!isFirstTime)
         {
             // Не первый запуск
             // тянем из CoreData
@@ -53,7 +53,9 @@
         {
             // Запуск первый
             // Загружаем в таблицу и CoreData из сети.
-            [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:token currentUserID:token.userIDString                         completeHandler:^(id dataModel) {
+            [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil
+                                                          localToken:token currentUserID:token.userIDString
+                                                     completeHandler:^(id dataModel) {
                 [self.coreDataService saveFriendModel:dataModel];
                 completeHandler(dataModel);
             }];

@@ -36,7 +36,7 @@
 }
 
 
--(void)setHighlighted:(BOOL)highlighted
+- (void)setHighlighted:(BOOL)highlighted
 {
     [super setHighlighted:highlighted];
     

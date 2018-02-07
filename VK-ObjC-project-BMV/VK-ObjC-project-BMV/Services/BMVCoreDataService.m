@@ -25,7 +25,8 @@
 @implementation BMVCoreDataService
 
 
-- (instancetype)initWithContext:(NSManagedObjectContext *)context andCoordinator:(NSPersistentStoreCoordinator *)coordinator
+- (instancetype)initWithContext:(NSManagedObjectContext *)context
+                 andCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     self = [super init];
     if (self)
@@ -65,7 +66,8 @@
     for (BMVVkUserModel *userModel in vkFriendsModelArray)
     {
         VKFriend *friendCoreDataModel = [NSEntityDescription
-                                              insertNewObjectForEntityForName:NSStringFromClass([VKFriend class]) inManagedObjectContext:self.context];
+                                         insertNewObjectForEntityForName:NSStringFromClass([VKFriend class])
+                                         inManagedObjectContext:self.context];
         NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",userModel.firstName, userModel.lastName];
         friendCoreDataModel.fullName = friendFullName;
         friendCoreDataModel.firstName = userModel.firstName;
@@ -93,17 +95,30 @@
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL AlreadyStart = [userDefaults boolForKey:@"AlreadyStarts"];
-    if (AlreadyStart == YES)
+    if (AlreadyStart)
     {
-        // если уже запускался, значит не первый запуск.
+        // если уже запускался - значит не первый запуск.
         return NO;
     }
     else
     {
-        // если еще не запускался, запуск первый.
+        // если еще не запускался - запуск первый.
         [userDefaults setBool:YES forKey:@"AlreadyStarts"];
         return YES;
     }
+}
+
+- (NSArray *)searchingForFriendWithSearchString:(NSString *)searchString
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VKFriend"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"fullName CONTAINS[c] %@",searchString];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:NO];
+    fetchRequest.sortDescriptors = @[sortDescriptor];
+    NSArray *personsArray = [NSArray new];
+    personsArray = nil;
+    personsArray = [self.context executeFetchRequest:fetchRequest error:nil];
+    return personsArray;
 }
 
 @end

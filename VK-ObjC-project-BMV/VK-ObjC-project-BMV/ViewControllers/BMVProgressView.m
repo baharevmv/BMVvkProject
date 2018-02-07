@@ -20,7 +20,7 @@
 //
 //@implementation BMVProgressView
 //
-//-(instancetype) initWithFrame:(CGRect)frame
+//- (instancetype) initWithFrame:(CGRect)frame
 //{
 //    self = [super initWithFrame:frame];
 //    if(self)
@@ -71,7 +71,7 @@
 //}
 //# pragma mark - Setters
 //
-//-(void) setProgress: (CGFloat)progress
+//- (void) setProgress: (CGFloat)progress
 //{
 //    _progress = progress;
 //    self.progressLabel.text = [NSString stringWithFormat:@"%f%%", progress];

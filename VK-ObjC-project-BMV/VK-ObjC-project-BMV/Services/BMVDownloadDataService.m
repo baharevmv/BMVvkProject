@@ -6,19 +6,22 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVDownloadDataService.h"
 #import "BMVBuilderURLFriend.h"
 #import "BMVBuilderURLPhotos.h"
-
 #import "BMVParsingJSONFriends.h"
 #import "BMVParsingJSONPhotots.h"
 
 
 @interface BMVDownloadDataService ()
 
+
 @property(nonatomic, strong) NSURLSession *session;
 
+
 @end
+
 
 @implementation BMVDownloadDataService
 
@@ -36,7 +39,8 @@
 
 
 
-- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
+- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue
+                            localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(id))completeHandler
 {
     NSLog(@"Зашли в экземпляр класса downloadDataWithDataTypeString");
@@ -45,30 +49,35 @@
     {
         queue_t = queue;
     }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLByType:dataType localToken:token currentUserID:userID]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLByType:dataType
+                                                                   localToken:token currentUserID:userID]];
     NSLog(@"Запрос выглядит так -  %@", request);
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         if (data)
-                                                         {
-                                                             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                                             id dataModel = [self parsingByType:dataType json:json];
-                                                             dispatch_async(queue_t, ^{
-                                                                 completeHandler(dataModel);
-                                                             });
-                                                         }
-                                                         else
-                                                         {
-                                                             dispatch_async(queue_t, ^{
-                                                                 completeHandler(nil);
-                                                             });
-                                                         }
-                                                     }];
+                                                     completionHandler:^(NSData *data,
+                                                                         NSURLResponse *response,
+                                                                         NSError *error){
+        if (data)
+        {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            id dataModel = [self parsingByType:dataType json:json];
+            dispatch_async(queue_t, ^{
+                completeHandler(dataModel);
+            });
+        }
+        else
+        {
+            dispatch_async(queue_t, ^{
+                completeHandler(nil);
+            });
+        }
+    }];
     [dataTask resume];
 }
 
-- (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray downloadDataType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
-                     completeHandler:(void(^)(NSArray *))completeHandler
+- (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray
+                    downloadDataType:(BMVDownloadDataType)dataType
+                          localToken:(BMVVkTokenModel *)token
+                       currentUserID:(NSString *)userID completeHandler:(void(^)(NSArray *))completeHandler
 {
     dispatch_queue_t queue = dispatch_queue_create("queue", DISPATCH_QUEUE_CONCURRENT);
     __block NSMutableArray *modelArray = [NSMutableArray new];
@@ -76,13 +85,13 @@
         dispatch_group_t dispatchGroup = dispatch_group_create();
             dispatch_group_enter(dispatchGroup);
             [self downloadDataWithDataTypeString:dataType queue:queue localToken:token currentUserID:userID
-                               completeHandler:^(id dataModel) {
-                                   if (dataModel)
-                                   {
-                                       [modelArray addObject:dataModel];
-                                   }
-                                   dispatch_group_leave(dispatchGroup);
-                               }];
+                                 completeHandler:^(id dataModel){
+                if (dataModel)
+                {
+                    [modelArray addObject:dataModel];
+                }
+                dispatch_group_leave(dispatchGroup);
+            }];
         dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             completeHandler([modelArray copy]);
@@ -91,7 +100,8 @@
 }
 
 
-- (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
+- (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
+            currentUserID:(NSString *)userID
 {
     NSURL *url;
     switch (dataType)
