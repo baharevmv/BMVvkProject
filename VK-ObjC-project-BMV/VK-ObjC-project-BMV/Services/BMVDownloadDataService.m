@@ -51,7 +51,6 @@
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                          if (data)
                                                          {
-                                                             NSLog(@"Должен вернуться массив");
                                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                                              id dataModel = [self parsingByType:dataType json:json];
                                                              dispatch_async(queue_t, ^{
@@ -60,7 +59,6 @@
                                                          }
                                                          else
                                                          {
-                                                             NSLog(@"Должен вернуться НИЛ");
                                                              dispatch_async(queue_t, ^{
                                                                  completeHandler(nil);
                                                              });
@@ -101,8 +99,6 @@
         case BMVDownloadDataTypeFriends:
         {
             url = [BMVBuilderURLFriend urlWithAllFriendsString:token];
-            
-            NSLog(@"%@",url);
             break;
         }
         case BMVDownloadDataTypePhotos:

@@ -105,7 +105,6 @@
         } else if ([key isEqualToString:@"user_id"]) {
             token.userIDString = [values lastObject];
             self.theToken = token;
-            NSLog(@"%@",self.theToken);
         }
     }
     self.webView.delegate = nil; // так не надо -  лучше показать что произошла ошибка.
@@ -116,13 +115,9 @@
     groupNavCon.tabBarItem.title = @"Groups";
     
     VKFriendsViewController *friendsViewController = [VKFriendsViewController new];
-    //        VKFriendsViewController *friendsViewController =  [[VKFriendsViewController alloc] initWithDownloadDataService:self.downloadDataService];
-    //        NSLog(@"%@",self.theToken.tokenString);
     friendsViewController.tokenForFriendsController = self.theToken;
-    //        NSLog(@"%@",friendsViewController.tokenForFriendsController.tokenString);
     UINavigationController *navCon = [[UINavigationController alloc] initWithRootViewController:friendsViewController];
     navCon.tabBarItem.title = @"Friends";
-    //        navCon.tabBarItem.image = [UIImage imageNamed:@"Friends.png"];
     
     UITabBarController *tabBarContr = [[UITabBarController alloc] init];
     tabBarContr.viewControllers = @[navCon, groupNavCon];

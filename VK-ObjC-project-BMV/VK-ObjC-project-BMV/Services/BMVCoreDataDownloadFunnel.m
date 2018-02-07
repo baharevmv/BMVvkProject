@@ -54,7 +54,6 @@
             // Запуск первый
             // Загружаем в таблицу и CoreData из сети.
             [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:token currentUserID:token.userIDString                         completeHandler:^(id dataModel) {
-                NSLog(@"%@", dataModel);
                 [self.coreDataService saveFriendModel:dataModel];
                 completeHandler(dataModel);
             }];

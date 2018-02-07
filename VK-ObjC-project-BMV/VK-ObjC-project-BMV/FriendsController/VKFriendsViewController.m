@@ -29,8 +29,6 @@ static NSString *const cellIdentifier = @"cellIdentifier";
 @property (nonatomic, strong) VKFriendsTableViewCell *tableViewCell;
 @property (nonatomic, strong) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
-//@property (nonatomic, assign) BOOL firstAppearance;
-
 
 @end
 
@@ -49,6 +47,7 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -64,16 +63,10 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
     
     self.navigationItem.title = @"Friends";
-//    self.firstAppearance = YES;
     [self.activityIndicatorView startAnimating];
     [self downloadDataForFriendsTableView];
-    
-//    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:self.tokenForFriendsController currentUserID:self.tokenForFriendsController.userIDString completeHandler:^(id modelArray) {
-//        self.usersArray = modelArray;
-//        [self.activityIndicatorView stopAnimating];
-//        [self.tableView reloadData];
-//    }];
 }
+
 
 - (void)downloadDataForFriendsTableView
 {
@@ -84,8 +77,6 @@ static NSString *const cellIdentifier = @"cellIdentifier";
                                                             [self.tableView reloadData];
                                                      }];
 }
-
-
 
 
 - (void)refresh:(UIRefreshControl *)refreshControl
@@ -128,7 +119,9 @@ static NSString *const cellIdentifier = @"cellIdentifier";
     return tableViewCell;
 }
 
+
 #pragma mark - UITableViewDelegate
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

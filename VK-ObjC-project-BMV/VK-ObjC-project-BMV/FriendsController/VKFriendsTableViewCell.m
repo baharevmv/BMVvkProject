@@ -22,11 +22,9 @@ static const CGFloat lineSizeImageView = 44.f;
     if(self)
     {
         _userPhotoImageView = [UIImageView new];
-//        _userPhotoImageView.backgroundColor = [UIColor blackColor];
         [self.contentView addSubview:_userPhotoImageView];
         
         _userNameLabel = [UILabel new];
-//        _userNameLabel.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_userNameLabel];
         
         [self setConstraints];
@@ -39,6 +37,7 @@ static const CGFloat lineSizeImageView = 44.f;
 {
     
 }
+
 
 - (void)setConstraints
 {
