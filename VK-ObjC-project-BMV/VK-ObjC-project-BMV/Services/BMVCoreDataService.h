@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 @class BMVVkUserModel;

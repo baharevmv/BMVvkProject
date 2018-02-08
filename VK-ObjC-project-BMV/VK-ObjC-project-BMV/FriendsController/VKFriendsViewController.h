@@ -6,13 +6,16 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
 #import "BMVVkTokenModel.h"
-
 @class BMVDownloadDataService;
+
 
 @interface VKFriendsViewController : UITableViewController
 
-@property (nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;
+
+@property(nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;
+
 
 @end

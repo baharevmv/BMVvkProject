@@ -74,30 +74,6 @@
     [dataTask resume];
 }
 
-- (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray
-                    downloadDataType:(BMVDownloadDataType)dataType
-                          localToken:(BMVVkTokenModel *)token
-                       currentUserID:(NSString *)userID completeHandler:(void(^)(NSArray *))completeHandler
-{
-    dispatch_queue_t queue = dispatch_queue_create("queue", DISPATCH_QUEUE_CONCURRENT);
-    __block NSMutableArray *modelArray = [NSMutableArray new];
-    dispatch_async(queue, ^{
-        dispatch_group_t dispatchGroup = dispatch_group_create();
-            dispatch_group_enter(dispatchGroup);
-            [self downloadDataWithDataTypeString:dataType queue:queue localToken:token currentUserID:userID
-                                 completeHandler:^(id dataModel){
-                if (dataModel)
-                {
-                    [modelArray addObject:dataModel];
-                }
-                dispatch_group_leave(dispatchGroup);
-            }];
-        dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completeHandler([modelArray copy]);
-        });
-    });
-}
 
 - (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
             currentUserID:(NSString *)userID
@@ -169,6 +145,7 @@
 {
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
+
 
 
 @end

@@ -6,10 +6,13 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVParsingJSONPhotots.h"
 #import "BMVVkPhotoModel.h"
 
+
 @implementation BMVParsingJSONPhotots
+
 
 + (NSArray *)jsonToModel:(NSDictionary *)json
 {

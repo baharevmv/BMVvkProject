@@ -6,13 +6,12 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVCoreDataService.h"
-
 #import "VKFriend+CoreDataProperties.h"
-
 #import "BMVVkUserModel.h"
-
 #import "AppDelegate.h"
+
 
 @interface BMVCoreDataService ()
 
@@ -37,6 +36,7 @@
     return self;
 }
 
+
 - (NSManagedObjectContext *) context
 {
     if (_context)
@@ -48,6 +48,7 @@
     NSManagedObjectContext *context = container.viewContext;
     return context;
 }
+
 
 - (NSArray *)obtainModelArray:(Class)className
 {
@@ -80,6 +81,7 @@
     }
 }
 
+
 - (void)removeFromCoreData:(NSManagedObject *)entity
 {
     if (!entity)
@@ -107,6 +109,7 @@
         return YES;
     }
 }
+
 
 - (NSArray *)searchingForFriendWithSearchString:(NSString *)searchString
 {

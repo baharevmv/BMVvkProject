@@ -64,7 +64,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 }
 
     
-- (void) createUI
+- (void)createUI
 {
     // PullToRefresh функция
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -137,6 +137,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
         });
     });
     return tableViewCell;
+
 }
 
 

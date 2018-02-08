@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "QuartzCore/QuartzCore.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
 #import "BMVvkPhotosCollectionViewCell.h"
@@ -13,6 +14,7 @@
 #import "BMVVkUserModel.h"
 #import "BMVVkTokenModel.h"
 #import "BMVDownloadDataService.h"
+
 
 static NSString *cellIdentifier = @"CellIdentifier";
 NSInteger const offsetLeft = 20;
@@ -35,6 +37,7 @@ NSInteger const offsetTop = 5;
 
 
 @end
+
 
 @implementation BMVvkAllFriendPhotoCollectionView
 

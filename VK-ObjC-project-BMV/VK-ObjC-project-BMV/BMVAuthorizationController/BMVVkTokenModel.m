@@ -6,8 +6,11 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVVkTokenModel.h"
 
+
 @implementation BMVVkTokenModel
+
 
 @end
