@@ -11,16 +11,20 @@
 #import "BMVVkUserModel.h"
 #import "BMVDownloadDataService.h"
 
+
 @interface BMVParsingJSONFriends()
+
 
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 
+
 @end
+
 
 @implementation BMVParsingJSONFriends
 
-+ (NSArray *)jsonToModel:(NSDictionary *)json
 
++ (NSArray *)jsonToModel:(NSDictionary *)json
 {
     if (!json)
     {

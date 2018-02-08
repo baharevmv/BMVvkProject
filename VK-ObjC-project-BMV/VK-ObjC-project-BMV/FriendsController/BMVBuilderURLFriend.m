@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVBuilderURLFriend.h"
 #import "BMVVkTokenModel.h"
 
@@ -15,6 +16,7 @@ static NSString *const BMVSecondPartURL = @"&fields=first_name,last_name,nicknam
                                                                         "photo_max_orig&lang=ru&count=5000&v=5.69";
 
 @implementation BMVBuilderURLFriend
+
 
 + (NSURL *)urlWithAllFriendsString:(BMVVkTokenModel *)token
 {

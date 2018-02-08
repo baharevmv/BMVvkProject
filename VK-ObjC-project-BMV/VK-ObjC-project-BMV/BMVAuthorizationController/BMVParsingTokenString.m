@@ -6,11 +6,13 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVParsingTokenString.h"
 #import "BMVVkTokenModel.h"
 
 
 @implementation BMVParsingTokenString
+
 
 -(BMVVkTokenModel *)getTokenFromWebViewHandlerWithRequest:(NSURLRequest *)request
 {

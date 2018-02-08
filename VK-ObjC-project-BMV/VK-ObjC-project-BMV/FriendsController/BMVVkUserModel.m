@@ -6,11 +6,13 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVVkUserModel.h"
 #import "VKFriend+CoreDataProperties.h"
 
 
 @implementation BMVVkUserModel
+
 
 - (instancetype)initWithVKFriend:(VKFriend *)vkFriendModel
 {

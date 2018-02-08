@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "VKFriendsTableViewCell.h"
 #import "Masonry.h"
 
@@ -36,6 +37,7 @@ static CGFloat const BMVOffset = 10.0;
     }
     return self;
 }
+
 
 - (void)setMasonryConstraints
 {

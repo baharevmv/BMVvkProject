@@ -6,18 +6,21 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import "BMVvkPhotosCollectionViewCell.h"
+
 
 @interface BMVvkPhotosCollectionViewCell ()
 
-@property (nonatomic, strong) UIImageView *imageToShow;
 
+@property (nonatomic, strong) UIImageView *imageToShow;
 
 
 @end
 
 
 @implementation BMVvkPhotosCollectionViewCell
+
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

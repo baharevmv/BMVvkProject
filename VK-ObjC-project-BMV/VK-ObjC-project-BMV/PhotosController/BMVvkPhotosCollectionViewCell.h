@@ -6,10 +6,14 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
+
 
 @interface BMVvkPhotosCollectionViewCell : UICollectionViewCell
 
+
 @property (nonatomic,strong) UIImage *image;
+
 
 @end

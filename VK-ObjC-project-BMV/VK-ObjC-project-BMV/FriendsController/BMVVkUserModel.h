@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @class VKFriend;
@@ -15,6 +16,7 @@
  Модель для работы с данными о пользователях
  */
 @interface BMVVkUserModel : NSObject
+
 
 @property (nonatomic, copy) NSString *userID;           /**< Уникальный идентифиактор друга */
 @property (nonatomic, copy) NSString *firstName;        /**< Имя Друга */

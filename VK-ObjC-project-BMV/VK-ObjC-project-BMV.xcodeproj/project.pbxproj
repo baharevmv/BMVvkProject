@@ -18,7 +18,6 @@
 		5082C823202858BF00474F0F /* BMVCoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5082C822202858BF00474F0F /* BMVCoreDataService.m */; };
 		5082C8282028746700474F0F /* VKFriend+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5082C8262028746700474F0F /* VKFriend+CoreDataProperties.m */; };
 		5082C8292028746700474F0F /* VKFriend+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5082C8272028746700474F0F /* VKFriend+CoreDataClass.m */; };
-		50A4AC4B20121D880081364A /* BMVProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4AC4A20121D880081364A /* BMVProgressView.m */; };
 		50A72BB320073CCE002B6F1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BB220073CCE002B6F1E /* AppDelegate.m */; };
 		50A72BBC20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50A72BBA20073CCE002B6F1E /* VK_ObjC_project_BMV.xcdatamodeld */; };
 		50A72BBE20073CCE002B6F1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50A72BBD20073CCE002B6F1E /* Assets.xcassets */; };
@@ -76,8 +75,6 @@
 		5082C8252028746600474F0F /* VKFriend+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VKFriend+CoreDataClass.h"; sourceTree = "<group>"; };
 		5082C8262028746700474F0F /* VKFriend+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VKFriend+CoreDataProperties.m"; sourceTree = "<group>"; };
 		5082C8272028746700474F0F /* VKFriend+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VKFriend+CoreDataClass.m"; sourceTree = "<group>"; };
-		50A4AC4920121D880081364A /* BMVProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVProgressView.h; sourceTree = "<group>"; };
-		50A4AC4A20121D880081364A /* BMVProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVProgressView.m; sourceTree = "<group>"; };
 		50A72BAE20073CCE002B6F1E /* VK-ObjC-project-BMV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VK-ObjC-project-BMV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50A72BB120073CCE002B6F1E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		50A72BB220073CCE002B6F1E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -248,7 +245,6 @@
 				506AB82B2024682E0025E610 /* PhotosController */,
 				50ED241320244FCE00DA6213 /* BMVAuthorizationController */,
 				504828522017792F00A09786 /* CoreData */,
-				50A72BE820077B5B002B6F1E /* ViewControllers */,
 				50A72BB120073CCE002B6F1E /* AppDelegate.h */,
 				50A72BB220073CCE002B6F1E /* AppDelegate.m */,
 				50A72BBD20073CCE002B6F1E /* Assets.xcassets */,
@@ -276,15 +272,6 @@
 				50A72BDA20073CCE002B6F1E /* Info.plist */,
 			);
 			path = "VK-ObjC-project-BMVUITests";
-			sourceTree = "<group>";
-		};
-		50A72BE820077B5B002B6F1E /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				50A4AC4920121D880081364A /* BMVProgressView.h */,
-				50A4AC4A20121D880081364A /* BMVProgressView.m */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		50ED241320244FCE00DA6213 /* BMVAuthorizationController */ = {
@@ -611,7 +598,6 @@
 				50A72BEB20078325002B6F1E /* VKLoginViewController.m in Sources */,
 				50A72BC420073CCE002B6F1E /* main.m in Sources */,
 				50B3FFA820267A00005DE6E8 /* BMVParsingJSONPhotots.m in Sources */,
-				50A4AC4B20121D880081364A /* BMVProgressView.m in Sources */,
 				5082C823202858BF00474F0F /* BMVCoreDataService.m in Sources */,
 				50648A69201CFD1F007EB756 /* BMVVkPhotoModel.m in Sources */,
 				5039956C200BF255009E0161 /* BMVVkUserModel.m in Sources */,

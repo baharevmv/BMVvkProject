@@ -6,8 +6,8 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "BMVBuilderURLPhotos.h"
 
+#import "BMVBuilderURLPhotos.h"
 
 
 static NSString *const BMVFirstPartURL = @"https://api.vk.com/method/photos.getAll?access_token=";
@@ -16,6 +16,7 @@ static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200";
 
 
 @implementation BMVBuilderURLPhotos
+
 
 + (NSURL *)urlWithAllFreindsPhotosString:(BMVVkTokenModel *)token currentFriendID:(NSString *)currentFriendID
 {

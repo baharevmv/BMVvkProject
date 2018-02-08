@@ -22,6 +22,7 @@
 
 @implementation BMVCoreDataDownloadFunnel
 
+
 - (instancetype)init
 {
     self = [super init];
@@ -32,36 +33,32 @@
     }
     return self;
 }
-    
-    
 
-    
+
 - (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token CompleteHandler:(void (^)(id dataModel))completeHandler
+{
+    NSLog(@"Вошли в obtainVKFriendsWithPredicateString");
+    BOOL isFirstTime = [self.coreDataService isItFirstTimeStarts];
+    if (!isFirstTime)
     {
-        NSLog(@"Вошли в obtainVKFriendsWithPredicateString");
-        
-        
-        BOOL isFirstTime = [self.coreDataService isItFirstTimeStarts];
-        if (!isFirstTime)
-        {
-            // Не первый запуск
-            // тянем из CoreData
-            NSArray <BMVVkUserModel *> *modelArray = [self.coreDataService obtainModelArray:[VKFriend class]];
-            completeHandler(modelArray);
-        }
-        else
-        {
-            // Запуск первый
-            // Загружаем в таблицу и CoreData из сети.
-            [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil
-                                                          localToken:token currentUserID:token.userIDString
-                                                     completeHandler:^(id dataModel) {
-                [self.coreDataService saveFriendModel:dataModel];
-                completeHandler(dataModel);
-            }];
-
-        }
+        // Не первый запуск
+        // тянем из CoreData
+        NSArray <BMVVkUserModel *> *modelArray = [self.coreDataService obtainModelArray:[VKFriend class]];
+        completeHandler(modelArray);
     }
-    
+    else
+    {
+        // Запуск первый
+        // Загружаем в таблицу и CoreData из сети.
+        [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil
+                                                      localToken:token currentUserID:token.userIDString
+                                                 completeHandler:^(id dataModel) {
+                                                     [self.coreDataService saveFriendModel:dataModel];
+                                                     completeHandler(dataModel);
+                                                 }];
+        
+    }
+}
+
 
 @end

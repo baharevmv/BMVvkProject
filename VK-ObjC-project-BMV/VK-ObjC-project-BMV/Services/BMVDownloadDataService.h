@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "BMVVkTokenModel.h"
@@ -40,18 +41,6 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType)
 - (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue
                             localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                        completeHandler:(void(^)(id))completeHandler;
-
-
-/**
- Обеспечивает получение массива данных из сети
- @param dataType - постоянная из BMVDownloadDataType
- @param token - Токен социальной сети Вконтакте, который необходим для построения обращений к API
- @param userID - Строка  с идентификатором пользователя Вконтакте
- @param completeHandler - блок, который выполняется по окончании загрузки
- */
-- (void)downloadGroupWithURLKeyArray:(NSArray *)urlKeyArray downloadDataType:(BMVDownloadDataType)dataType
-                          localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
-                     completeHandler:(void(^)(NSArray *))completeHandler;
 
 
 /**
