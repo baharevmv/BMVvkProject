@@ -6,7 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
+#import "QuartzCore/QuartzCore.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
 #import "BMVvkPhotosCollectionViewCell.h"
 #import "BMVVkPhotoModel.h"
@@ -22,7 +22,9 @@ NSInteger const offsetTop = 5;
 @interface BMVvkAllFriendPhotoCollectionView ()
 
 
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, retain) UIView *loadingView;
+@property (nonatomic, retain) UILabel *loadingLabel;
 @property (nonatomic, assign) NSUInteger numberPage;
 @property (nonatomic, copy) BMVVkUserModel *viewedUser;
 @property (nonatomic, strong) NSMutableArray <BMVVkPhotoModel *> *modelArray;
@@ -53,7 +55,7 @@ NSInteger const offsetTop = 5;
                                                currentUserID:self.interestingUser.userID
                                              completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
-        [self.activityIndicatorView stopAnimating];
+//        [self.spinner stopAnimating];
         [self.collectionView reloadData];
     }];
     
@@ -71,10 +73,31 @@ NSInteger const offsetTop = 5;
     self.collectionView.allowsMultipleSelection = YES;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
+    // Создаем спиннер
+    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(75, 155, 170, 170)];
+    self.loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.loadingView.clipsToBounds = YES;
+    self.loadingView.layer.cornerRadius = 10.0;
+    
+    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 115, 130, 22)];
+    self.loadingLabel.backgroundColor = [UIColor clearColor];
+    self.loadingLabel.textColor = [UIColor whiteColor];
+    self.loadingLabel.adjustsFontSizeToFitWidth = YES;
+    self.loadingLabel.textAlignment = NSTextAlignmentCenter;
+    self.loadingLabel.text = @"Загружаем...";
+    [self.loadingView addSubview:self.loadingLabel];
+    
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.frame = CGRectMake(65, 40, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+    [self.loadingView addSubview:self.activityView];
+    
+    
+    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
-                                                                 target:self action:@selector(downloadAllPhotos)];
+                                                                 target:self action:@selector(downloadPhotosToPhone)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
+
 
 - (void)refreshWithPull:(UIRefreshControl *)refreshControl
 {
@@ -83,7 +106,6 @@ NSInteger const offsetTop = 5;
                                                currentUserID:self.interestingUser.userID
                                              completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
-        [self.activityIndicatorView stopAnimating];
         [self.collectionView reloadData];
     }];
     [refreshControl endRefreshing];
@@ -99,42 +121,38 @@ NSInteger const offsetTop = 5;
     }
     NSLog(@"We got an Error here - %@", error);
 }
-- (void) downloadAllPhotos
+
+- (void) downloadPhotosToPhone
 {
-    // network animation on
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    // network animation
+    [self.view addSubview:self.loadingView];
+    [self.activityView startAnimating];
     
     // save image from the web
-    NSLog(@"КОЛИЧЕСТВО %lu",(unsigned long)self.selectedModelArray.count);
-    if (self.selectedModelArray.count != 0 )
-    {
-        for (BMVVkPhotoModel *photo in self.selectedModelArray)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (self.selectedModelArray.count != 0 )
         {
-            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSLog(@"%@", originalPhotoPath);
-                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
-                SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
-                UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
-            });
-        }
-    } else {
-        for (BMVVkPhotoModel *photo in self.modelArray)
-        {
-            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                dispatch_async(dispatch_get_main_queue(), ^(void){
-                    NSLog(@"%@", originalPhotoPath);
-                    UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
-                    SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
-                    UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+            [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:self.selectedModelArray completeHandler:^(id any) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.activityView stopAnimating];
+                    [self.loadingView removeFromSuperview];
+                    NSLog(@"Задание на загрузку выполнено");
                 });
-            });
+            }];
         }
-    }
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        else
+        {
+            [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:self.modelArray completeHandler:^(id any) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.activityView stopAnimating];
+                    [self.loadingView removeFromSuperview];
+                    NSLog(@"Задание на загрузку выполнено");
+                });
+            }];
+        }
+    });
 }
+
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -152,7 +170,7 @@ NSInteger const offsetTop = 5;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
         NSString *previewPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.modelArray[indexPath.row].previewImageURL];
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: previewPhotoPath]];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -166,7 +184,7 @@ NSInteger const offsetTop = 5;
 {
     [self.selectedModelArray addObject:self.modelArray[indexPath.item]];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain
-                                                                 target:self action:@selector(downloadAllPhotos)];
+                                                                 target:self action:@selector(downloadPhotosToPhone)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
@@ -177,7 +195,7 @@ NSInteger const offsetTop = 5;
     {
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
                                                                      target:self
-                                                                     action:@selector(downloadAllPhotos)];
+                                                                     action:@selector(downloadPhotosToPhone)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
         

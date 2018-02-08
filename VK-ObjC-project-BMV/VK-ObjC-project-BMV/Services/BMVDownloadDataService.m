@@ -99,7 +99,6 @@
     });
 }
 
-
 - (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
             currentUserID:(NSString *)userID
 {
@@ -139,5 +138,37 @@
     }
     return dataModel;
 }
+
+
+- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload completeHandler:(void(^)(id))completeHandler
+{
+    for (BMVVkPhotoModel *photo in arrayToDownload)
+    {
+        NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
+            NSLog(@"%@", originalPhotoPath);
+            UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
+            SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
+            UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+    }
+    completeHandler(nil);
+
+}
+
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (!error)
+    {
+        return;
+    }
+    [self tryWriteAgain:image];
+//    NSLog(@"We got an Error here - %@", error);
+}
+
+-(void)tryWriteAgain:(UIImage *)image
+{
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
 
 @end

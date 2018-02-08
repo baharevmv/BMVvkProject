@@ -51,7 +51,6 @@
                                                         "scope=274438&"
                                                         "redirect_uri=https://oauth.vk.com/blank.html&"
                                                         "display=mobile&"
-                                                        "v=5.68&"
                                                         "revoke=0&"
                                                         "response_type=token";
     
@@ -82,16 +81,22 @@
     {
         
         NSArray* values = [pair componentsSeparatedByString:@"="];
-        if ([values count] != 2) {
+        if ([values count] != 2)
+        {
             continue;
         }
         NSString* key = [values firstObject];
-        if ([key isEqualToString:@"access_token"]) {
+        if ([key isEqualToString:@"access_token"])
+        {
             token.tokenString = [values lastObject];
-        } else if ([key isEqualToString:@"expires_in"]) {
+        }
+        else if ([key isEqualToString:@"expires_in"])
+        {
             NSTimeInterval interval = [[values lastObject] doubleValue];
             token.expirationDate = [NSDate dateWithTimeIntervalSinceNow:interval];
-        } else if ([key isEqualToString:@"user_id"]) {
+        }
+        else if ([key isEqualToString:@"user_id"])
+        {
             token.userIDString = [values lastObject];
             self.theToken = token;
         }
