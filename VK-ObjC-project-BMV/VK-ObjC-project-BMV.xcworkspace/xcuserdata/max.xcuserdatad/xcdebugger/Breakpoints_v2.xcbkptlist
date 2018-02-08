@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VK-ObjC-project-BMV/PhotosController/BMVvkAllFriendPhotoCollectionView.m"
-            timestampString = "539738485.797387"
+            filePath = "VK-ObjC-project-BMV/BMVAuthorizationController/VKLoginViewController.m"
+            timestampString = "539789220.886891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "BMVvkAllFriendPhotoCollectionView"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK-ObjC-project-BMV/PhotosController/BMVvkAllFriendPhotoCollectionView.m"
-            timestampString = "539738485.797992"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-downloadPhotosToPhone"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,45 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VK-ObjC-project-BMV/PhotosController/BMVvkAllFriendPhotoCollectionView.m"
-            timestampString = "539738485.798255"
+            filePath = "VK-ObjC-project-BMV/BMVAuthorizationController/VKLoginViewController.m"
+            timestampString = "539789220.887181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "-downloadPhotosToPhone"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK-ObjC-project-BMV/PhotosController/BMVvkAllFriendPhotoCollectionView.m"
-            timestampString = "539738485.798474"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "-downloadPhotosToPhone"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VK-ObjC-project-BMV/PhotosController/BMVvkAllFriendPhotoCollectionView.m"
-            timestampString = "539738485.7986881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-downloadPhotosToPhone"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

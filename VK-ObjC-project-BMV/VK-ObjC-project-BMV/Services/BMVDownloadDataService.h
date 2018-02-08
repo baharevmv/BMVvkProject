@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "BMVVkTokenModel.h"
 #import "BMVVkPhotoModel.h"
 
@@ -58,5 +59,6 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType)
  @param arrayToDownload - массив с элементами типа BMVVkPhotoModel
  */
 - (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload completeHandler:(void(^)(id))completeHandler;
+
 
 @end

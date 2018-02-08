@@ -10,7 +10,8 @@
 #import "Masonry.h"
 
 
-static const CGFloat lineSizeImageView = 44.f;
+static CGFloat const lineSizeImageView = 44.f;
+static CGFloat const BMVOffset = 10.0;
 
 
 @implementation VKFriendsTableViewCell
@@ -27,15 +28,30 @@ static const CGFloat lineSizeImageView = 44.f;
         _userNameLabel = [UILabel new];
         [self.contentView addSubview:_userNameLabel];
         
-        [self setConstraints];
+        
+        
+//        [self setConstraints];
         [self setMasonryConstraints];
+        
     }
     return self;
 }
 
 - (void)setMasonryConstraints
 {
+    [_userPhotoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).with.offset(BMVOffset / 2);
+        make.left.equalTo(self.contentView.mas_left).with.offset(BMVOffset);
+        make.right.equalTo(self.contentView.mas_left).with.offset(2 * BMVOffset + lineSizeImageView);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset);
+    }];
     
+    [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).with.offset(lineSizeImageView / 2);
+        make.left.equalTo(_userPhotoImageView.mas_right).with.offset(2 * BMVOffset);
+        make.right.equalTo(self.contentView.mas_right).with.offset( - BMVOffset);
+    }];
+//    [super updateConstraints];
 }
 
 

@@ -34,6 +34,7 @@
 		50B3FFA220266E24005DE6E8 /* BMVBuilderURLPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA120266E24005DE6E8 /* BMVBuilderURLPhotos.m */; };
 		50B3FFA5202675FE005DE6E8 /* BMVParsingJSONFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA4202675FE005DE6E8 /* BMVParsingJSONFriends.m */; };
 		50B3FFA820267A00005DE6E8 /* BMVParsingJSONPhotots.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotots.m */; };
+		50BB5F55202C83C400AD2585 /* BMVParsingTokenString.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB5F54202C83C400AD2585 /* BMVParsingTokenString.m */; };
 		50C4A19C20288AB4008A932E /* BMVCoreDataDownloadFunnel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFunnel.m */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,8 @@
 		50B3FFA4202675FE005DE6E8 /* BMVParsingJSONFriends.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingJSONFriends.m; sourceTree = "<group>"; };
 		50B3FFA620267A00005DE6E8 /* BMVParsingJSONPhotots.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingJSONPhotots.h; sourceTree = "<group>"; };
 		50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotots.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingJSONPhotots.m; sourceTree = "<group>"; };
+		50BB5F53202C83C400AD2585 /* BMVParsingTokenString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingTokenString.h; sourceTree = "<group>"; };
+		50BB5F54202C83C400AD2585 /* BMVParsingTokenString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingTokenString.m; sourceTree = "<group>"; };
 		50C4A19A20288AB4008A932E /* BMVCoreDataDownloadFunnel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVCoreDataDownloadFunnel.h; sourceTree = "<group>"; };
 		50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFunnel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVCoreDataDownloadFunnel.m; sourceTree = "<group>"; };
 		56D70E2D42C8F3635EA5A436 /* libPods-VK-ObjC-project-BMVUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VK-ObjC-project-BMVUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +292,8 @@
 			children = (
 				50A72BE920078325002B6F1E /* VKLoginViewController.h */,
 				50A72BEA20078325002B6F1E /* VKLoginViewController.m */,
+				50BB5F53202C83C400AD2585 /* BMVParsingTokenString.h */,
+				50BB5F54202C83C400AD2585 /* BMVParsingTokenString.m */,
 				50A72BED200783DF002B6F1E /* BMVVkTokenModel.h */,
 				50A72BEE200783DF002B6F1E /* BMVVkTokenModel.m */,
 			);
@@ -596,6 +601,7 @@
 				500ACEB3201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m in Sources */,
 				50A72BEF200783DF002B6F1E /* BMVVkTokenModel.m in Sources */,
 				5082C8282028746700474F0F /* VKFriend+CoreDataProperties.m in Sources */,
+				50BB5F55202C83C400AD2585 /* BMVParsingTokenString.m in Sources */,
 				50A72BF22007978D002B6F1E /* VKFriendsViewController.m in Sources */,
 				50C4A19C20288AB4008A932E /* BMVCoreDataDownloadFunnel.m in Sources */,
 				5082C8292028746700474F0F /* VKFriend+CoreDataClass.m in Sources */,
