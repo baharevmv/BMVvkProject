@@ -127,7 +127,6 @@
             UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
     }
     completeHandler(nil);
-
 }
 
 
@@ -138,14 +137,12 @@
         return;
     }
     [self tryWriteAgain:image];
-//    NSLog(@"We got an Error here - %@", error);
 }
 
 -(void)tryWriteAgain:(UIImage *)image
 {
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
-
 
 
 @end

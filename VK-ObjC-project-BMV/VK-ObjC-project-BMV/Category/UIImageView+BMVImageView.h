@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageView_BMVImageView : UIImageView
+
+/**
+ Категория класса UIImageView
+ */
+@interface UIImageView (BMVImageView)
+
+/**
+ Создает анимацию при загрузке приложения
+ @param superview - вью, на которой будет располагаться image view
+ @return image view с анимацией
+ */
++ (UIImageView *)bmv_animationOnView:(UIView *)superview;
 
 @end

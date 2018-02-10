@@ -1,6 +1,6 @@
 //
 //  BMVLoginViewController.m
-//  VK-ObjC-project-BMV
+//  VK-ObjC-project-BMV 6355197
 //
 //  Created by max on 11.01.18.
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
@@ -12,6 +12,8 @@
 #import "BMVVkTokenModel.h"
 #import "BMVParsingTokenString.h"
 #import "AppDelegate.h"
+#import "UIImageView+BMVImageView.h"
+#import <Masonry.h>
 
 
 static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
@@ -29,6 +31,10 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 @property (nonatomic, strong) UIWebView* webView;
 @property (nonatomic, strong) BMVVkTokenModel *theToken;
 @property (nonatomic, strong) BMVParsingTokenString *parsingTokenString;
+@property (nonatomic, strong) NSURLRequest *request;
+
+@property (nonatomic, strong) UIView *animationView;
+@property (nonatomic, strong) NSTimer *timer;
 
 
 @end
@@ -51,6 +57,10 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+    
+    
+    
     CGRect typicalRectangle = self.view.bounds;
     typicalRectangle.origin = CGPointZero;
     
@@ -60,11 +70,44 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
     
     self.navigationItem.title = @"Login";
     NSURL* url = [NSURL URLWithString:BMVurlString];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    self.webView.delegate = self;
-    [self.webView loadRequest:request];
+    self.request = [NSURLRequest requestWithURL:url];
+
+    self.animationView = [UIView new];
+    self.animationView.backgroundColor = UIColor.whiteColor;
+    [self.view addSubview:self.animationView];
+
+    [self.animationView addSubview:[UIImageView bmv_animationOnView:self.view]];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                  target:self
+                                                selector:@selector(actionTimerRemoveAnimationViewAuthorizarion)
+                                                userInfo:nil
+                                                 repeats:NO];
+
 }
 
+
+#pragma mark - Animations
+
+
+
+- (void)actionTimerRemoveAnimationViewAuthorizarion
+{
+    [self.animationView removeFromSuperview];
+    self.webView.delegate = self;
+    [self.webView loadRequest:self.request];
+
+}
+
+- (void)createConstraints
+{
+    [self.animationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view.mas_top);
+        make.left.mas_equalTo(self.view.mas_left);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+        make.right.mas_equalTo(self.view.mas_right);
+    }];
+}
 
 #pragma mark - UIWebViewDelegete
 
