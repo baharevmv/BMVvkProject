@@ -57,9 +57,15 @@
  Обеспечивает работу строки живого поиска.
  @param searchString - строка поиска.
  @return массив сущностей соответствующий поисковому запросу.
- 
  */
 - (NSArray *)searchingForFriendWithSearchString:(NSString *)searchString;
+
+/**
+Очищение всей базы CoreData
+ */
+- (void)clearCoreData;
+
+
 
 
 @end

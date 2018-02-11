@@ -74,6 +74,7 @@
         friendCoreDataModel.firstName = userModel.firstName;
         friendCoreDataModel.lastName = userModel.lastName;
         friendCoreDataModel.smallImageURL = [NSURL URLWithString:userModel.smallImageURL];
+//        friendCoreDataModel.smallImageURL = userModel.smallImageURL;
         friendCoreDataModel.imageURL = [NSURL URLWithString:userModel.imageURL];
         friendCoreDataModel.bigImageURL = [NSURL URLWithString:userModel.bigImageURL];
         friendCoreDataModel.userID = [NSString stringWithFormat:@"%@", userModel.userID];
@@ -116,12 +117,24 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VKFriend"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"fullName CONTAINS[c] %@",searchString];
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES];
     fetchRequest.sortDescriptors = @[sortDescriptor];
     NSArray *personsArray = [NSArray new];
     personsArray = nil;
     personsArray = [self.context executeFetchRequest:fetchRequest error:nil];
     return personsArray;
 }
+
+- (void)clearCoreData
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VKFriend"];
+    NSArray *personsArray = [NSArray new];
+    personsArray = [self.context executeFetchRequest:fetchRequest error:nil];
+    NSLog(@"%lu",(unsigned long)personsArray.count);
+    for (NSManagedObject *userModel in personsArray) {
+        [self removeFromCoreData:userModel];
+    }
+}
+
 
 @end

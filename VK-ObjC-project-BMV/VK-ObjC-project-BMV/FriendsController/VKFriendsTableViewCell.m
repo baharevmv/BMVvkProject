@@ -11,7 +11,7 @@
 #import "Masonry.h"
 
 
-static CGFloat const lineSizeImageView = 44.f;
+static CGFloat const lineSizeImageView = 60.0;
 static CGFloat const BMVOffset = 10.0;
 
 
@@ -29,11 +29,7 @@ static CGFloat const BMVOffset = 10.0;
         _userNameLabel = [UILabel new];
         [self.contentView addSubview:_userNameLabel];
         
-        
-        
-//        [self setConstraints];
         [self setMasonryConstraints];
-        
     }
     return self;
 }
@@ -42,68 +38,17 @@ static CGFloat const BMVOffset = 10.0;
 - (void)setMasonryConstraints
 {
     [_userPhotoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(BMVOffset / 2);
-        make.left.equalTo(self.contentView.mas_left).with.offset(BMVOffset);
-        make.right.equalTo(self.contentView.mas_left).with.offset(2 * BMVOffset + lineSizeImageView);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset);
+        make.top.mas_equalTo(self.contentView.mas_top).with.offset(BMVOffset/5);
+        make.left.mas_equalTo(self.contentView.mas_left).with.offset(BMVOffset);
+        make.size.mas_equalTo(CGSizeMake(lineSizeImageView, lineSizeImageView));
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset/5);
     }];
     
     [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(lineSizeImageView / 2);
-        make.left.equalTo(_userPhotoImageView.mas_right).with.offset(2 * BMVOffset);
-        make.right.equalTo(self.contentView.mas_right).with.offset( - BMVOffset);
+        make.top.mas_equalTo(self.contentView.mas_top).with.offset(BMVOffset);
+        make.left.mas_equalTo(_userPhotoImageView.mas_right).with.offset(BMVOffset * 2);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset);
     }];
-//    [super updateConstraints];
-}
-
-
-- (void)setConstraints
-{
-    [_userPhotoImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_userNameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSDictionary *dictionary =@{
-                                @"_userPhotoImageView":_userPhotoImageView,
-                                @"_userNameLabel":_userNameLabel,
-                                };
-    
-    NSArray *horizontalConstraints =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_userPhotoImageView]-20-[_userNameLabel]-20-|"
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:dictionary];
-    
-    NSLayoutConstraint * widthConstraints2 = [NSLayoutConstraint constraintWithItem:_userPhotoImageView
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:nil
-                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1
-                                                                           constant:lineSizeImageView];
-    
-    NSLayoutConstraint * heightConstraints2 = [NSLayoutConstraint constraintWithItem:_userPhotoImageView
-                                                                           attribute:NSLayoutAttributeHeight
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:nil
-                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1
-                                                                            constant:lineSizeImageView];
-    
-    NSArray *verticalConstraints =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_userPhotoImageView]-20-[_userNameLabel]-30-|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:dictionary];
-    
-    NSArray *verticalConstraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[_userNameLabel]-40-|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                             views:dictionary];
-    
-    
-    [self.contentView addConstraints:horizontalConstraints];
-    [self.contentView addConstraint:heightConstraints2];
-    [self.contentView addConstraint:widthConstraints2];
-    [self.contentView addConstraints:verticalConstraints];
-    [self.contentView addConstraints:verticalConstraints1];
 }
 
 @end

@@ -45,10 +45,11 @@ NSInteger const offsetTop = 5;
 - (void) viewDidLoad
 {
     // Pull-to-Refresh Feature
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    UIRefreshControl *refreshControl = [UIRefreshControl new];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
+    
     self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
     [super viewDidLoad];
     // Собираем модель
@@ -58,7 +59,6 @@ NSInteger const offsetTop = 5;
                                                currentUserID:self.interestingUser.userID
                                              completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
-//        [self.spinner stopAnimating];
         [self.collectionView reloadData];
     }];
     
