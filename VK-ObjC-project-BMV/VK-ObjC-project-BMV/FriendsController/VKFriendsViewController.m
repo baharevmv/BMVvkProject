@@ -191,7 +191,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
         animation.toValue = @(0);
         animation.removedOnCompletion = YES;
         [layer addAnimation:animation forKey:@"transform.rotation"];
-    } 
+    }
     if (indexPath.row >= [self.tableView indexPathsForVisibleRows].lastObject.row)
     {
         CALayer *layer = [cell layer];
