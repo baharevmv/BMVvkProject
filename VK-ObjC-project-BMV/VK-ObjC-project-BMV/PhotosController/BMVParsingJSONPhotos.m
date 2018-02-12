@@ -7,11 +7,11 @@
 //
 
 
-#import "BMVParsingJSONPhotots.h"
+#import "BMVParsingJSONPhotos.h"
 #import "BMVVkPhotoModel.h"
 
 
-@implementation BMVParsingJSONPhotots
+@implementation BMVParsingJSONPhotos
 
 
 + (NSArray *)jsonToModel:(NSDictionary *)json

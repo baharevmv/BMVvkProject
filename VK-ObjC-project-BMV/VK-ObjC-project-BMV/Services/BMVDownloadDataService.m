@@ -11,7 +11,7 @@
 #import "BMVBuilderURLFriend.h"
 #import "BMVBuilderURLPhotos.h"
 #import "BMVParsingJSONFriends.h"
-#import "BMVParsingJSONPhotots.h"
+#import "BMVParsingJSONPhotos.h"
 
 
 @interface BMVDownloadDataService ()
@@ -108,7 +108,7 @@
         }
         case BMVDownloadDataTypePhotos:
         {
-            dataModel = [BMVParsingJSONPhotots jsonToModel:json];
+            dataModel = [BMVParsingJSONPhotos jsonToModel:json];
             break;
         }
     }

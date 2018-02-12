@@ -1,5 +1,5 @@
 //
-//  BMVLoginViewController.m
+//  BMVLoginViewController.m 6244609
 //  VK-ObjC-project-BMV 6355197
 //
 //  Created by max on 11.01.18.
@@ -17,7 +17,7 @@
 
 
 static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
-                                                    "client_id=6244609&"
+                                                    "client_id=6355197&"
                                                     "scope=274438&"
                                                     "redirect_uri=https://oauth.vk.com/blank.html&"
                                                     "display=mobile&"

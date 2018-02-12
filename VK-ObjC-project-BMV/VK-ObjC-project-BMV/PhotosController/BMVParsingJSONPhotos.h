@@ -14,7 +14,7 @@
 /**
  Класс для получения модели BMVVkUserModel из JSON
  */
-@interface BMVParsingJSONPhotots : NSObject
+@interface BMVParsingJSONPhotos : NSObject
 
 
 /**
