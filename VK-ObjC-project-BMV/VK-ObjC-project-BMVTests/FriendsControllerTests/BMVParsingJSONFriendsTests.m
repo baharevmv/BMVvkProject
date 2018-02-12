@@ -54,7 +54,7 @@
     id arrayOfOutputData = [NSArray<BMVVkUserModel *> class];
     NSArray *goingOut = [BMVParsingJSONFriends jsonToModel:arrayOfInputData];
     expect(goingOut).to.beAKindOf(arrayOfOutputData);
-}
+} 
 
 
 
