@@ -73,10 +73,12 @@
         friendCoreDataModel.fullName = friendFullName;
         friendCoreDataModel.firstName = userModel.firstName;
         friendCoreDataModel.lastName = userModel.lastName;
-        friendCoreDataModel.smallImageURL = [NSURL URLWithString:userModel.smallImageURL];
+        friendCoreDataModel.smallImageURLString = userModel.smallImageURLString;
 //        friendCoreDataModel.smallImageURL = userModel.smallImageURL;
-        friendCoreDataModel.imageURL = [NSURL URLWithString:userModel.imageURL];
-        friendCoreDataModel.bigImageURL = [NSURL URLWithString:userModel.bigImageURL];
+        friendCoreDataModel.imageURLString = userModel.imageURLString;
+//        friendCoreDataModel.imageURL = userModel.imageURL;
+        friendCoreDataModel.bigImageURLString = userModel.bigImageURLString;
+//        friendCoreDataModel.bigImageURL = userModel.bigImageURL;
         friendCoreDataModel.userID = [NSString stringWithFormat:@"%@", userModel.userID];
         [self.context save:nil];
     }

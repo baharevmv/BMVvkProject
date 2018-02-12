@@ -2,7 +2,7 @@
 //  VKFriend+CoreDataProperties.m
 //  
 //
-//  Created by max on 05.02.18.
+//  Created by max on 12.02.18.
 //
 //
 
@@ -14,12 +14,12 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"VKFriend"];
 }
 
-@dynamic bigImageURL;
+@dynamic bigImageURLString;
 @dynamic firstName;
-@dynamic imageURL;
-@dynamic lastName;
-@dynamic smallImageURL;
-@dynamic userID;
 @dynamic fullName;
+@dynamic imageURLString;
+@dynamic lastName;
+@dynamic smallImageURLString;
+@dynamic userID;
 
 @end

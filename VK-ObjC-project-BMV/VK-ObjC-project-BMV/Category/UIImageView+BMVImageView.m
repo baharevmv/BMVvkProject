@@ -38,7 +38,7 @@ const NSInteger imageCount = 18;
     [phoneView addSubview:vkImageView];
     
     CGRect thePhotosBounds = phoneView.bounds;
-    CGPoint thePhotosCenter = CGPointMake(CGRectGetMidX(thePhotosBounds), CGRectGetMidY(thePhotosBounds) + BMVOffset*5.3);
+    CGPoint thePhotosCenter = CGPointMake(CGRectGetMidX(thePhotosBounds), CGRectGetMidY(thePhotosBounds) + BMVOffset*7);
     CGFloat thePhotosWidth = CGRectGetWidth(thePhotosBounds) / BMVPhotosWidthsRatio;
     CGFloat thePhotosHeight = thePhotosWidth * BMVHeightToWidthRatio;
     CGRect thePhotos = CGRectMake(0, 0, thePhotosWidth, thePhotosHeight);
@@ -57,7 +57,7 @@ const NSInteger imageCount = 18;
     
     photos.animationImages = mutableArrayForImages;
     photos.animationDuration = 1;
-    photos.animationRepeatCount = 3;
+    photos.animationRepeatCount = 4;
     [photos startAnimating];
     
     return phoneView;
