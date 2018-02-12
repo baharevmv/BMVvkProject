@@ -17,8 +17,8 @@
 
 
 static NSString *cellIdentifier = @"CellIdentifier";
-NSInteger const offsetLeft = 20;
-NSInteger const offsetTop = 5;
+static CGFloat const activityOffset = 150;
+static CGFloat const loadingLabelOffset = 20;
 
 
 @interface BMVvkAllFriendPhotoCollectionView ()
@@ -44,15 +44,18 @@ NSInteger const offsetTop = 5;
 
 - (void) viewDidLoad
 {
+    [super viewDidLoad];
+    [self createCollectionViewUI];
     // Pull-to-Refresh Feature
     UIRefreshControl *refreshControl = [UIRefreshControl new];
-    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
     
     self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
-    [super viewDidLoad];
-    // Собираем модель
+    
+    
+    // Собираем модель - вынеси меня в метод.
     self.downloadDataService = [BMVDownloadDataService new];
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil
                                                   localToken:self.tokenForFriendsController
@@ -62,6 +65,17 @@ NSInteger const offsetTop = 5;
         [self.collectionView reloadData];
     }];
     
+
+    
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
+                                                                 target:self action:@selector(downloadPhotosToPhone)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+
+- (void) createCollectionViewUI
+{
     // Настраиваем flowLayout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 2.0f;
@@ -77,12 +91,15 @@ NSInteger const offsetTop = 5;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
     // Создаем спиннер
-    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(75, 155, 170, 170)];
+    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(activityOffset*1.5, activityOffset, CGRectGetWidth(self.view.frame) - activityOffset*1.5, activityOffset)];
+    self.loadingView.center = self.view.center;
     self.loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     self.loadingView.clipsToBounds = YES;
     self.loadingView.layer.cornerRadius = 10.0;
     
-    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 115, 130, 22)];
+//    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 115, 130, 22)];
+    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(loadingLabelOffset*1.5, loadingLabelOffset*5.75, loadingLabelOffset * 6.5, loadingLabelOffset)];
+    self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.loadingView.bounds)/2, loadingLabelOffset*5.75);
     self.loadingLabel.backgroundColor = [UIColor clearColor];
     self.loadingLabel.textColor = [UIColor whiteColor];
     self.loadingLabel.adjustsFontSizeToFitWidth = YES;
@@ -91,14 +108,8 @@ NSInteger const offsetTop = 5;
     [self.loadingView addSubview:self.loadingLabel];
     
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.activityView.frame = CGRectMake(65, 40, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+    self.activityView.frame = CGRectMake(CGRectGetWidth(self.loadingView.frame)/2 -  self.activityView.bounds.size.width/2, 40, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
     [self.loadingView addSubview:self.activityView];
-    
-    
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
-                                                                 target:self action:@selector(downloadPhotosToPhone)];
-    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 

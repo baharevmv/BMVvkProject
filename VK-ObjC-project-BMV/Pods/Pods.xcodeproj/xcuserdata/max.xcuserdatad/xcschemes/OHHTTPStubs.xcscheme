@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BEF9CD31DCC04D7A9D6BA543668F8454"
-               BlueprintName = "Pods-VK-ObjC-project-BMVUITests"
+               BlueprintIdentifier = "0A578B91EB23BBD0EB78884A6FCB29D9"
+               BlueprintName = "OHHTTPStubs"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-VK-ObjC-project-BMVUITests.a">
+               BuildableName = "libOHHTTPStubs.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

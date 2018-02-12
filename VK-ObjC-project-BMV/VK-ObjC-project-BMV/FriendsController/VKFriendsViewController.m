@@ -70,18 +70,16 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     
 - (void)createUI
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, CGRectGetWidth(self.view.frame),
-                                                                   (CGRectGetHeight(self.view.frame) - 40))];
     [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:BMVCellIdentifier];
     
     // PullToRefresh функция
     UIRefreshControl *refreshControl = [UIRefreshControl new];
-    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Please Wait..."];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
     //Search Bar
-    self.lifeSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30)];
+    self.lifeSearchBar = [UISearchBar new];
     self.lifeSearchBar.returnKeyType = UIReturnKeyDone;
     self.lifeSearchBar.searchBarStyle = UISearchBarStyleProminent;
     self.navigationItem.titleView = self.lifeSearchBar;
@@ -129,7 +127,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     NSMutableArray *theArray = [NSMutableArray new];
     for (BMVVkUserModel *user in self.usersArray)
     {
-        NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",user.smallImageURL];
+        NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",user.smallImageURLString];
         UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
         [theArray addObject:downloadedImage];
     }
@@ -146,7 +144,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     self.usersArray[indexPath.row].lastName];
     tableViewCell.userNameLabel.text = friendFullName;
     // Забираем фото.
-    NSString *friendPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.usersArray[indexPath.row].smallImageURL];
+    NSString *friendPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.usersArray[indexPath.row].smallImageURLString];
     dispatch_async(dispatch_get_global_queue(0,0), ^{
     NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: friendPhotoPath]];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -165,7 +163,6 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UICollectionViewFlowLayout* flowLayout = [UICollectionViewFlowLayout new];
-    flowLayout.itemSize = CGSizeMake(100, 100);
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc]
                                                                 initWithCollectionViewLayout:flowLayout];

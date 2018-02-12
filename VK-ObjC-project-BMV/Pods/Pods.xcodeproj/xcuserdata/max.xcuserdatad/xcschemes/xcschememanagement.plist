@@ -25,21 +25,21 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>Pods-VK-ObjC-project-BMV.xcscheme</key>
+		<key>OHHTTPStubs.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>Pods-VK-ObjC-project-BMVTests.xcscheme</key>
+		<key>Pods-VK-ObjC-project-BMV.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>Pods-VK-ObjC-project-BMVUITests.xcscheme</key>
+		<key>Pods-VK-ObjC-project-BMVTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

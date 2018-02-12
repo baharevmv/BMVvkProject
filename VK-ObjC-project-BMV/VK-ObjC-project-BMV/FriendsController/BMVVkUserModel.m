@@ -21,9 +21,9 @@
     {
         _firstName = vkFriendModel.firstName;
         _lastName = vkFriendModel.lastName;
-        _smallImageURL = vkFriendModel.smallImageURL;
-        _imageURL = vkFriendModel.imageURL;
-        _bigImageURL = vkFriendModel.bigImageURL;
+        _smallImageURLString = vkFriendModel.smallImageURLString;
+        _imageURLString = vkFriendModel.imageURLString;
+        _bigImageURLString = vkFriendModel.bigImageURLString;
         _userID = vkFriendModel.userID;
     }
     return self;

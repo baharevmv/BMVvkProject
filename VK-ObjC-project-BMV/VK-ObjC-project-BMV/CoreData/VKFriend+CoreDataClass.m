@@ -2,7 +2,7 @@
 //  VKFriend+CoreDataClass.m
 //  
 //
-//  Created by max on 05.02.18.
+//  Created by max on 12.02.18.
 //
 //
 
