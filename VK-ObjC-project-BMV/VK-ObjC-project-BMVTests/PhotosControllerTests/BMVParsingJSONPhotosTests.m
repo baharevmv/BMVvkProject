@@ -104,8 +104,9 @@
     [classMockBMVVkPhotoModel stopMocking];
 }
 
+// Условие - насколько корректно заполняются поля у модели, если JSON неправильный
 
-- (void)testJSONToModelButGotWrongJSON
+- (void)testJSONToModelWhenGotWrongJSON
 {
     NSDictionary *photosDictionary = @{@"pid" : @"123456", @"src_small" : @"https://vk.api.com/littlephoto.jpg",
                                        @"src_big" : @"https://vk.api.com/photo.jpg", @"src_xbig" : @"https://vk.api.com/bigphoto.jpg"};

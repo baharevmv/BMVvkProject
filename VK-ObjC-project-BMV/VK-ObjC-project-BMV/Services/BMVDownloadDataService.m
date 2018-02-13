@@ -83,12 +83,12 @@
     {
         case BMVDownloadDataTypeFriends:
         {
-            url = [BMVBuilderURLFriend urlWithAllFriendsString:token];
+            url = [BMVBuilderURLFriend urlForFriendsBuildWithToken:token];
             break;
         }
         case BMVDownloadDataTypePhotos:
         {
-            url = [BMVBuilderURLPhotos urlWithAllFreindsPhotosString:token currentFriendID:userID];
+            url = [BMVBuilderURLPhotos urlGetAllPhotosWithToken:token forCurrentFriendID:userID];
             break;
         }
     }

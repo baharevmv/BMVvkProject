@@ -106,7 +106,7 @@
 }
 
 
-// Условие - насколько корректно заполняются поля у модели если JSON неправильный
+// Условие - насколько корректно заполняются поля у модели, если JSON неправильный
 
 - (void)testJSONToModelButGotWrongJSON
 {
@@ -117,8 +117,8 @@
     id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
     id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
     OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
-    NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
     
+    NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
     expect(modelArray).notTo.beNil();
     expect(modelArray.count == 1).to.beTruthy();
     expect(modelArray[0].firstName).to.beNil();

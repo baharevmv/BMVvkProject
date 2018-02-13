@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		017E1A22FD7477BDFCE6A35B /* libPods-VK-ObjC-project-BMVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA2506277F2A76BCBF7884A /* libPods-VK-ObjC-project-BMVTests.a */; };
 		08FEA3EA5BD7B7C3F6B584F0 /* libPods-VK-ObjC-project-BMV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E68FE70C2D69263F7CC1F380 /* libPods-VK-ObjC-project-BMV.a */; };
+		50086A4920321EA4002C4666 /* BMVBuilderURLFriendTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50086A4820321EA4002C4666 /* BMVBuilderURLFriendTests.m */; };
+		50086A4B20323727002C4666 /* BMVBuilderURLPhotosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50086A4A20323727002C4666 /* BMVBuilderURLPhotosTests.m */; };
 		500ACEB3201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */; };
 		500ACEB6201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500ACEB5201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.m */; };
 		500D329D20317D1100082D82 /* BMVParsingJSONFriendsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 500D329C20317D1100082D82 /* BMVParsingJSONFriendsTests.m */; };
@@ -52,6 +54,8 @@
 		1BA96DC773E13431F1F72E5D /* Pods-VK-ObjC-project-BMV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMV/Pods-VK-ObjC-project-BMV.debug.xcconfig"; sourceTree = "<group>"; };
 		1EB4D31884EC63379AEAA03D /* Pods-VK-ObjC-project-BMVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMVTests/Pods-VK-ObjC-project-BMVTests.release.xcconfig"; sourceTree = "<group>"; };
 		4F68DC8F40008E37B7EDD085 /* Pods-VK-ObjC-project-BMV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK-ObjC-project-BMV.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK-ObjC-project-BMV/Pods-VK-ObjC-project-BMV.release.xcconfig"; sourceTree = "<group>"; };
+		50086A4820321EA4002C4666 /* BMVBuilderURLFriendTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BMVBuilderURLFriendTests.m; path = "VK-ObjC-project-BMVTests/FriendsControllerTests/BMVBuilderURLFriendTests.m"; sourceTree = SOURCE_ROOT; };
+		50086A4A20323727002C4666 /* BMVBuilderURLPhotosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVBuilderURLPhotosTests.m; sourceTree = "<group>"; };
 		500ACEB1201E636400EFE52F /* BMVvkPhotosCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkPhotosCollectionViewCell.h; sourceTree = "<group>"; };
 		500ACEB2201E636400EFE52F /* BMVvkPhotosCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVvkPhotosCollectionViewCell.m; sourceTree = "<group>"; };
 		500ACEB4201E69CC00EFE52F /* BMVvkAllFriendPhotoCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVvkAllFriendPhotoCollectionView.h; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				500D329C20317D1100082D82 /* BMVParsingJSONFriendsTests.m */,
+				50086A4820321EA4002C4666 /* BMVBuilderURLFriendTests.m */,
 			);
 			path = FriendsControllerTests;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				507E64662031BEBF0011188C /* BMVParsingJSONPhotosTests.m */,
+				50086A4A20323727002C4666 /* BMVBuilderURLPhotosTests.m */,
 			);
 			path = PhotosControllerTests;
 			sourceTree = "<group>";
@@ -506,6 +512,8 @@
 				500D329D20317D1100082D82 /* BMVParsingJSONFriendsTests.m in Sources */,
 				504A07192030D55C005F68E4 /* VK_ObjC_project_BMVTests.m in Sources */,
 				507E64672031BEBF0011188C /* BMVParsingJSONPhotosTests.m in Sources */,
+				50086A4B20323727002C4666 /* BMVBuilderURLPhotosTests.m in Sources */,
+				50086A4920321EA4002C4666 /* BMVBuilderURLFriendTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

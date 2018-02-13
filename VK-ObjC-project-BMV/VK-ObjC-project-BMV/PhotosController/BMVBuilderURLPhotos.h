@@ -21,9 +21,10 @@
 /**
  Обеспечивает создание URL
  @param token - токен, необходимый для построения корректного запроса к API вконтакте
+ @param currentFriendID - уникальный идентификатор пользователя, фото которого необходимо получить.
  @return необходимый URL
  */
-+ (NSURL *)urlWithAllFreindsPhotosString:(BMVVkTokenModel *)token currentFriendID:(NSString *)currentFriendID;
++ (NSURL *)urlGetAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID;
 
 
 @end

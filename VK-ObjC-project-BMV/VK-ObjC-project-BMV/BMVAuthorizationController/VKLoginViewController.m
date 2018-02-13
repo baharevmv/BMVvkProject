@@ -57,10 +57,6 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
-    
-    
     CGRect typicalRectangle = self.view.bounds;
     typicalRectangle.origin = CGPointZero;
     
