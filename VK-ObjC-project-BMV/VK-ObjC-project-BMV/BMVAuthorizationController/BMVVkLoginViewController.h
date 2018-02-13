@@ -13,6 +13,6 @@
 /**
  Класс для авторизации в соц. сети vk.com, и для получения Ключа доступа пользователя.
  */
-@interface VKLoginViewController : UIViewController
+@interface BMVVkLoginViewController : UIViewController
 
 @end

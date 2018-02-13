@@ -1,5 +1,5 @@
 //
-//  VKFriendsTableViewCellView.h
+//  BMVVkFriendsTableViewCell.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 15.01.18.
@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface VKFriendsTableViewCell : UITableViewCell
+@interface BMVVkFriendsTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UIImageView *userPhotoImageView;

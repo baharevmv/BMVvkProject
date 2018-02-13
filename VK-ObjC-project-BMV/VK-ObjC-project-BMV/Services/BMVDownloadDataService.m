@@ -8,6 +8,7 @@
 
 
 #import "BMVDownloadDataService.h"
+
 #import "BMVBuilderURLFriend.h"
 #import "BMVBuilderURLPhotos.h"
 #import "BMVParsingJSONFriends.h"
@@ -49,7 +50,7 @@
     {
         queue_t = queue;
     }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLByType:dataType
+    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLWithType:dataType
                                                                    localToken:token currentUserID:userID]];
     NSLog(@"Запрос выглядит так -  %@", request);
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
@@ -75,7 +76,7 @@
 }
 
 
-- (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
+- (NSURL *)buildURLWithType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
             currentUserID:(NSString *)userID
 {
     NSURL *url;
@@ -88,7 +89,7 @@
         }
         case BMVDownloadDataTypePhotos:
         {
-            url = [BMVBuilderURLPhotos urlGetAllPhotosWithToken:token forCurrentFriendID:userID];
+            url = [BMVBuilderURLPhotos urlForAllPhotosWithToken:token forCurrentFriendID:userID];
             break;
         }
     }

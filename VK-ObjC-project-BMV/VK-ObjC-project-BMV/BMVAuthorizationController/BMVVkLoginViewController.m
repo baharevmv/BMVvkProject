@@ -7,8 +7,8 @@
 //
 
 
-#import "VKLoginViewController.h"
-#import "VKFriendsViewController.h"
+#import "BMVVkLoginViewController.h"
+#import "BMVVkFriendsViewController.h"
 #import "BMVVkTokenModel.h"
 #import "BMVParsingTokenString.h"
 #import "AppDelegate.h"
@@ -25,7 +25,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
                                                     "response_type=token";
 
 
-@interface VKLoginViewController () <UIWebViewDelegate>
+@interface BMVVkLoginViewController () <UIWebViewDelegate>
 
 
 @property (nonatomic, strong) UIWebView* webView;
@@ -40,7 +40,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 @end
 
 
-@implementation VKLoginViewController
+@implementation BMVVkLoginViewController
 
 
 - (instancetype)init
@@ -116,7 +116,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
     self.theToken = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    VKFriendsViewController *friendsViewController = [VKFriendsViewController new];
+    BMVVkFriendsViewController *friendsViewController = [BMVVkFriendsViewController new];
     friendsViewController.tokenForFriendsController = self.theToken;
     UINavigationController *friendsNavigationController = [[UINavigationController alloc] initWithRootViewController:friendsViewController];
     friendsNavigationController.tabBarItem.title = @"Friends";

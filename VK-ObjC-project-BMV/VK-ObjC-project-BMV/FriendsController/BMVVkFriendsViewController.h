@@ -1,5 +1,5 @@
 //
-//  BMVvkFriendsViewController.h
+//  BMVVkFriendsViewController.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 11.01.18.
@@ -12,7 +12,7 @@
 @class BMVDownloadDataService;
 
 
-@interface VKFriendsViewController : UITableViewController
+@interface BMVVkFriendsViewController : UITableViewController
 
 
 @property(nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;

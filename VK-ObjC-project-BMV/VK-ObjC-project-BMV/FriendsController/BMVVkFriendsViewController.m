@@ -1,13 +1,13 @@
 //
-//  BMVvkFriendsViewController.m
+//  BMVVkFriendsViewController.m
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 11.01.18.
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "VKFriendsViewController.h"
-#import "VKFriendsTableViewCell.h"
+#import "BMVVkFriendsViewController.h"
+#import "BMVVkFriendsTableViewCell.h"
 #import "BMVVkUserModel.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
 #import "BMVCoreDataDownloadFunnel.h"
@@ -20,7 +20,7 @@
 static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 
-@interface VKFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface BMVVkFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
@@ -29,7 +29,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 @property (nonatomic, strong) BMVCoreDataService *coreDataService;
 @property (nonatomic, strong) BMVVkUserModel *dataFriendModel;
 @property (nonatomic, copy) NSArray *friendsArray;
-@property (nonatomic, strong) VKFriendsTableViewCell *tableViewCell;
+@property (nonatomic, strong) BMVVkFriendsTableViewCell *tableViewCell;
 @property (nonatomic, strong) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVvkAllFriendPhotoCollectionView *photosOfThisFriend;
 @property (nonatomic, strong) UISearchBar *lifeSearchBar;
@@ -39,7 +39,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 @end
 
 
-@implementation VKFriendsViewController
+@implementation BMVVkFriendsViewController
 
 
 - (instancetype)init
@@ -70,7 +70,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     
 - (void)createUI
 {
-    [self.tableView registerClass:[VKFriendsTableViewCell class] forCellReuseIdentifier:BMVCellIdentifier];
+    [self.tableView registerClass:[BMVVkFriendsTableViewCell class] forCellReuseIdentifier:BMVCellIdentifier];
     
     // PullToRefresh функция
     UIRefreshControl *refreshControl = [UIRefreshControl new];
@@ -137,7 +137,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    VKFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier forIndexPath:indexPath];
+    BMVVkFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier forIndexPath:indexPath];
 
     // Забираем имя
     NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName,
@@ -175,7 +175,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 #pragma mark - Animations
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(VKFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(BMVVkFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row <= [self.tableView indexPathsForVisibleRows].firstObject.row)
     {

@@ -1,5 +1,5 @@
 //
-//  VKFriendsTableViewCellView.m
+//  BMVVkFriendsTableViewCell.m
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 15.01.18.
@@ -7,7 +7,7 @@
 //
 
 
-#import "VKFriendsTableViewCell.h"
+#import "BMVVkFriendsTableViewCell.h"
 #import "Masonry.h"
 
 
@@ -15,7 +15,7 @@ static CGFloat const lineSizeImageView = 60.0;
 static CGFloat const BMVOffset = 10.0;
 
 
-@implementation VKFriendsTableViewCell
+@implementation BMVVkFriendsTableViewCell
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

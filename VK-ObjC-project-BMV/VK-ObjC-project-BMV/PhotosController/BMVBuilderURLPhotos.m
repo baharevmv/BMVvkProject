@@ -18,7 +18,7 @@ static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200";
 @implementation BMVBuilderURLPhotos
 
 
-+ (NSURL *)urlGetAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID
++ (NSURL *)urlForAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID
 {
     if (!token)
     {

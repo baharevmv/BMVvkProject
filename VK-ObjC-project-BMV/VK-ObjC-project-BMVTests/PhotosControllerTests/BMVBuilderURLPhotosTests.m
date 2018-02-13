@@ -29,7 +29,7 @@ static NSString *testTokenString = @"123214215215215214124214";
 
 - (void) testURLBuilderWithNilToken
 {
-    NSURL *url = [BMVBuilderURLPhotos urlGetAllPhotosWithToken:nil forCurrentFriendID:@"123456"];
+    NSURL *url = [BMVBuilderURLPhotos urlForAllPhotosWithToken:nil forCurrentFriendID:@"123456"];
     expect(url).to.beNil();
 }
 
@@ -40,7 +40,7 @@ static NSString *testTokenString = @"123214215215215214124214";
 {
     id objectMockBMVVkTokenModel = OCMPartialMock([BMVVkTokenModel new]);
     OCMStub([objectMockBMVVkTokenModel tokenString]).andReturn(testTokenString);
-    NSURL *url = [BMVBuilderURLPhotos urlGetAllPhotosWithToken:objectMockBMVVkTokenModel forCurrentFriendID:nil];
+    NSURL *url = [BMVBuilderURLPhotos urlForAllPhotosWithToken:objectMockBMVVkTokenModel forCurrentFriendID:nil];
     expect(url).to.beNil();
 }
 
@@ -52,7 +52,7 @@ static NSString *testTokenString = @"123214215215215214124214";
     id objectMockBMVVkTokenModel = OCMPartialMock([BMVVkTokenModel new]);
     OCMStub([objectMockBMVVkTokenModel tokenString]).andReturn(testTokenString);
     
-    NSURL *url = [BMVBuilderURLPhotos urlGetAllPhotosWithToken:objectMockBMVVkTokenModel forCurrentFriendID:@"123456"];
+    NSURL *url = [BMVBuilderURLPhotos urlForAllPhotosWithToken:objectMockBMVVkTokenModel forCurrentFriendID:@"123456"];
     
     NSString *stringForReferenceURL = [NSString stringWithFormat:@"%@%@%@123456%@",BMVFirstPartURL, ([objectMockBMVVkTokenModel tokenString]), BMVSecondPartURL, BMVThirdPartURL];;
     NSURL *urlReference = [NSURL URLWithString:stringForReferenceURL];
