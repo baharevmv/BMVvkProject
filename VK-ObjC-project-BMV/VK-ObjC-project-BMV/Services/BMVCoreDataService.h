@@ -17,6 +17,7 @@
  */
 @interface BMVCoreDataService : NSObject
 
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 /**
  Инициализирует сервис с контекстом
@@ -66,6 +67,7 @@
 - (void)clearCoreData;
 
 
+- (void)saveContext;
 
 
 @end

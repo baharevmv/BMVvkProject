@@ -42,6 +42,14 @@ typedef NS_ENUM(NSUInteger, BMVDownloadDataType)
                             localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                        completeHandler:(void(^)(id))completeHandler;
 
+//
+///**
+// Формирует запрос на загрузку фотографий
+// @param arrayWithModel - массив с элементами для закгрузки.
+// */
+//- (void)downloadAllPhotosWithArray:(NSArray *)arrayWithModel;
+
+
 
 /**
  Обеспечивает загрузку фотографий из передаваемого массива

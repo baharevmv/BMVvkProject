@@ -18,5 +18,4 @@
 @property (nonatomic, strong) BMVVkUserModel *interestingUser;
 @property (nonatomic, strong) BMVVkTokenModel *tokenForFriendsController;
 
-
 @end

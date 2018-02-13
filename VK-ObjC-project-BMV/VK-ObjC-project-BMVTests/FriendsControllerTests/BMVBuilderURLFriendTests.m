@@ -26,7 +26,7 @@ static NSString *testTokenString = @"123214215215215214124214";
 
 // Условие - Вместо Токена в класс передали nil
 
-- (void) testURLBuilderWithNilToken
+- (void)testURLBuilderWithNilToken
 {
     NSURL *url = [BMVBuilderURLFriend urlForFriendsBuildWithToken:nil];
     expect(url).to.beNil();
@@ -35,7 +35,7 @@ static NSString *testTokenString = @"123214215215215214124214";
 
 // Условие - сформируется ли из исходных фрагментов URL'а и токена валидный запрос.
 
-- (void) testURLBuildingWithTokenAndURLParts
+- (void)testURLBuildingWithTokenAndURLParts
 {
     id objectMockBMVVkTokenModel = OCMPartialMock([BMVVkTokenModel new]);
     

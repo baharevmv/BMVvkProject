@@ -43,8 +43,9 @@
     {
         return _context;
     }
-    UIApplication *application = [UIApplication sharedApplication];
-    NSPersistentContainer *container = ((AppDelegate *) (application.delegate)).persistentContainer;
+//    UIApplication *application = [UIApplication sharedApplication];
+//    NSPersistentContainer *container = ((AppDelegate *) (application.delegate)).persistentContainer;
+    NSPersistentContainer *container = self.persistentContainer;
     NSManagedObjectContext *context = container.viewContext;
     return context;
 }
@@ -99,18 +100,13 @@
 - (BOOL)isItFirstTimeStarts
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL AlreadyStart = [userDefaults boolForKey:@"AlreadyStarts"];
-    if (AlreadyStart)
+    BOOL alreadyStart = [userDefaults boolForKey:@"AlreadyStarts"];
+    if (!alreadyStart)
     {
-        // если уже запускался - значит не первый запуск.
-        return NO;
-    }
-    else
-    {
-        // если еще не запускался - запуск первый.
         [userDefaults setBool:YES forKey:@"AlreadyStarts"];
         return YES;
     }
+    return NO;
 }
 
 
@@ -135,6 +131,42 @@
     NSLog(@"%lu",(unsigned long)personsArray.count);
     for (NSManagedObject *userModel in personsArray) {
         [self removeFromCoreData:userModel];
+    }
+}
+
+
+#pragma mark - Core Data stack
+
+@synthesize persistentContainer = _persistentContainer;
+
+- (NSPersistentContainer *)persistentContainer {
+    @synchronized (self) {
+        if (_persistentContainer == nil)
+        {
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"VK_ObjC_project_BMV"];
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error)
+             {
+                 if (error != nil)
+                 {
+                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                     abort();
+                 }
+             }];
+        }
+    }
+    
+    return _persistentContainer;
+}
+
+
+#pragma mark - Core Data Saving support
+
+- (void)saveContext {
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSError *error = nil;
+    if ([context hasChanges] && ![context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
     }
 }
 

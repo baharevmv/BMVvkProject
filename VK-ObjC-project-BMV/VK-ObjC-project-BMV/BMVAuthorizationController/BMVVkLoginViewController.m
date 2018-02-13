@@ -13,7 +13,6 @@
 #import "BMVParsingTokenString.h"
 #import "AppDelegate.h"
 #import "UIImageView+BMVImageView.h"
-#import <Masonry.h>
 
 
 static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
@@ -86,24 +85,15 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 #pragma mark - Animations
 
 
-
 - (void)actionTimerRemoveAnimationViewAuthorizarion
 {
     [self.animationView removeFromSuperview];
+    [self.timer invalidate];
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
 
 }
 
-- (void)createConstraints
-{
-    [self.animationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top);
-        make.left.mas_equalTo(self.view.mas_left);
-        make.bottom.mas_equalTo(self.view.mas_bottom);
-        make.right.mas_equalTo(self.view.mas_right);
-    }];
-}
 
 #pragma mark - UIWebViewDelegete
 

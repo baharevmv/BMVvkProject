@@ -23,16 +23,11 @@ static CGFloat const loadingLabelOffset = 20;
 
 @interface BMVvkAllFriendPhotoCollectionView ()
 
-
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
-@property (nonatomic, retain) UIView *loadingView;
-@property (nonatomic, retain) UILabel *loadingLabel;
-@property (nonatomic, assign) NSUInteger numberPage;
-@property (nonatomic, copy) BMVVkUserModel *viewedUser;
+@property (nonatomic, strong) UIView *loadingView;
+@property (nonatomic, strong) UILabel *loadingLabel;
 @property (nonatomic, strong) NSMutableArray <BMVVkPhotoModel *> *modelArray;
 @property (nonatomic, retain) NSMutableArray <BMVVkPhotoModel *> *selectedModelArray;
-@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
-@property (nonatomic, strong) UIVisualEffectView *visualEffectView;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 
 
@@ -42,7 +37,7 @@ static CGFloat const loadingLabelOffset = 20;
 @implementation BMVvkAllFriendPhotoCollectionView
 
 
-- (void) viewDidLoad
+- (void)viewDidLoad
 {
     [super viewDidLoad];
     [self createCollectionViewUI];
@@ -69,12 +64,12 @@ static CGFloat const loadingLabelOffset = 20;
     
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
-                                                                 target:self action:@selector(downloadPhotosToPhone)];
+                                                                 target:self action:@selector(savePhotosToPhone)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 
-- (void) createCollectionViewUI
+- (void)createCollectionViewUI
 {
     // Настраиваем flowLayout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -136,27 +131,13 @@ static CGFloat const loadingLabelOffset = 20;
     NSLog(@"We got an Error here - %@", error);
 }
 
-- (void) downloadPhotosToPhone
+
+- (void)downloadAllPhotosWithArray:(NSArray *)arrayWithModel
 {
-    // network animation
-    [self.view addSubview:self.loadingView];
-    [self.activityView startAnimating];
-    
-    // save image from the web
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (self.selectedModelArray.count != 0 )
+        
         {
-            [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:self.selectedModelArray completeHandler:^(id any) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.activityView stopAnimating];
-                    [self.loadingView removeFromSuperview];
-                    NSLog(@"Задание на загрузку выполнено");
-                });
-            }];
-        }
-        else
-        {
-            [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:self.modelArray completeHandler:^(id any) {
+            [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:arrayWithModel completeHandler:^(id any) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.activityView stopAnimating];
                     [self.loadingView removeFromSuperview];
@@ -165,6 +146,25 @@ static CGFloat const loadingLabelOffset = 20;
             }];
         }
     });
+}
+
+
+- (void)savePhotosToPhone
+{
+    // network animation
+    [self.view addSubview:self.loadingView];
+    [self.activityView startAnimating];
+    NSArray* arrayToDownload = [NSArray new];
+    // save image from the web
+    if (self.selectedModelArray.count != 0 )
+    {
+        arrayToDownload = self.selectedModelArray;
+    }
+    else
+    {
+        arrayToDownload = self.modelArray;
+    }
+        [self downloadAllPhotosWithArray:arrayToDownload];
 }
 
 
@@ -198,7 +198,7 @@ static CGFloat const loadingLabelOffset = 20;
 {
     [self.selectedModelArray addObject:self.modelArray[indexPath.item]];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain
-                                                                 target:self action:@selector(downloadPhotosToPhone)];
+                                                                 target:self action:@selector(savePhotosToPhone)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
@@ -209,7 +209,7 @@ static CGFloat const loadingLabelOffset = 20;
     {
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
                                                                      target:self
-                                                                     action:@selector(downloadPhotosToPhone)];
+                                                                     action:@selector(savePhotosToPhone)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
         

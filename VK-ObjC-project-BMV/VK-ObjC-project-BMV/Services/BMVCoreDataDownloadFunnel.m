@@ -44,7 +44,10 @@
         // Не первый запуск
         // тянем из CoreData
         NSArray <BMVVkUserModel *> *modelArray = [self.coreDataService obtainModelArray:[VKFriend class]];
-        completeHandler(modelArray);
+        if (modelArray)
+        {
+            completeHandler(modelArray);
+        }
     }
     else
     {

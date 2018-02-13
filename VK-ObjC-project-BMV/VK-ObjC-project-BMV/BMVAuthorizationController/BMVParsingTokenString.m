@@ -17,22 +17,21 @@
 -(BMVVkTokenModel *)getTokenFromWebViewHandlerWithRequest:(NSURLRequest *)request
 {
     BMVVkTokenModel *token = [BMVVkTokenModel new];
-    NSString* query = [[request URL] description];
-    NSArray* array = [query componentsSeparatedByString:@"#"];
-    if ([array count] > 1)
+    NSString *query = [[request URL] description];
+    NSArray *array = [query componentsSeparatedByString:@"#"];
+    if (array.count > 1)
     {
         query = [array lastObject];
     }
-    NSArray* pairs = [query componentsSeparatedByString:@"&"];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
     for (NSString* pair in pairs)
     {
-        
-        NSArray* values = [pair componentsSeparatedByString:@"="];
+        NSArray *values = [pair componentsSeparatedByString:@"="];
         if ([values count] != 2)
         {
             continue;
         }
-        NSString* key = [values firstObject];
+        NSString *key = [values firstObject];
         if ([key isEqualToString:@"access_token"])
         {
             token.tokenString = [values lastObject];

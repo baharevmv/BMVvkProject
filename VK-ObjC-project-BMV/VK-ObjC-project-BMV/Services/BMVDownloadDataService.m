@@ -140,10 +140,27 @@
     [self tryWriteAgain:image];
 }
 
--(void)tryWriteAgain:(UIImage *)image
+- (void)tryWriteAgain:(UIImage *)image
 {
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
+
+
+//- (void)downloadAllPhotosWithArray:(NSArray *)arrayWithModel
+//{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        {
+//            [self downloadAllPhotosToPhotoAlbumWithArray:arrayWithModel completeHandler:^(id any) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.activityView stopAnimating];
+//                    [self.loadingView removeFromSuperview];
+//                    NSLog(@"Задание на загрузку выполнено");
+//                });
+//            }];
+//        }
+//    });
+//}
 
 
 @end

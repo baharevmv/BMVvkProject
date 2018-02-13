@@ -157,6 +157,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 #pragma mark - UITableViewDelegate
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.lifeSearchBar resignFirstResponder];
@@ -174,6 +175,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 
 #pragma mark - Animations
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BMVVkFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -206,21 +208,21 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 #pragma mark - Search Bar Delegate
 
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if ([searchText isEqual: @""]) {
+    if ([searchText isEqualToString:@""]) {
         [self downloadDataForFriendsTableView];
-        [self.tableView reloadData];
     }
     else
     {
         self.usersArray = [self.coreDataService searchingForFriendWithSearchString:searchText];
-        [self.tableView reloadData];
     }
+    [self.tableView reloadData];
 }
 
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self.lifeSearchBar resignFirstResponder];
 }
