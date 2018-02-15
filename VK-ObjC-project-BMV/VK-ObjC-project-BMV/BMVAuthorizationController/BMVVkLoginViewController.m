@@ -27,7 +27,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 @interface BMVVkLoginViewController () <UIWebViewDelegate>
 
 
-@property (nonatomic, strong) UIWebView* webView;
+@property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) BMVVkTokenModel *theToken;
 @property (nonatomic, strong) BMVParsingTokenString *parsingTokenString;
 @property (nonatomic, strong) NSURLRequest *request;
@@ -64,7 +64,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
     [self.view addSubview:self.webView];
     
     self.navigationItem.title = @"Login";
-    NSURL* url = [NSURL URLWithString:BMVurlString];
+    NSURL *url = [NSURL URLWithString:BMVurlString];
     self.request = [NSURLRequest requestWithURL:url];
 
     self.animationView = [UIView new];

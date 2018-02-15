@@ -35,7 +35,7 @@
 }
 
 
-- (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token CompleteHandler:(void (^)(id dataModel))completeHandler
+- (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token сompleteHandler:(void (^)(id dataModel))completeHandler
 {
     NSLog(@"Вошли в obtainVKFriendsWithPredicateString");
     BOOL isFirstTime = [self.coreDataService isItFirstTimeStarts];

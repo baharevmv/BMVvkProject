@@ -43,8 +43,6 @@
     {
         return _context;
     }
-//    UIApplication *application = [UIApplication sharedApplication];
-//    NSPersistentContainer *container = ((AppDelegate *) (application.delegate)).persistentContainer;
     NSPersistentContainer *container = self.persistentContainer;
     NSManagedObjectContext *context = container.viewContext;
     return context;
@@ -75,11 +73,8 @@
         friendCoreDataModel.firstName = userModel.firstName;
         friendCoreDataModel.lastName = userModel.lastName;
         friendCoreDataModel.smallImageURLString = userModel.smallImageURLString;
-//        friendCoreDataModel.smallImageURL = userModel.smallImageURL;
         friendCoreDataModel.imageURLString = userModel.imageURLString;
-//        friendCoreDataModel.imageURL = userModel.imageURL;
         friendCoreDataModel.bigImageURLString = userModel.bigImageURLString;
-//        friendCoreDataModel.bigImageURL = userModel.bigImageURL;
         friendCoreDataModel.userID = [NSString stringWithFormat:@"%@", userModel.userID];
         [self.context save:nil];
     }

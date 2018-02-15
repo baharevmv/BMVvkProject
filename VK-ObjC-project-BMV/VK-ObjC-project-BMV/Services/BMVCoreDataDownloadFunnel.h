@@ -32,7 +32,7 @@
  block parameters:
  dataModel - запрашиваемая модель данных
  */
-- (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token CompleteHandler:(void (^)(id dataModel))completeHandler;
+- (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token сompleteHandler:(void (^)(id dataModel))completeHandler;
 
 
 @end

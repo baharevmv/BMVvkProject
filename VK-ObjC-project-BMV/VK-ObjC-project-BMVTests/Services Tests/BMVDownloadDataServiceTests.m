@@ -64,8 +64,6 @@
                                                       localToken:objectMockBMVVkTokenModel currentUserID:testUserIDString];
     expect(url).toNot.beNil();
     expect(url).to.equal(referenceURL);
-    
-    [classMockBuilderURLFriend stopMocking];
 }
 
 // Условие - Верно ли формируется URL для типа данных BMVDownloadDataTypePhotos
@@ -86,8 +84,6 @@
                                                  localToken:objectMockBMVVkTokenModel currentUserID:testUserIDString];
     expect(url).toNot.beNil();
     expect(url).to.equal(referenceURL);
-    
-    [classMockBuilderURLPhotos stopMocking];
 }
 
 - (void)testParsingByTypeDownloadDataTypeFriends
@@ -102,8 +98,6 @@
     expect(testArray).toNot.beNil();
     expect(testArray.count == 1).to.beTruthy();
     expect(testArray[0]).to.equal(@"Ordinary Friends");
-    
-    [classMockParsingJSONFriends stopMocking];
 }
 
 - (void)testParsingByTypeDownloadDataTypePhotos
@@ -118,8 +112,6 @@
     expect(testArray).toNot.beNil();
     expect(testArray.count == 1).to.beTruthy();
     expect(testArray[0]).to.equal(@"Brutal Photos");
-    
-    [classMockParsingJSONPhotos stopMocking];
 }
 
 @end

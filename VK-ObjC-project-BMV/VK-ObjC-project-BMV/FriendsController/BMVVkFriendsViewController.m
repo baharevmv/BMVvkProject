@@ -90,7 +90,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 - (void)downloadDataForFriendsTableView
 {
     [self.coreDataDownloadFunnel obtainVKFriendsWithLocalToken:self.tokenForFriendsController
-                                               CompleteHandler:^(id dataModel) {
+                                               сompleteHandler:^(id dataModel) {
                                                          self.usersArray = dataModel;
                                                             [self.tableView reloadData];
                                                      }];
@@ -146,7 +146,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     // Забираем фото.
     NSString *friendPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.usersArray[indexPath.row].smallImageURLString];
     dispatch_async(dispatch_get_global_queue(0,0), ^{
-    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: friendPhotoPath]];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: friendPhotoPath]];
         dispatch_async(dispatch_get_main_queue(), ^{
             tableViewCell.userPhotoImageView.image = [UIImage imageWithData: imageData];
         });
@@ -163,11 +163,11 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     [self.lifeSearchBar resignFirstResponder];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UICollectionViewFlowLayout* flowLayout = [UICollectionViewFlowLayout new];
+    UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc]
                                                                 initWithCollectionViewLayout:flowLayout];
-    BMVVkUserModel* user = [self.usersArray objectAtIndex:indexPath.row];
+    BMVVkUserModel *user = [self.usersArray objectAtIndex:indexPath.row];
     photosOfThisFriend.interestingUser = user;
     photosOfThisFriend.tokenForFriendsController = self.tokenForFriendsController;
     [self.navigationController pushViewController:photosOfThisFriend animated:YES];

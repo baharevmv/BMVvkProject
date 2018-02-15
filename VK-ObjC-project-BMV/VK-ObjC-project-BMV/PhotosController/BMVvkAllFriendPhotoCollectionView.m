@@ -154,7 +154,7 @@ static CGFloat const loadingLabelOffset = 20;
     // network animation
     [self.view addSubview:self.loadingView];
     [self.activityView startAnimating];
-    NSArray* arrayToDownload = [NSArray new];
+    NSArray *arrayToDownload = [NSArray new];
     // save image from the web
     if (self.selectedModelArray.count != 0 )
     {
@@ -186,7 +186,7 @@ static CGFloat const loadingLabelOffset = 20;
     BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
         NSString *previewPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.modelArray[indexPath.row].previewImageURL];
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: previewPhotoPath]];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: previewPhotoPath]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 collectionViewCell.image = [UIImage imageWithData: imageData];
             });

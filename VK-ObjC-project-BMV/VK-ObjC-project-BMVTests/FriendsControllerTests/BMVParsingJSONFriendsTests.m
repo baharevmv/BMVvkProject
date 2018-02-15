@@ -75,8 +75,6 @@
     NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
     
     expect(modelArray).to.beNil();
-    
-    [classMockBMVVkUserModel stopMocking];
 }
 
 
@@ -101,8 +99,6 @@
     expect(modelArray[0].smallImageURLString).to.equal(@"https://vk.api.com/littlephoto.jpg");
     expect(modelArray[0].imageURLString).to.equal(@"https://vk.api.com/photo.jpg");
     expect(modelArray[0].bigImageURLString).to.equal(@"https://vk.api.com/bigphoto.jpg");
-
-    [classMockBMVVkUserModel stopMocking];
 }
 
 
@@ -127,8 +123,6 @@
     expect(modelArray[0].smallImageURLString).to.beNil();
     expect(modelArray[0].imageURLString).to.beNil();
     expect(modelArray[0].bigImageURLString).to.beNil();
-    
-    [classMockBMVVkUserModel stopMocking];
 }
 
 @end

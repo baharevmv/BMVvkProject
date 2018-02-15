@@ -77,7 +77,7 @@
     
     expect(modelArray).to.beNil();
     
-    [classMockBMVVkUserModel stopMocking];
+//    [classMockBMVVkUserModel stopMocking];
 }
 
 
@@ -101,7 +101,7 @@
     expect(modelArray[0].mediumImageURL).to.equal(@"https://vk.api.com/photo.jpg");
     expect(modelArray[0].orinalImageURL).to.equal(@"https://vk.api.com/bigphoto.jpg");
 
-    [classMockBMVVkPhotoModel stopMocking];
+//    [classMockBMVVkPhotoModel stopMocking];
 }
 
 // Условие - насколько корректно заполняются поля у модели, если JSON неправильный
@@ -121,7 +121,7 @@
     expect(modelArray.count == 0).to.beTruthy();
 
 
-    [classMockBMVVkPhotoModel stopMocking];
+//    [classMockBMVVkPhotoModel stopMocking];
 }
 
 @end

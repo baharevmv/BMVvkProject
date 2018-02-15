@@ -24,7 +24,7 @@
         query = [array lastObject];
     }
     NSArray *pairs = [query componentsSeparatedByString:@"&"];
-    for (NSString* pair in pairs)
+    for (NSString *pair in pairs)
     {
         NSArray *values = [pair componentsSeparatedByString:@"="];
         if ([values count] != 2)

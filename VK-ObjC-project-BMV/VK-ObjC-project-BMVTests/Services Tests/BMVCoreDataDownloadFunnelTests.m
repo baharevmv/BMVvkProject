@@ -12,6 +12,8 @@
 #import "BMVCoreDataDownloadFunnel.h"
 #import "BMVCoreDataService.h"
 #import "BMVDownloadDataService.h"
+#import "BMVVkUserModel.h"
+#import "BMVVkTokenModel.h"
 
 @interface BMVCoreDataDownloadFunnel (BMVTests)
 
@@ -42,11 +44,52 @@
     self.testCoreDataDownloadFunnel = nil;
 }
 
-- (void)testObtainModelFriendsWithToken
+- (void)testObtainModelFriendsWithTokenIfItsFirstTime
 {
     id mockCoreData = OCMClassMock([BMVCoreDataService class]);
     OCMStub(self.testCoreDataDownloadFunnel.coreDataService).andReturn(mockCoreData);
+    OCMStub([mockCoreData obtainModelArray:nil]).andReturn(@[]);
+    OCMStub([mockCoreData isItFirstTimeStarts]).andReturn(YES);
+    
+    id objectMockDataModel = OCMPartialMock([BMVVkUserModel new]);
+    id classMockDataModel = OCMClassMock([BMVVkUserModel class]);
+    
+    id objectMockBMVVkTokenModel = OCMPartialMock([BMVVkTokenModel new]);
+    OCMStub([objectMockBMVVkTokenModel tokenString]).andReturn(@"12345678");
+    
+    OCMStub([[classMockDataModel alloc] initWithVKFriend:nil]).andReturn(objectMockDataModel);
+    void(^completeHandler)(BMVVkUserModel *dataModelArray) = ^(BMVVkUserModel *dataModelArray){};
+    
+    [self.testCoreDataDownloadFunnel obtainVKFriendsWithLocalToken:(objectMockBMVVkTokenModel) сompleteHandler:completeHandler];
+    
+    expect(objectMockDataModel).notTo.beNil;
+    expect(completeHandler).notTo.raiseAny();
 }
 
+
+- (void) testObtainVKFriendsWithLocalTokenIfItIsNotFirstTime
+{
+    id mockCoreData = OCMClassMock([BMVCoreDataService class]);
+    OCMStub(self.testCoreDataDownloadFunnel.coreDataService).andReturn(mockCoreData);
+    OCMStub([mockCoreData obtainModelArray:nil]).andReturn(@[]);
+    OCMStub([mockCoreData isItFirstTimeStarts]).andReturn(NO);
+    
+    id objectMockDataModel = OCMPartialMock([BMVVkUserModel new]);
+    id mockDownloadData = OCMClassMock([BMVDownloadDataService class]);
+    
+    id objectMockBMVVkTokenModel = OCMPartialMock([BMVVkTokenModel new]);
+    OCMStub([objectMockBMVVkTokenModel tokenString]).andReturn(@"12345678");
+
+    OCMStub(self.testCoreDataDownloadFunnel.downloadDataService).andReturn(mockDownloadData);
+    
+    OCMExpect([[mockDownloadData ignoringNonObjectArgs] downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:objectMockBMVVkTokenModel currentUserID:@"3213211" completeHandler:([OCMArg invokeBlockWithArgs:objectMockDataModel, nil])]);
+    
+    void(^completeHandler)(BMVVkUserModel *friendDataModel) = ^(BMVVkUserModel *friendDataModel){};
+    
+    [self.testCoreDataDownloadFunnel obtainVKFriendsWithLocalToken:(objectMockBMVVkTokenModel) сompleteHandler:completeHandler];
+
+    expect(completeHandler).notTo.raiseAny();
+//    OCMVerifyAll(mockDownloadData);
+}
 
 @end
