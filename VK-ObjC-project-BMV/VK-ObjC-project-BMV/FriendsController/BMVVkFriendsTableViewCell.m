@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVVkFriendsTableViewCell.h"
 #import "Masonry.h"
 

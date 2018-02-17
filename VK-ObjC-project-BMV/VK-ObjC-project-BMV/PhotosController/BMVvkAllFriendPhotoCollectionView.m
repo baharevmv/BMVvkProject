@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "QuartzCore/QuartzCore.h"
 #import "BMVvkAllFriendPhotoCollectionView.h"
 #import "BMVvkPhotosCollectionViewCell.h"
@@ -37,28 +36,21 @@ static CGFloat const loadingLabelOffset = 20;
 @implementation BMVvkAllFriendPhotoCollectionView
 
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self createCollectionViewUI];
+    [self createUserInterface];
+    [self preparingModel];
+    self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
     // Pull-to-Refresh Feature
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
     
-    self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
-    
-    
-    // Собираем модель - вынеси меня в метод.
-    self.downloadDataService = [BMVDownloadDataService new];
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil
-                                                  localToken:self.tokenForFriendsController
-                                               currentUserID:self.interestingUser.userID
-                                             completeHandler:^(id photoModelArray) {
-        self.modelArray = photoModelArray;
-        [self.collectionView reloadData];
-    }];
+
     
 
     
@@ -69,7 +61,9 @@ static CGFloat const loadingLabelOffset = 20;
 }
 
 
-- (void)createCollectionViewUI
+#pragma mark - Working With UI
+
+- (void)createUserInterface
 {
     // Настраиваем flowLayout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -92,7 +86,6 @@ static CGFloat const loadingLabelOffset = 20;
     self.loadingView.clipsToBounds = YES;
     self.loadingView.layer.cornerRadius = 10.0;
     
-//    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 115, 130, 22)];
     self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(loadingLabelOffset*1.5, loadingLabelOffset*5.75, loadingLabelOffset * 6.5, loadingLabelOffset)];
     self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.loadingView.bounds)/2, loadingLabelOffset*5.75);
     self.loadingLabel.backgroundColor = [UIColor clearColor];
@@ -110,7 +103,7 @@ static CGFloat const loadingLabelOffset = 20;
 
 - (void)refreshWithPull:(UIRefreshControl *)refreshControl
 {
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos queue:nil
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos
                                                   localToken:self.tokenForFriendsController
                                                currentUserID:self.interestingUser.userID
                                              completeHandler:^(id photoModelArray) {
@@ -121,16 +114,7 @@ static CGFloat const loadingLabelOffset = 20;
 }
 
 
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (!error)
-    {
-        NSLog(@"DOWNLOADED");
-        return;
-    }
-    NSLog(@"We got an Error here - %@", error);
-}
-
+#pragma mark - Working With Network
 
 - (void)downloadAllPhotosWithArray:(NSArray *)arrayWithModel
 {
@@ -168,11 +152,26 @@ static CGFloat const loadingLabelOffset = 20;
 }
 
 
+- (void)preparingModel
+{
+    self.downloadDataService = [BMVDownloadDataService new];
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos
+                                                  localToken:self.tokenForFriendsController
+                                               currentUserID:self.interestingUser.userID
+                                             completeHandler:^(id photoModelArray) {
+                                                 self.modelArray = photoModelArray;
+                                                 [self.collectionView reloadData];
+                                             }];
+}
+
+
+#pragma mark - UICollectionView Required Methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -180,10 +179,10 @@ static CGFloat const loadingLabelOffset = 20;
 }
 
 
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)
+    [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
         NSString *previewPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.modelArray[indexPath.row].previewImageURL];
         NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: previewPhotoPath]];
@@ -194,6 +193,9 @@ static CGFloat const loadingLabelOffset = 20;
     return collectionViewCell;
 }
 
+
+#pragma mark - UITableView Delegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.selectedModelArray addObject:self.modelArray[indexPath.item]];
@@ -201,6 +203,7 @@ static CGFloat const loadingLabelOffset = 20;
                                                                  target:self action:@selector(savePhotosToPhone)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
+
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -212,7 +215,7 @@ static CGFloat const loadingLabelOffset = 20;
                                                                      action:@selector(savePhotosToPhone)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
-        
 }
+
 
 @end

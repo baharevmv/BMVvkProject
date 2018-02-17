@@ -6,9 +6,7 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVDownloadDataService.h"
-
 #import "BMVBuilderURLFriend.h"
 #import "BMVBuilderURLPhotos.h"
 #import "BMVParsingJSONFriends.h"
@@ -39,20 +37,15 @@
 }
 
 
+#pragma mark - Working With VK.com API
 
-- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue
+- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType
                             localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(id))completeHandler
 {
-    NSLog(@"Зашли в экземпляр класса downloadDataWithDataTypeString");
-    dispatch_queue_t queue_t = dispatch_get_main_queue();
-    if (queue)
-    {
-        queue_t = queue;
-    }
     NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLWithType:dataType
-                                                                   localToken:token currentUserID:userID]];
-    NSLog(@"Запрос выглядит так -  %@", request);
+                                                                     localToken:token
+                                                                  currentUserID:userID]];
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data,
                                                                          NSURLResponse *response,
@@ -61,13 +54,13 @@
         {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
             id dataModel = [self parsingByType:dataType json:json];
-            dispatch_async(queue_t, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 completeHandler(dataModel);
             });
         }
         else
         {
-            dispatch_async(queue_t, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 completeHandler(nil);
             });
         }
@@ -117,7 +110,10 @@
 }
 
 
-- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload completeHandler:(void(^)(id))completeHandler
+#pragma mark - Downloading Photos to iPhone Memory
+
+- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload
+                               completeHandler:(void(^)(id))completeHandler
 {
     for (BMVVkPhotoModel *photo in arrayToDownload)
     {
@@ -139,6 +135,7 @@
     }
     [self tryWriteAgain:image];
 }
+
 
 - (void)tryWriteAgain:(UIImage *)image
 {

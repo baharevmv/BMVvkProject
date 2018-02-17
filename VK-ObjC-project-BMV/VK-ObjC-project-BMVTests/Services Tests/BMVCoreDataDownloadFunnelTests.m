@@ -44,7 +44,10 @@
     self.testCoreDataDownloadFunnel = nil;
 }
 
-- (void)testObtainModelFriendsWithTokenIfItsFirstTime
+
+// Условие - Получаем данные о "друзьях" не в первый раз.
+
+- (void)testObtainModelFriendsWithTokenIfItIsNotFirstTime
 {
     id mockCoreData = OCMClassMock([BMVCoreDataService class]);
     OCMStub(self.testCoreDataDownloadFunnel.coreDataService).andReturn(mockCoreData);
@@ -64,10 +67,15 @@
     
     expect(objectMockDataModel).notTo.beNil;
     expect(completeHandler).notTo.raiseAny();
+    
+    [mockCoreData stopMocking];
+    [classMockDataModel stopMocking];
 }
 
 
-- (void) testObtainVKFriendsWithLocalTokenIfItIsNotFirstTime
+// Условие - Получаем данные о "друзьях" в первый раз.
+
+- (void) testObtainVKFriendsWithLocalTokenIfItsFirstTime
 {
     id mockCoreData = OCMClassMock([BMVCoreDataService class]);
     OCMStub(self.testCoreDataDownloadFunnel.coreDataService).andReturn(mockCoreData);
@@ -82,14 +90,13 @@
 
     OCMStub(self.testCoreDataDownloadFunnel.downloadDataService).andReturn(mockDownloadData);
     
-    OCMExpect([[mockDownloadData ignoringNonObjectArgs] downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:objectMockBMVVkTokenModel currentUserID:@"3213211" completeHandler:([OCMArg invokeBlockWithArgs:objectMockDataModel, nil])]);
+    OCMExpect([[mockDownloadData ignoringNonObjectArgs] downloadDataWithDataTypeString:BMVDownloadDataTypeFriends localToken:objectMockBMVVkTokenModel currentUserID:@"3213211" completeHandler:([OCMArg invokeBlockWithArgs:objectMockDataModel, nil])]);
     
     void(^completeHandler)(BMVVkUserModel *friendDataModel) = ^(BMVVkUserModel *friendDataModel){};
     
     [self.testCoreDataDownloadFunnel obtainVKFriendsWithLocalToken:(objectMockBMVVkTokenModel) сompleteHandler:completeHandler];
 
     expect(completeHandler).notTo.raiseAny();
-//    OCMVerifyAll(mockDownloadData);
 }
 
 @end
