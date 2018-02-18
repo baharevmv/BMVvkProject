@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 #import "BMVVkTokenModel.h"
 
@@ -18,8 +17,8 @@
 
 
 /**
- Обеспечивает парсинг JSON в модель
- @param request - JSON, который парсится в модель
+ Обеспечивает парсинг строки header в Token модель
+ @param request - строка, который парсится в модель
  @return - объект типа токен.
  */
 -(BMVVkTokenModel *)getTokenFromWebViewHandlerWithRequest:(NSURLRequest *)request;

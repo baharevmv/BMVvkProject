@@ -6,16 +6,18 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import <UIKit/UIKit.h>
 #import "BMVVkUserModel.h"
 #import "BMVVkTokenModel.h"
 
 
+/**
+ Контроллер для отображения коллекции с фотографиями конкретного пользователя
+ */
 @interface BMVvkAllFriendPhotoCollectionView : UICollectionViewController
 
 
-@property (nonatomic, strong) BMVVkUserModel *interestingUser;
-@property (nonatomic, strong) BMVVkTokenModel *tokenForFriendsController;
+@property (nonatomic, strong) BMVVkUserModel *interestingUser;              /**< Выбранный пользователь */
+@property (nonatomic, strong) BMVVkTokenModel *tokenForFriendsController;   /**< Токен для работы с API вконтакте */
 
 @end

@@ -1,27 +1,17 @@
 //
-//  BMVLoginViewController.m 6244609
+//  BMVLoginViewController.m 
 //  VK-ObjC-project-BMV 6355197
 //
 //  Created by max on 11.01.18.
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVVkLoginViewController.h"
 #import "BMVVkFriendsViewController.h"
 #import "BMVVkTokenModel.h"
 #import "BMVParsingTokenString.h"
-#import "AppDelegate.h"
 #import "UIImageView+BMVImageView.h"
-
-
-static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
-                                                    "client_id=6355197&"
-                                                    "scope=274438&"
-                                                    "redirect_uri=https://oauth.vk.com/blank.html&"
-                                                    "display=mobile&"
-                                                    "revoke=0&"
-                                                    "response_type=token";
+#import "BMVVkURLRequestGenerator.h"
 
 
 @interface BMVVkLoginViewController () <UIWebViewDelegate>
@@ -31,7 +21,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 @property (nonatomic, strong) BMVVkTokenModel *theToken;
 @property (nonatomic, strong) BMVParsingTokenString *parsingTokenString;
 @property (nonatomic, strong) NSURLRequest *request;
-
+@property (nonatomic, strong) BMVVkURLRequestGenerator *requestGenerator;
 @property (nonatomic, strong) UIView *animationView;
 @property (nonatomic, strong) NSTimer *timer;
 
@@ -48,6 +38,7 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
     if (self)
     {
         _parsingTokenString = [BMVParsingTokenString new];
+        _requestGenerator = [BMVVkURLRequestGenerator new];
     }
     return self;
 }
@@ -64,26 +55,22 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
     [self.view addSubview:self.webView];
     
     self.navigationItem.title = @"Login";
-    NSURL *url = [NSURL URLWithString:BMVurlString];
-    self.request = [NSURLRequest requestWithURL:url];
+    self.request = [self.requestGenerator makingRequest];
 
     self.animationView = [UIView new];
     self.animationView.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.animationView];
-
-    [self.animationView addSubview:[UIImageView bmv_animationOnView:self.view]];
     
+    [self.animationView addSubview:[UIImageView bmv_animationOnView:self.view]];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:3
                                                   target:self
                                                 selector:@selector(actionTimerRemoveAnimationViewAuthorizarion)
                                                 userInfo:nil
                                                  repeats:NO];
-
 }
 
 
 #pragma mark - Animations
-
 
 - (void)actionTimerRemoveAnimationViewAuthorizarion
 {
@@ -98,7 +85,6 @@ static NSString *const BMVurlString = @"https://oauth.vk.com/authorize?"
 #pragma mark - UIWebViewDelegete
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
     if ([[[request URL] description] rangeOfString:@"#access_token="].location == NSNotFound)
     {
         return YES;

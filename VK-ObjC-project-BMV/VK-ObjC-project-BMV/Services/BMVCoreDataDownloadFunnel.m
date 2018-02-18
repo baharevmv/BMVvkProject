@@ -37,12 +37,9 @@
 
 - (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token сompleteHandler:(void (^)(id dataModel))completeHandler
 {
-    NSLog(@"Вошли в obtainVKFriendsWithPredicateString");
     BOOL isFirstTime = [self.coreDataService isItFirstTimeStarts];
     if (!isFirstTime)
     {
-        // Не первый запуск
-        // тянем из CoreData
         NSArray <BMVVkUserModel *> *modelArray = [self.coreDataService obtainModelArray:[VKFriend class]];
         if (modelArray)
         {
@@ -51,9 +48,7 @@
     }
     else
     {
-        // Запуск первый
-        // Загружаем в таблицу и CoreData из сети.
-        [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends queue:nil localToken:token currentUserID:token.userIDString
+        [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends localToken:token currentUserID:token.userIDString
         completeHandler:^(id dataModel) {
             [self.coreDataService saveFriendModel:dataModel];
             completeHandler(dataModel);

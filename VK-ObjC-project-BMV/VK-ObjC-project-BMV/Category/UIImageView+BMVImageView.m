@@ -20,6 +20,14 @@ const NSInteger imageCount = 18;
 
 + (UIImageView *)bmv_animationOnView:(UIView *)superview
 {
+    if (!superview)
+    {
+        return nil;
+    }
+    if (![superview isMemberOfClass:[UIView class]])
+    {
+        return nil;
+    }
     CGRect bounds = superview.bounds;
     CGFloat sideSquare = CGRectGetWidth(bounds) - BMVOffset;
     CGRect frame = CGRectMake(0, 0, sideSquare, sideSquare);
