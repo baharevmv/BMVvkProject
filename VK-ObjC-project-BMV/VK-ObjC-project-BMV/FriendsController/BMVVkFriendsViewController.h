@@ -14,7 +14,7 @@
 @interface BMVVkFriendsViewController : UITableViewController
 
 
-@property(nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;
+@property(nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;      /**< Токен для работы с API вконтакте */
 
 
 @end

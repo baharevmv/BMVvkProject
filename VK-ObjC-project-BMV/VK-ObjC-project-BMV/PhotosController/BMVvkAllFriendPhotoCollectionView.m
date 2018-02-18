@@ -118,36 +118,23 @@ static CGFloat const loadingLabelOffset = 20;
 
 - (void)downloadAllPhotosWithArray:(NSArray *)arrayWithModel
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        {
-            [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:arrayWithModel completeHandler:^(id any) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.activityView stopAnimating];
-                    [self.loadingView removeFromSuperview];
-                    NSLog(@"Задание на загрузку выполнено");
-                });
-            }];
-        }
-    });
+    [self.downloadDataService downloadAllPhotosToPhotoAlbumWithArray:arrayWithModel completeHandler:^(id any) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityView stopAnimating];
+            [self.loadingView removeFromSuperview];
+            NSLog(@"Задание на загрузку выполнено");
+        });
+    }];
+    
 }
 
 
 - (void)savePhotosToPhone
 {
-    // network animation
     [self.view addSubview:self.loadingView];
     [self.activityView startAnimating];
     NSArray *arrayToDownload = [NSArray new];
-    // save image from the web
-    if (self.selectedModelArray.count != 0 )
-    {
-        arrayToDownload = self.selectedModelArray;
-    }
-    else
-    {
-        arrayToDownload = self.modelArray;
-    }
+    arrayToDownload = (self.selectedModelArray.count != 0 ) ? self.selectedModelArray : self.modelArray;
         [self downloadAllPhotosWithArray:arrayToDownload];
 }
 

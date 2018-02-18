@@ -115,6 +115,7 @@
 - (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload
                                completeHandler:(void(^)(id))completeHandler
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     for (BMVVkPhotoModel *photo in arrayToDownload)
     {
         NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
@@ -124,16 +125,16 @@
             UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
     }
     completeHandler(nil);
+    });
 }
 
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    if (!error)
+    if (error)
     {
-        return;
+        [self tryWriteAgain:image];
     }
-    [self tryWriteAgain:image];
 }
 
 
@@ -141,23 +142,6 @@
 {
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
-
-
-//- (void)downloadAllPhotosWithArray:(NSArray *)arrayWithModel
-//{
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        {
-//            [self downloadAllPhotosToPhotoAlbumWithArray:arrayWithModel completeHandler:^(id any) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.activityView stopAnimating];
-//                    [self.loadingView removeFromSuperview];
-//                    NSLog(@"Задание на загрузку выполнено");
-//                });
-//            }];
-//        }
-//    });
-//}
 
 
 @end
