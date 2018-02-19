@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVBuilderURLFriend.h"
 #import "BMVVkTokenModel.h"
 
@@ -18,10 +17,14 @@ static NSString *const BMVSecondPartURL = @"&fields=first_name,last_name,nicknam
 @implementation BMVBuilderURLFriend
 
 
-+ (NSURL *)urlWithAllFriendsString:(BMVVkTokenModel *)token
++ (NSURL *)urlForFriendsBuildWithToken:(BMVVkTokenModel *)token
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL];
-    return [NSURL URLWithString:urlString];
+    if (token)
+    {
+        NSString *urlString = [NSString stringWithFormat:@"%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL];
+        return [NSURL URLWithString:urlString];
+    }
+    return nil;
 }
 
 @end

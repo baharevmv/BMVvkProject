@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVBuilderURLPhotos.h"
 
 
@@ -18,9 +17,18 @@ static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200";
 @implementation BMVBuilderURLPhotos
 
 
-+ (NSURL *)urlWithAllFreindsPhotosString:(BMVVkTokenModel *)token currentFriendID:(NSString *)currentFriendID
++ (NSURL *)urlForAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL, currentFriendID, BMVThirdPartURL];
+    if (!token)
+    {
+        return nil;
+    }
+    if (!currentFriendID)
+    {
+        return nil;
+    }
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL,
+                                                                    currentFriendID, BMVThirdPartURL];
     return [NSURL URLWithString:urlString];
 }
 

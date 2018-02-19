@@ -14,9 +14,10 @@
  */
 @interface UIImageView (BMVImageView)
 
+
 /**
  Создает анимацию при загрузке приложения
- @param superview - вью, на которой будет располагаться image view
+ @param superview - вью, на которой будет располагаться image view с анимацией.
  @return image view с анимацией
  */
 + (UIImageView *)bmv_animationOnView:(UIView *)superview;

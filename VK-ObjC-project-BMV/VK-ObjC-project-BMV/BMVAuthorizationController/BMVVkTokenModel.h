@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 
 
@@ -15,10 +14,9 @@
  */
 @interface BMVVkTokenModel : NSObject
 
-
-@property (nonatomic, copy) NSString* tokenString;      /**< непосредственно сам ключ токена */
-@property (nonatomic, strong) NSDate* expirationDate;   /**< срок действия токена */
-@property (nonatomic, copy) NSString* userIDString;     /**< ШВ авторизовавшегося пользователя */
+@property (nonatomic, copy) NSString *tokenString;      /**< непосредственно сам ключ токена */
+@property (nonatomic, strong) NSDate *expirationDate;   /**< срок действия токена */
+@property (nonatomic, copy) NSString *userIDString;     /**< ID авторизовавшегося пользователя */
 
 
 @end

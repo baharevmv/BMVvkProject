@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 @class BMVDownloadDataService;
 @class BMVCoreDataService;
@@ -32,7 +31,7 @@
  block parameters:
  dataModel - запрашиваемая модель данных
  */
-- (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token CompleteHandler:(void (^)(id dataModel))completeHandler;
+- (void)obtainVKFriendsWithLocalToken:(BMVVkTokenModel *)token сompleteHandler:(void (^)(id dataModel))completeHandler;
 
 
 @end

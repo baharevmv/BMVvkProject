@@ -15,11 +15,19 @@ static CGFloat const BMVPhotosWidthsRatio = 2.5;
 static CGFloat const BMVHeightToWidthRatio = 1.12;
 const NSInteger imageCount = 18;
 
-@implementation UIImageView (BMVImageView)
 
+@implementation UIImageView (BMVImageView)
 
 + (UIImageView *)bmv_animationOnView:(UIView *)superview
 {
+    if (!superview)
+    {
+        return nil;
+    }
+    if (![superview isMemberOfClass:[UIView class]])
+    {
+        return nil;
+    }
     CGRect bounds = superview.bounds;
     CGFloat sideSquare = CGRectGetWidth(bounds) - BMVOffset;
     CGRect frame = CGRectMake(0, 0, sideSquare, sideSquare);
@@ -54,12 +62,11 @@ const NSInteger imageCount = 18;
         UIImage *image = [UIImage imageNamed:imageName];
         [mutableArrayForImages addObject:image];
     }
-    
     photos.animationImages = mutableArrayForImages;
     photos.animationDuration = 1;
     photos.animationRepeatCount = 4;
     [photos startAnimating];
-    
+
     return phoneView;
 }
 

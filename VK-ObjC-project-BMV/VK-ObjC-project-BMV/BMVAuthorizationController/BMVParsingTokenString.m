@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVParsingTokenString.h"
 #import "BMVVkTokenModel.h"
 
@@ -16,23 +15,23 @@
 
 -(BMVVkTokenModel *)getTokenFromWebViewHandlerWithRequest:(NSURLRequest *)request
 {
-    BMVVkTokenModel *token = [BMVVkTokenModel new];
-    NSString* query = [[request URL] description];
-    NSArray* array = [query componentsSeparatedByString:@"#"];
-    if ([array count] > 1)
+    if (!request)
     {
-        query = [array lastObject];
+        return nil;
     }
-    NSArray* pairs = [query componentsSeparatedByString:@"&"];
-    for (NSString* pair in pairs)
+    if ([request.URL.absoluteString  isEqualToString:@""])
     {
-        
-        NSArray* values = [pair componentsSeparatedByString:@"="];
-        if ([values count] != 2)
-        {
-            continue;
-        }
-        NSString* key = [values firstObject];
+        return nil;
+    }
+    BMVVkTokenModel *token = [BMVVkTokenModel new];
+    NSString *query = [[request URL] description];
+    NSArray *array = [query componentsSeparatedByString:@"#"];
+    query = [array lastObject];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    for (NSString *pair in pairs)
+    {
+        NSArray *values = [pair componentsSeparatedByString:@"="];
+        NSString *key = [values firstObject];
         if ([key isEqualToString:@"access_token"])
         {
             token.tokenString = [values lastObject];

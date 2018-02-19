@@ -6,7 +6,6 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 @class BMVVkUserModel;
@@ -17,6 +16,7 @@
  */
 @interface BMVCoreDataService : NSObject
 
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 /**
  Инициализирует сервис с контекстом
@@ -41,6 +41,7 @@
  */
 - (void)saveFriendModel:(BMVVkUserModel *)dataFriendModel;
 
+
 /**
  Удаление данных из core data
  @param entity - сущность, которая удаляется
@@ -53,6 +54,7 @@
  */
 - (BOOL)isItFirstTimeStarts;
 
+
 /**
  Обеспечивает работу строки живого поиска.
  @param searchString - строка поиска.
@@ -60,12 +62,10 @@
  */
 - (NSArray *)searchingForFriendWithSearchString:(NSString *)searchString;
 
+
 /**
 Очищение всей базы CoreData
  */
 - (void)clearCoreData;
-
-
-
 
 @end

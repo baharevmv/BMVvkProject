@@ -18,9 +18,9 @@
 
 /**
  Обеспечивает создание URL
- @param token - токен, необходимый для построения корректного запроса к API вконтакте
+ @param token - токен социальной сети Вконтакте, который необходим для построения обращений к API
  @return необходимый URL
  */
-+ (NSURL *)urlWithAllFriendsString:(BMVVkTokenModel *)token;
++ (NSURL *)urlForFriendsBuildWithToken:(BMVVkTokenModel *)token;
 
 @end

@@ -6,12 +6,11 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-
 #import "BMVDownloadDataService.h"
 #import "BMVBuilderURLFriend.h"
 #import "BMVBuilderURLPhotos.h"
 #import "BMVParsingJSONFriends.h"
-#import "BMVParsingJSONPhotots.h"
+#import "BMVParsingJSONPhotos.h"
 
 
 @interface BMVDownloadDataService ()
@@ -38,35 +37,27 @@
 }
 
 
+#pragma mark - Working With VK.com API
 
-- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType queue:(dispatch_queue_t)queue
+- (void)downloadDataWithDataTypeString:(BMVDownloadDataType)dataType
                             localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(id))completeHandler
 {
-    NSLog(@"Зашли в экземпляр класса downloadDataWithDataTypeString");
-    dispatch_queue_t queue_t = dispatch_get_main_queue();
-    if (queue)
-    {
-        queue_t = queue;
-    }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLByType:dataType
-                                                                   localToken:token currentUserID:userID]];
-    NSLog(@"Запрос выглядит так -  %@", request);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLWithType:dataType localToken:token
+                                                                  currentUserID:userID]];
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data,
-                                                                         NSURLResponse *response,
-                                                                         NSError *error){
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         if (data)
         {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
             id dataModel = [self parsingByType:dataType json:json];
-            dispatch_async(queue_t, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 completeHandler(dataModel);
             });
         }
         else
         {
-            dispatch_async(queue_t, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 completeHandler(nil);
             });
         }
@@ -75,7 +66,7 @@
 }
 
 
-- (NSURL *)buildURLByType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
+- (NSURL *)buildURLWithType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
             currentUserID:(NSString *)userID
 {
     NSURL *url;
@@ -83,12 +74,12 @@
     {
         case BMVDownloadDataTypeFriends:
         {
-            url = [BMVBuilderURLFriend urlWithAllFriendsString:token];
+            url = [BMVBuilderURLFriend urlForFriendsBuildWithToken:token];
             break;
         }
         case BMVDownloadDataTypePhotos:
         {
-            url = [BMVBuilderURLPhotos urlWithAllFreindsPhotosString:token currentFriendID:userID];
+            url = [BMVBuilderURLPhotos urlForAllPhotosWithToken:token forCurrentFriendID:userID];
             break;
         }
     }
@@ -108,7 +99,7 @@
         }
         case BMVDownloadDataTypePhotos:
         {
-            dataModel = [BMVParsingJSONPhotots jsonToModel:json];
+            dataModel = [BMVParsingJSONPhotos jsonToModel:json];
             break;
         }
     }
@@ -116,30 +107,36 @@
 }
 
 
-- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload completeHandler:(void(^)(id))completeHandler
+#pragma mark - Downloading Photos to iPhone Memory
+
+- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload
+                               completeHandler:(void(^)(id))completeHandler
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     for (BMVVkPhotoModel *photo in arrayToDownload)
     {
         NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
-            NSLog(@"%@", originalPhotoPath);
-            UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
-            SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
-            UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+        NSLog(@"%@", originalPhotoPath);
+        NSURL *urlToDownload = [NSURL URLWithString:originalPhotoPath];
+        UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlToDownload]];
+        SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
+        UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
     }
     completeHandler(nil);
+    });
 }
 
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    if (!error)
+    if (error)
     {
-        return;
+        [self tryWriteAgain:image];
     }
-    [self tryWriteAgain:image];
 }
 
--(void)tryWriteAgain:(UIImage *)image
+
+- (void)tryWriteAgain:(UIImage *)image
 {
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
