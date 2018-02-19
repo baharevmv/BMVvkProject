@@ -6,10 +6,10 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "BMVVkFriendsViewController.h"
-#import "BMVVkFriendsTableViewCell.h"
+#import "BMVFriendsViewController.h"
+#import "BMVFriendsTableViewCell.h"
 #import "BMVVkUserModel.h"
-#import "BMVvkAllFriendPhotoCollectionView.h"
+#import "BMVAllFriendsPhotosCollectionView.h"
 #import "BMVCoreDataDownloadFunnel.h"
 #import "BMVCoreDataService.h"
 #import "BMVDownloadDataService.h"
@@ -19,7 +19,7 @@
 static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 
-@interface BMVVkFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface BMVFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, copy) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVCoreDataDownloadFunnel *coreDataDownloadFunnel;
@@ -30,7 +30,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 @end
 
 
-@implementation BMVVkFriendsViewController
+@implementation BMVFriendsViewController
 
 
 - (instancetype)init
@@ -63,7 +63,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     
 - (void)createUserInterface
 {
-    [self.tableView registerClass:[BMVVkFriendsTableViewCell class] forCellReuseIdentifier:BMVCellIdentifier];
+    [self.tableView registerClass:[BMVFriendsTableViewCell class] forCellReuseIdentifier:BMVCellIdentifier];
 
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
@@ -116,7 +116,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BMVVkFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier
+    BMVFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier
                                                                                forIndexPath:indexPath];
     // Забираем имя
     NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName,
@@ -143,7 +143,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    BMVvkAllFriendPhotoCollectionView *photosOfThisFriend = [[BMVvkAllFriendPhotoCollectionView alloc]
+    BMVAllFriendsPhotosCollectionView *photosOfThisFriend = [[BMVAllFriendsPhotosCollectionView alloc]
                                                                 initWithCollectionViewLayout:flowLayout];
     BMVVkUserModel *user = [self.usersArray objectAtIndex:indexPath.row];
     photosOfThisFriend.interestingUser = user;
@@ -154,7 +154,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 #pragma mark - Animations
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(BMVVkFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(BMVFriendsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row <= [self.tableView indexPathsForVisibleRows].firstObject.row)
     {

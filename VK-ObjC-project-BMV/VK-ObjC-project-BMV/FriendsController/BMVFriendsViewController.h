@@ -1,5 +1,5 @@
 //
-//  BMVVkFriendsViewController.h
+//  BMVFriendsViewController.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 11.01.18.
@@ -14,7 +14,7 @@
 /**
  Контроллер для отображения списка "друзей"
  */
-@interface BMVVkFriendsViewController : UITableViewController
+@interface BMVFriendsViewController : UITableViewController
 
 @property(nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;      /**< Токен для работы с API вконтакте */
 

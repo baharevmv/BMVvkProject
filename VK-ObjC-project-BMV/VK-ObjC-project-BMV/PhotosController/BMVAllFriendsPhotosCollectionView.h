@@ -1,5 +1,5 @@
 //
-//  BMVvkAllFriendPhotoCollectionView.h
+//  BMVAllFriendsPhotosCollectionView.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 28.01.18.
@@ -14,7 +14,7 @@
 /**
  Контроллер для отображения коллекции с фотографиями конкретного пользователя
  */
-@interface BMVvkAllFriendPhotoCollectionView : UICollectionViewController
+@interface BMVAllFriendsPhotosCollectionView : UICollectionViewController
 
 
 @property (nonatomic, strong) BMVVkUserModel *interestingUser;              /**< Выбранный пользователь */

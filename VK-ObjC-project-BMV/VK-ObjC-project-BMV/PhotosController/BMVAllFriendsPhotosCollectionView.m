@@ -1,14 +1,14 @@
 //
-//  BMVvkAllFriendPhotoCollectionViewController.m
+//  BMVAllFriendsPhotosCollectionView.m
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 27.01.18.
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "QuartzCore/QuartzCore.h"
-#import "BMVvkAllFriendPhotoCollectionView.h"
-#import "BMVvkPhotosCollectionViewCell.h"
+
+#import "BMVAllFriendsPhotosCollectionView.h"
+#import "BMVPhotosCollectionViewCell.h"
 #import "BMVVkPhotoModel.h"
 #import "BMVVkUserModel.h"
 #import "BMVVkTokenModel.h"
@@ -24,7 +24,7 @@ static CGFloat const BMVLoadingViewCornerRadius = 10.0;
 static CGFloat const BMVActivityViewDimension = 40.0;
 
 
-@interface BMVvkAllFriendPhotoCollectionView ()
+@interface BMVAllFriendsPhotosCollectionView ()
 
 @property (nonatomic, copy) NSArray <BMVVkPhotoModel *> *modelArray;
 @property (nonatomic, strong) NSMutableArray <BMVVkPhotoModel *> *selectedModelArray;
@@ -33,11 +33,10 @@ static CGFloat const BMVActivityViewDimension = 40.0;
 @property (nonatomic, strong) UILabel *loadingLabel;
 @property (nonatomic, strong) UIView *loadingView;
 
-
 @end
 
 
-@implementation BMVvkAllFriendPhotoCollectionView
+@implementation BMVAllFriendsPhotosCollectionView
 
 
 #pragma mark - Lifecycle
@@ -48,6 +47,7 @@ static CGFloat const BMVActivityViewDimension = 40.0;
     [self createUserInterface];
     [self preparingModel];
     self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
+    
     // Pull-to-Refresh Feature
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
@@ -72,7 +72,7 @@ static CGFloat const BMVActivityViewDimension = 40.0;
     self.collectionView.collectionViewLayout = flowLayout;
     
     // Настраиваем collectionView
-    [self.collectionView registerClass:[BMVvkPhotosCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
+    [self.collectionView registerClass:[BMVPhotosCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.allowsMultipleSelection = YES;
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -167,7 +167,7 @@ static CGFloat const BMVActivityViewDimension = 40.0;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    BMVvkPhotosCollectionViewCell *collectionViewCell = (BMVvkPhotosCollectionViewCell *)
+    BMVPhotosCollectionViewCell *collectionViewCell = (BMVPhotosCollectionViewCell *)
     [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
         NSString *previewPhotoPath = [[NSString alloc] initWithFormat:@"%@",self.modelArray[indexPath.row].previewImageURL];

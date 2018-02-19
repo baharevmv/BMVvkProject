@@ -1,5 +1,5 @@
 //
-//  BMVvkPhotosCollectionViewCell.h
+//  BMVPhotosCollectionViewCell.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 28.01.18.
@@ -11,7 +11,7 @@
 /**
  Ячейка с фото пользователя.
  */
-@interface BMVvkPhotosCollectionViewCell : UICollectionViewCell
+@interface BMVPhotosCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic,strong) UIImage *image;        /**< Фото из фотоальбома пользователя*/
 

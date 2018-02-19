@@ -6,28 +6,28 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "BMVVkLoginViewController.h"
-#import "BMVVkFriendsViewController.h"
+#import "BMVLoginViewController.h"
+#import "BMVFriendsViewController.h"
 #import "BMVVkTokenModel.h"
 #import "BMVParsingTokenString.h"
 #import "UIImageView+BMVImageView.h"
-#import "BMVVkURLRequestGenerator.h"
+#import "BMVURLRequestGenerator.h"
 
 
-@interface BMVVkLoginViewController () <UIWebViewDelegate>
+@interface BMVLoginViewController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) BMVVkTokenModel *theToken;
 @property (nonatomic, strong) BMVParsingTokenString *parsingTokenString;
 @property (nonatomic, strong) NSURLRequest *request;
-@property (nonatomic, strong) BMVVkURLRequestGenerator *requestGenerator;
+@property (nonatomic, strong) BMVURLRequestGenerator *requestGenerator;
 @property (nonatomic, strong) UIView *animationView;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
 
 
-@implementation BMVVkLoginViewController
+@implementation BMVLoginViewController
 
 
 - (instancetype)init
@@ -36,7 +36,7 @@
     if (self)
     {
         _parsingTokenString = [BMVParsingTokenString new];
-        _requestGenerator = [BMVVkURLRequestGenerator new];
+        _requestGenerator = [BMVURLRequestGenerator new];
     }
     return self;
 }
@@ -89,7 +89,7 @@
     self.theToken = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    BMVVkFriendsViewController *friendsViewController = [BMVVkFriendsViewController new];
+    BMVFriendsViewController *friendsViewController = [BMVFriendsViewController new];
     friendsViewController.tokenForFriendsController = self.theToken;
     UINavigationController *friendsNavigationController = [[UINavigationController alloc] initWithRootViewController:
                                                                                                 friendsViewController];

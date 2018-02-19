@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "BMVVkLoginViewController.h"
+#import "BMVLoginViewController.h"
 
 
 @interface AppDelegate ()
@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [UIWindow new];
-    BMVVkLoginViewController *loginViewController = [BMVVkLoginViewController new];
+    BMVLoginViewController *loginViewController = [BMVLoginViewController new];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     
     self.window.rootViewController = navigationController;

@@ -1,25 +1,25 @@
 //
-//  BMVvkPhotosCollectionViewCell.m
+//  BMVPhotosCollectionViewCell.m
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 28.01.18.
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "BMVvkPhotosCollectionViewCell.h"
+#import "BMVPhotosCollectionViewCell.h"
 
 
 static CGFloat const BMVOffset = 2.0;
 
 
-@interface BMVvkPhotosCollectionViewCell ()
+@interface BMVPhotosCollectionViewCell ()
 
 @property (nonatomic, strong) UIImageView *imageToShow;
 
 @end
 
 
-@implementation BMVvkPhotosCollectionViewCell
+@implementation BMVPhotosCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

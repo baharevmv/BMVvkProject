@@ -1,5 +1,5 @@
 //
-//  BMVVkURLRequestGenerator.h
+//  BMVURLRequestGenerator.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 16.02.18.
@@ -12,7 +12,7 @@
 /**
  Класс для генерации запроса токена от сети Вконтакте.
  */
-@interface BMVVkURLRequestGenerator : NSObject
+@interface BMVURLRequestGenerator : NSObject
 
 
 /**
