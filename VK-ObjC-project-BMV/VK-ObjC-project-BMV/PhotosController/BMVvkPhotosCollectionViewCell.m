@@ -9,17 +9,17 @@
 #import "BMVvkPhotosCollectionViewCell.h"
 
 
+static CGFloat const BMVOffset = 2.0;
+
+
 @interface BMVvkPhotosCollectionViewCell ()
 
-
 @property (nonatomic, strong) UIImageView *imageToShow;
-
 
 @end
 
 
 @implementation BMVvkPhotosCollectionViewCell
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -27,7 +27,7 @@
     if (self)
     {
         self.backgroundColor = [UIColor whiteColor];
-        self.imageToShow = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, 1, 1)];
+        self.imageToShow = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, BMVOffset, BMVOffset)];
         [self.contentView addSubview:self.imageToShow];
     
         UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -35,29 +35,6 @@
         self.selectedBackgroundView = selectedBackgroundView;
     }
     return self;
-}
-
-
-- (void)setHighlighted:(BOOL)highlighted
-{
-    [super setHighlighted:highlighted];
-    
-    if (self.highlighted)
-    {
-        self.imageToShow.alpha = 0.8f;
-    }
-    else
-    {
-        self.imageToShow.alpha = 1.0f;
-    }
-}
-
-
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    self.image = nil;
-    
 }
 
 

@@ -19,7 +19,7 @@
     {
         return nil;
     }
-    if ([request.URL.absoluteString  isEqual: @""])
+    if ([request.URL.absoluteString  isEqualToString:@""])
     {
         return nil;
     }

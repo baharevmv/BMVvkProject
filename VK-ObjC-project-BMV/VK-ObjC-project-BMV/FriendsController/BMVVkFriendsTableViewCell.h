@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
+/**
+ Ячейка для отображения данных о друге.
+ */
 @interface BMVVkFriendsTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *userNameLabel;
-@property (nonatomic, strong) UIImageView *userPhotoImageView;
+@property (nonatomic, strong) UILabel *userNameLabel;               /**< Фамилия и имя друга*/
+@property (nonatomic, strong) UIImageView *userPhotoImageView;      /**< Аватарка друга.*/
 
 @end

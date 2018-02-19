@@ -16,7 +16,6 @@
 
 @interface BMVVkLoginViewController () <UIWebViewDelegate>
 
-
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) BMVVkTokenModel *theToken;
 @property (nonatomic, strong) BMVParsingTokenString *parsingTokenString;
@@ -24,7 +23,6 @@
 @property (nonatomic, strong) BMVVkURLRequestGenerator *requestGenerator;
 @property (nonatomic, strong) UIView *animationView;
 @property (nonatomic, strong) NSTimer *timer;
-
 
 @end
 
@@ -64,7 +62,7 @@
     [self.animationView addSubview:[UIImageView bmv_animationOnView:self.view]];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:3
                                                   target:self
-                                                selector:@selector(actionTimerRemoveAnimationViewAuthorizarion)
+                                                selector:@selector(actionTimerRemoveAnimationViewAuthorization)
                                                 userInfo:nil
                                                  repeats:NO];
 }
@@ -72,13 +70,12 @@
 
 #pragma mark - Animations
 
-- (void)actionTimerRemoveAnimationViewAuthorizarion
+- (void)actionTimerRemoveAnimationViewAuthorization
 {
     [self.animationView removeFromSuperview];
     [self.timer invalidate];
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
-
 }
 
 
@@ -94,7 +91,8 @@
     
     BMVVkFriendsViewController *friendsViewController = [BMVVkFriendsViewController new];
     friendsViewController.tokenForFriendsController = self.theToken;
-    UINavigationController *friendsNavigationController = [[UINavigationController alloc] initWithRootViewController:friendsViewController];
+    UINavigationController *friendsNavigationController = [[UINavigationController alloc] initWithRootViewController:
+                                                                                                friendsViewController];
     friendsNavigationController.tabBarItem.title = @"Friends";
     [self presentViewController:friendsNavigationController animated:YES completion:nil];
     return NO;

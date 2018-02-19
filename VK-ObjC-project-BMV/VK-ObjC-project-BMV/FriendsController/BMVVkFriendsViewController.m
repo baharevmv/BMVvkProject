@@ -21,12 +21,11 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 @interface BMVVkFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
+@property (nonatomic, copy) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) BMVCoreDataDownloadFunnel *coreDataDownloadFunnel;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 @property (nonatomic, strong) BMVCoreDataService *coreDataService;
-@property (nonatomic, strong) NSArray <BMVVkUserModel *> *usersArray;
 @property (nonatomic, strong) UISearchBar *lifeSearchBar;
-
 
 @end
 
@@ -70,7 +69,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
-    
+
     self.lifeSearchBar = [UISearchBar new];
     self.lifeSearchBar.returnKeyType = UIReturnKeyDone;
     self.lifeSearchBar.searchBarStyle = UISearchBarStyleProminent;
@@ -85,12 +84,12 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends
                                                   localToken:self.tokenForFriendsController
                                                currentUserID:self.tokenForFriendsController.userIDString
-                                             completeHandler:^(id modelArray) {
-        self.usersArray = modelArray;
-        BMVCoreDataService *coreDataService = [BMVCoreDataService new];
-        [coreDataService saveFriendModel:modelArray];
-        [self.tableView reloadData];
-    }];
+        completeHandler:^(id modelArray) {
+            self.usersArray = modelArray;
+            BMVCoreDataService *coreDataService = [BMVCoreDataService new];
+            [coreDataService saveFriendModel:modelArray];
+            [self.tableView reloadData];
+        }];
     [refreshControl endRefreshing];
 }
 
@@ -117,7 +116,8 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BMVVkFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier forIndexPath:indexPath];
+    BMVVkFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier
+                                                                               forIndexPath:indexPath];
     // Забираем имя
     NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName,
                                 self.usersArray[indexPath.row].lastName];

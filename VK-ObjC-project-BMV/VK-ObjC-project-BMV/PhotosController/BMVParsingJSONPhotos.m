@@ -29,12 +29,12 @@
     {
         if ([netModelDictionary isKindOfClass:[NSDictionary class]])
         {
-            BMVVkPhotoModel *startModel = [BMVVkPhotoModel new];
-            startModel.photoID = netModelDictionary[@"pid"];
-            startModel.previewImageURL = netModelDictionary[@"src_small"];
-            startModel.mediumImageURL = netModelDictionary[@"src_big"];
-            startModel.orinalImageURL = netModelDictionary[@"src_xbig"];
-            [readyPhotosArray addObject:startModel];
+            BMVVkPhotoModel *typicalPhotoModel = [BMVVkPhotoModel new];
+            typicalPhotoModel.photoID = netModelDictionary[@"pid"];
+            typicalPhotoModel.previewImageURL = netModelDictionary[@"src_small"];
+            typicalPhotoModel.mediumImageURL = netModelDictionary[@"src_big"];
+            typicalPhotoModel.orinalImageURL = netModelDictionary[@"src_xbig"];
+            [readyPhotosArray addObject:typicalPhotoModel];
         }
     }
     return [readyPhotosArray copy];

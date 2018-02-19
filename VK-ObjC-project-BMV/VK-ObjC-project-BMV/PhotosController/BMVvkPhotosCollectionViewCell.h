@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-
+/**
+ Ячейка с фото пользователя.
+ */
 @interface BMVvkPhotosCollectionViewCell : UICollectionViewCell
 
-
-@property (nonatomic,strong) UIImage *image;
-
+@property (nonatomic,strong) UIImage *image;        /**< Фото из фотоальбома пользователя*/
 
 @end

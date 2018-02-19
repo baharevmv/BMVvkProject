@@ -20,8 +20,8 @@
 
 @end
 
-@implementation BMVCoreDataDownloadFunnel
 
+@implementation BMVCoreDataDownloadFunnel
 
 - (instancetype)init
 {
@@ -48,9 +48,10 @@
     }
     else
     {
-        [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends localToken:token currentUserID:token.userIDString
-        completeHandler:^(id dataModel) {
-            [self.coreDataService saveFriendModel:dataModel];
+        [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends localToken:token
+                                                   currentUserID:token.userIDString
+            completeHandler:^(id dataModel) {
+                [self.coreDataService saveFriendModel:dataModel];
             completeHandler(dataModel);
         }];
     }

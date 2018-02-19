@@ -11,10 +11,11 @@
 @class BMVDownloadDataService;
 
 
+/**
+ Контроллер для отображения списка "друзей"
+ */
 @interface BMVVkFriendsViewController : UITableViewController
 
-
 @property(nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;      /**< Токен для работы с API вконтакте */
-
 
 @end

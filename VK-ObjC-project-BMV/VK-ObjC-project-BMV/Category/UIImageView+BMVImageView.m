@@ -15,8 +15,8 @@ static CGFloat const BMVPhotosWidthsRatio = 2.5;
 static CGFloat const BMVHeightToWidthRatio = 1.12;
 const NSInteger imageCount = 18;
 
-@implementation UIImageView (BMVImageView)
 
+@implementation UIImageView (BMVImageView)
 
 + (UIImageView *)bmv_animationOnView:(UIView *)superview
 {
@@ -62,12 +62,11 @@ const NSInteger imageCount = 18;
         UIImage *image = [UIImage imageNamed:imageName];
         [mutableArrayForImages addObject:image];
     }
-    
     photos.animationImages = mutableArrayForImages;
     photos.animationDuration = 1;
     photos.animationRepeatCount = 4;
     [photos startAnimating];
-    
+
     return phoneView;
 }
 

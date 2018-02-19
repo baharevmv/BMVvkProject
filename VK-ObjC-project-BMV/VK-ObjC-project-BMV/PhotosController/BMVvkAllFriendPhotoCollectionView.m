@@ -16,18 +16,22 @@
 
 
 static NSString *cellIdentifier = @"CellIdentifier";
-static CGFloat const activityOffset = 150;
-static CGFloat const loadingLabelOffset = 20;
+static CGFloat const BMVActivityOffset = 150.0;
+static CGFloat const BMVLoadingLabelOffset = 20.0;
+static CGFloat const BMVFlowLayoutSpacing = 2.0;
+static CGFloat const BMVFlowLayoutSizes = 100.0;
+static CGFloat const BMVLoadingViewCornerRadius = 10.0;
+static CGFloat const BMVActivityViewDimension = 40.0;
 
 
 @interface BMVvkAllFriendPhotoCollectionView ()
 
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
-@property (nonatomic, strong) UIView *loadingView;
-@property (nonatomic, strong) UILabel *loadingLabel;
-@property (nonatomic, strong) NSMutableArray <BMVVkPhotoModel *> *modelArray;
-@property (nonatomic, retain) NSMutableArray <BMVVkPhotoModel *> *selectedModelArray;
+@property (nonatomic, copy) NSArray <BMVVkPhotoModel *> *modelArray;
+@property (nonatomic, strong) NSMutableArray <BMVVkPhotoModel *> *selectedModelArray;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UILabel *loadingLabel;
+@property (nonatomic, strong) UIView *loadingView;
 
 
 @end
@@ -49,12 +53,6 @@ static CGFloat const loadingLabelOffset = 20;
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
     [refreshControl addTarget:self action:@selector(refreshWithPull:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
-    
-
-    
-
-    
-    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
                                                                  target:self action:@selector(savePhotosToPhone)];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -67,10 +65,10 @@ static CGFloat const loadingLabelOffset = 20;
 {
     // Настраиваем flowLayout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumInteritemSpacing = 2.0f;
-    flowLayout.minimumLineSpacing = 2.0f;
+    flowLayout.minimumInteritemSpacing = BMVFlowLayoutSpacing;
+    flowLayout.minimumLineSpacing = BMVFlowLayoutSpacing;
     flowLayout.sectionInset = UIEdgeInsetsMake(1, 1, 1, 1);
-    flowLayout.itemSize = CGSizeMake(100, 100);
+    flowLayout.itemSize = CGSizeMake(BMVFlowLayoutSizes, BMVFlowLayoutSizes);
     self.collectionView.collectionViewLayout = flowLayout;
     
     // Настраиваем collectionView
@@ -80,14 +78,17 @@ static CGFloat const loadingLabelOffset = 20;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
     // Создаем спиннер
-    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(activityOffset*1.5, activityOffset, CGRectGetWidth(self.view.frame) - activityOffset*1.5, activityOffset)];
+    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(BMVActivityOffset*1.5, BMVActivityOffset,
+                                                                CGRectGetWidth(self.view.frame) - BMVActivityOffset*1.5,
+                                                                BMVActivityOffset)];
     self.loadingView.center = self.view.center;
     self.loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     self.loadingView.clipsToBounds = YES;
-    self.loadingView.layer.cornerRadius = 10.0;
+    self.loadingView.layer.cornerRadius = BMVLoadingViewCornerRadius;
     
-    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(loadingLabelOffset*1.5, loadingLabelOffset*5.75, loadingLabelOffset * 6.5, loadingLabelOffset)];
-    self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.loadingView.bounds)/2, loadingLabelOffset*5.75);
+    self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(BMVLoadingLabelOffset*1.5, BMVLoadingLabelOffset*5.75,
+                                                                  BMVLoadingLabelOffset *6.5, BMVLoadingLabelOffset)];
+    self.loadingLabel.center = CGPointMake(CGRectGetWidth(self.loadingView.bounds)/2, BMVLoadingLabelOffset*5.75);
     self.loadingLabel.backgroundColor = [UIColor clearColor];
     self.loadingLabel.textColor = [UIColor whiteColor];
     self.loadingLabel.adjustsFontSizeToFitWidth = YES;
@@ -96,17 +97,15 @@ static CGFloat const loadingLabelOffset = 20;
     [self.loadingView addSubview:self.loadingLabel];
     
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.activityView.frame = CGRectMake(CGRectGetWidth(self.loadingView.frame)/2 -  self.activityView.bounds.size.width/2, 40, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+    self.activityView.frame = CGRectMake(CGRectGetWidth(self.loadingView.frame)/2 - self.activityView.bounds.size.width/2, BMVActivityViewDimension, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
     [self.loadingView addSubview:self.activityView];
 }
 
 
 - (void)refreshWithPull:(UIRefreshControl *)refreshControl
 {
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos
-                                                  localToken:self.tokenForFriendsController
-                                               currentUserID:self.interestingUser.userID
-                                             completeHandler:^(id photoModelArray) {
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos localToken:self.tokenForFriendsController
+                                    currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
         [self.collectionView reloadData];
     }];
@@ -145,10 +144,10 @@ static CGFloat const loadingLabelOffset = 20;
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos
                                                   localToken:self.tokenForFriendsController
                                                currentUserID:self.interestingUser.userID
-                                             completeHandler:^(id photoModelArray) {
-                                                 self.modelArray = photoModelArray;
-                                                 [self.collectionView reloadData];
-                                             }];
+        completeHandler:^(id photoModelArray) {
+        self.modelArray = photoModelArray;
+        [self.collectionView reloadData];
+    }];
 }
 
 
@@ -198,8 +197,7 @@ static CGFloat const loadingLabelOffset = 20;
     if (self.selectedModelArray.count == 0)
     {
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save All" style:UIBarButtonItemStylePlain
-                                                                     target:self
-                                                                     action:@selector(savePhotosToPhone)];
+                                                                     target:self action:@selector(savePhotosToPhone)];
         self.navigationItem.rightBarButtonItem = rightItem;
     }
 }

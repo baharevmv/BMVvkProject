@@ -53,7 +53,8 @@
         if (_persistentContainer == nil)
         {
             _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"VK_ObjC_project_BMV"];
-            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error)
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription,
+                                                                              NSError *error)
              {
                  if (error != nil)
                  {

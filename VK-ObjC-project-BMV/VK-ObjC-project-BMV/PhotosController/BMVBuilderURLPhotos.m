@@ -27,7 +27,8 @@ static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200";
     {
         return nil;
     }
-    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL, currentFriendID, BMVThirdPartURL];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL,
+                                                                    currentFriendID, BMVThirdPartURL];
     return [NSURL URLWithString:urlString];
 }
 

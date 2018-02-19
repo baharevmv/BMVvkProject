@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BMVVkLoginViewController.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -27,7 +28,6 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
-
 
 
 @end

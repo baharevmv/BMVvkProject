@@ -43,13 +43,10 @@
                             localToken:(BMVVkTokenModel *)token currentUserID:(NSString *)userID
                      completeHandler:(void(^)(id))completeHandler
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLWithType:dataType
-                                                                     localToken:token
+    NSURLRequest *request = [NSURLRequest requestWithURL:[self buildURLWithType:dataType localToken:token
                                                                   currentUserID:userID]];
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data,
-                                                                         NSURLResponse *response,
-                                                                         NSError *error){
+        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         if (data)
         {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -119,10 +116,11 @@
     for (BMVVkPhotoModel *photo in arrayToDownload)
     {
         NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
-            NSLog(@"%@", originalPhotoPath);
-            UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:originalPhotoPath]]];
-            SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
-            UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+        NSLog(@"%@", originalPhotoPath);
+        NSURL *urlToDownload = [NSURL URLWithString:originalPhotoPath];
+        UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlToDownload]];
+        SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
+        UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
     }
     completeHandler(nil);
     });

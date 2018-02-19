@@ -16,7 +16,6 @@ static CGFloat const BMVOffset = 10.0;
 
 @implementation BMVVkFriendsTableViewCell
 
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BMVVkURLRequestGenerator : NSObject
-
 
 /**
  Класс для генерации запроса токена от сети Вконтакте.
  */
-- (NSURLRequest *) makingRequest;
+@interface BMVVkURLRequestGenerator : NSObject
+
+
+/**
+ Обеспечивает создание URL
+ */
+- (NSURLRequest *)makingRequest;
 
 @end
