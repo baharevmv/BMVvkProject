@@ -19,6 +19,7 @@ static CGFloat const BMVLineSizeControlView = 10.0;
 
 @end
 
+
 @implementation UIImageView_BMVImageViewTests
 
 - (void)setUp {

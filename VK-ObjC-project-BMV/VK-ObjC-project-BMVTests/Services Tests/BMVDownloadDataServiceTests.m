@@ -29,10 +29,10 @@
 
 @interface BMVDownloadDataServiceTests : XCTestCase
 
-
 @property (nonatomic, strong) BMVDownloadDataService *testDownloadService;
 
 @end
+
 
 @implementation BMVDownloadDataServiceTests
 

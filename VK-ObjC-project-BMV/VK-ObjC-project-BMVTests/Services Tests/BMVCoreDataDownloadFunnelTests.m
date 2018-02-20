@@ -23,12 +23,12 @@
 @end
 
 
-
 @interface BMVCoreDataDownloadFunnelTests : XCTestCase
 
 @property (nonatomic, strong) BMVCoreDataDownloadFunnel *testCoreDataDownloadFunnel;
 
 @end
+
 
 @implementation BMVCoreDataDownloadFunnelTests
 

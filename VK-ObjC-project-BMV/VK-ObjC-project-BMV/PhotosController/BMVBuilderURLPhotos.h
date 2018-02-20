@@ -16,7 +16,6 @@
  */
 @interface BMVBuilderURLPhotos : NSObject
 
-
 /**
  Обеспечивает создание URL
  @param token - токен социальной сети Вконтакте, который необходим для построения обращений к API
@@ -24,6 +23,5 @@
  @return необходимый URL
  */
 + (NSURL *)urlForAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID;
-
 
 @end

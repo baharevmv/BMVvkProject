@@ -22,7 +22,6 @@
 
 @implementation BMVParsingJSONPhototsTests
 
-
 - (void)setUp {
     [super setUp];
     self.parsingJSONPhotos = ([BMVParsingJSONPhotos new]);

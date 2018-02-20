@@ -29,7 +29,6 @@
 
 @implementation BMVLoginViewController
 
-
 - (instancetype)init
 {
     self = [super init];

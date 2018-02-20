@@ -15,9 +15,7 @@
 
 @interface BMVDownloadDataService ()
 
-
 @property(nonatomic, strong) NSURLSession *session;
-
 
 @end
 

@@ -16,7 +16,6 @@ static NSString *const BMVSecondPartURL = @"&fields=first_name,last_name,nicknam
 
 @implementation BMVBuilderURLFriend
 
-
 + (NSURL *)urlForFriendsBuildWithToken:(BMVVkTokenModel *)token
 {
     if (token)

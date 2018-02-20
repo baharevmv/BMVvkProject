@@ -23,4 +23,5 @@
  */
 + (NSArray *)jsonToModel:(NSDictionary *)json;
 
+
 @end

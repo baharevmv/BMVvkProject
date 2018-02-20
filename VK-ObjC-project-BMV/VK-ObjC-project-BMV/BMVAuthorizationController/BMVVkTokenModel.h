@@ -18,5 +18,4 @@
 @property (nonatomic, strong) NSDate *expirationDate;   /**< срок действия токена */
 @property (nonatomic, copy) NSString *userIDString;     /**< ID авторизовавшегося пользователя */
 
-
 @end

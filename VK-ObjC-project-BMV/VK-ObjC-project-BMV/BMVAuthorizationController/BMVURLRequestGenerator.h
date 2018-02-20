@@ -14,7 +14,6 @@
  */
 @interface BMVURLRequestGenerator : NSObject
 
-
 /**
  Обеспечивает создание URL
  */

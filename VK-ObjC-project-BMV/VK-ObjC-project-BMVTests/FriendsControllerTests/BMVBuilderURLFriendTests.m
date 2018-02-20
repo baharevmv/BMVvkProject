@@ -12,6 +12,7 @@
 #import "BMVBuilderURLFriend.h"
 #import "BMVVkTokenModel.h"
 
+
 static NSString *const BMVFirstPartURL = @"https://api.vk.com/method/friends.get?access_token=";
 static NSString *const BMVSecondPartURL = @"&fields=first_name,last_name,nickname,domain,photo_50,photo_100,"
 "photo_max_orig&lang=ru&count=5000&v=5.69";
@@ -21,8 +22,8 @@ static NSString *testTokenString = @"123214215215215214124214";
 
 @end
 
-@implementation BMVBuilderURLFriendTests
 
+@implementation BMVBuilderURLFriendTests
 
 // Условие - Вместо Токена в класс передали nil
 

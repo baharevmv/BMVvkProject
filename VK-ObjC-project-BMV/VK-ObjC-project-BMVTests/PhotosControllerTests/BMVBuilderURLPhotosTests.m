@@ -60,4 +60,5 @@ static NSString *testTokenString = @"123214215215215214124214";
     expect(url).notTo.beNil();
     expect(url).to.equal(urlReference);
 }
+
 @end

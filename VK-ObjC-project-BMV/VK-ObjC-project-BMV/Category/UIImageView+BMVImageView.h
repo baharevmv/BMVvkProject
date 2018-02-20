@@ -22,4 +22,5 @@
  */
 + (UIImageView *)bmv_animationOnView:(UIView *)superview;
 
+
 @end

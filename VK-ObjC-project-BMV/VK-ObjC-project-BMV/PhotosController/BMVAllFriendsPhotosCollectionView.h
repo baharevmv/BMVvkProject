@@ -16,7 +16,6 @@
  */
 @interface BMVAllFriendsPhotosCollectionView : UICollectionViewController
 
-
 @property (nonatomic, strong) BMVVkUserModel *interestingUser;              /**< Выбранный пользователь */
 @property (nonatomic, strong) BMVVkTokenModel *tokenForFriendsController;   /**< Токен для работы с API вконтакте */
 

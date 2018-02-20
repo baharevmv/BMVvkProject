@@ -67,4 +67,5 @@
  */
 - (void)clearCoreData;
 
+
 @end
