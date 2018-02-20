@@ -9,7 +9,6 @@
 #import "BMVCoreDataService.h"
 #import "VKFriend+CoreDataProperties.h"
 #import "BMVVkUserModel.h"
-#import "AppDelegate.h"
 
 
 @interface BMVCoreDataService ()
