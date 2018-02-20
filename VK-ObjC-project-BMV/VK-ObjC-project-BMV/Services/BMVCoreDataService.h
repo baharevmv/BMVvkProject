@@ -23,8 +23,7 @@
  @param context - контекст для настрокий сервиса
  @return экземпляр класса BMVCoreDataService
  */
-- (instancetype)initWithContext:(NSManagedObjectContext *)context
-                 andCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (instancetype)initWithContext:(NSManagedObjectContext *)context;
 
 
 /**

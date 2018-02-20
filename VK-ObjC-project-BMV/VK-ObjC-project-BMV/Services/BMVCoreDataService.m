@@ -9,13 +9,11 @@
 #import "BMVCoreDataService.h"
 #import "VKFriend+CoreDataProperties.h"
 #import "BMVVkUserModel.h"
-#import "AppDelegate.h"
 
 
 @interface BMVCoreDataService ()
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
 
 @end
 
@@ -130,13 +128,11 @@
 #pragma mark - CoreData Context&Coordinator
 
 - (instancetype)initWithContext:(NSManagedObjectContext *)context
-                 andCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     self = [super init];
     if (self)
     {
         _context = context;
-        _coordinator = coordinator;
     }
     return self;
 }
