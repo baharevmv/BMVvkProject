@@ -41,7 +41,7 @@
     if (!isFirstTime)
     {
         NSArray <BMVVkUserModel *> *modelArray = [self.coreDataService obtainModelArray:[VKFriend class]];
-        if (modelArray)
+        if (completeHandler)
         {
             completeHandler(modelArray);
         }
@@ -52,7 +52,10 @@
                                                    currentUserID:token.userIDString
             completeHandler:^(id dataModel) {
                 [self.coreDataService saveFriendModel:dataModel];
-            completeHandler(dataModel);
+            if (completeHandler)
+            {
+                completeHandler(dataModel);
+            }
         }];
     }
 }
