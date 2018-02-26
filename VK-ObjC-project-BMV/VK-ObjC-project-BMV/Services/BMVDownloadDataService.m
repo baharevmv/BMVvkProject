@@ -85,30 +85,44 @@
 }
 
 
+//- (id)parsingByType:(BMVDownloadDataType)dataType json:(NSDictionary *)json
+//{
+//    id dataModel;
+//    switch (dataType)
+//    {
+//        case BMVDownloadDataTypeFriends:
+//        {
+//            dataModel = [BMVParsingJSONFriends jsonToModel:json];
+//            break;
+//        }
+//        case BMVDownloadDataTypePhotos:
+//        {
+//            dataModel = [BMVParsingJSONPhotos jsonToModel:json];
+//            break;
+//        }
+//    }
+//    return dataModel;
+//}
+
+
 - (id)parsingByType:(BMVDownloadDataType)dataType json:(NSDictionary *)json
 {
-    id dataModel;
     switch (dataType)
     {
         case BMVDownloadDataTypeFriends:
         {
-            dataModel = [BMVParsingJSONFriends jsonToModel:json];
-            break;
+            return [BMVParsingJSONFriends jsonToModel:json];
         }
         case BMVDownloadDataTypePhotos:
         {
-            dataModel = [BMVParsingJSONPhotos jsonToModel:json];
-            break;
+            return [BMVParsingJSONPhotos jsonToModel:json];
         }
     }
-    return dataModel;
 }
-
 
 #pragma mark - Downloading Photos to iPhone Memory
 
-- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray <BMVVkPhotoModel *> *)arrayToDownload
-                               completeHandler:(void(^)(id))completeHandler
+- (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray *)arrayToDownload completeHandler:(void(^)(id))completeHandler
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     for (BMVVkPhotoModel *photo in arrayToDownload)
@@ -117,8 +131,8 @@
         NSLog(@"%@", originalPhotoPath);
         NSURL *urlToDownload = [NSURL URLWithString:originalPhotoPath];
         UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlToDownload]];
-        SEL _imageDownloaded= @selector(image:didFinishSavingWithError:contextInfo:);
-        UIImageWriteToSavedPhotosAlbum(downloadedImage, self, _imageDownloaded, nil);
+        SEL imageDownloaded = @selector(image:didFinishSavingWithError:contextInfo:);
+        UIImageWriteToSavedPhotosAlbum(downloadedImage, self, imageDownloaded, nil);
     }
     completeHandler(nil);
     });

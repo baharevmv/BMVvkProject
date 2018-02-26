@@ -22,7 +22,7 @@
 /**
  Токен необходимый для обращения к API вконтакте.
  */
-@property (nonatomic, weak) BMVVkTokenModel *tokenForFriendsController;
+@property (nonatomic, strong) BMVVkTokenModel *tokenForFriendsController;
 
 
 /**

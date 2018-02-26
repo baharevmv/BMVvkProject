@@ -41,6 +41,12 @@
 }
 
 
+- (void)dealloc
+{
+    [self.timer invalidate];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
