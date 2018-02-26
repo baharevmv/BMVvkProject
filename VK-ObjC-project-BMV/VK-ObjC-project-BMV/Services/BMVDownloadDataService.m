@@ -50,13 +50,20 @@
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
             id dataModel = [self parsingByType:dataType json:json];
             dispatch_async(dispatch_get_main_queue(), ^{
-                completeHandler(dataModel);
+                if (completeHandler)
+                {
+                    completeHandler(dataModel);
+                }
             });
         }
         else
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                completeHandler(nil);
+                if (completeHandler)
+                {
+                    completeHandler(nil);
+                }
+
             });
         }
     }];
@@ -65,44 +72,20 @@
 
 
 - (NSURL *)buildURLWithType:(BMVDownloadDataType)dataType localToken:(BMVVkTokenModel *)token
-            currentUserID:(NSString *)userID
+              currentUserID:(NSString *)userID
 {
-    NSURL *url;
     switch (dataType)
     {
         case BMVDownloadDataTypeFriends:
         {
-            url = [BMVBuilderURLFriend urlForFriendsBuildWithToken:token];
-            break;
+            return [BMVBuilderURLFriend urlForFriendsBuildWithToken:token];
         }
         case BMVDownloadDataTypePhotos:
         {
-            url = [BMVBuilderURLPhotos urlForAllPhotosWithToken:token forCurrentFriendID:userID];
-            break;
+            return [BMVBuilderURLPhotos urlForAllPhotosWithToken:token forCurrentFriendID:userID];
         }
     }
-    return url;
 }
-
-
-//- (id)parsingByType:(BMVDownloadDataType)dataType json:(NSDictionary *)json
-//{
-//    id dataModel;
-//    switch (dataType)
-//    {
-//        case BMVDownloadDataTypeFriends:
-//        {
-//            dataModel = [BMVParsingJSONFriends jsonToModel:json];
-//            break;
-//        }
-//        case BMVDownloadDataTypePhotos:
-//        {
-//            dataModel = [BMVParsingJSONPhotos jsonToModel:json];
-//            break;
-//        }
-//    }
-//    return dataModel;
-//}
 
 
 - (id)parsingByType:(BMVDownloadDataType)dataType json:(NSDictionary *)json
@@ -125,16 +108,19 @@
 - (void)downloadAllPhotosToPhotoAlbumWithArray:(NSArray *)arrayToDownload completeHandler:(void(^)(id))completeHandler
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    for (BMVVkPhotoModel *photo in arrayToDownload)
-    {
-        NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
-        NSLog(@"%@", originalPhotoPath);
-        NSURL *urlToDownload = [NSURL URLWithString:originalPhotoPath];
-        UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlToDownload]];
-        SEL imageDownloaded = @selector(image:didFinishSavingWithError:contextInfo:);
-        UIImageWriteToSavedPhotosAlbum(downloadedImage, self, imageDownloaded, nil);
-    }
-    completeHandler(nil);
+        for (BMVVkPhotoModel *photo in arrayToDownload)
+        {
+            NSString *originalPhotoPath = [[NSString alloc] initWithFormat:@"%@",photo.mediumImageURL];
+            NSLog(@"%@", originalPhotoPath);
+            NSURL *urlToDownload = [NSURL URLWithString:originalPhotoPath];
+            UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlToDownload]];
+            SEL imageDownloaded = @selector(image:didFinishSavingWithError:contextInfo:);
+            UIImageWriteToSavedPhotosAlbum(downloadedImage, self, imageDownloaded, nil);
+        }
+        if (completeHandler)
+        {
+            completeHandler(nil);
+        }
     });
 }
 
