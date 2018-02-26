@@ -32,7 +32,6 @@
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VKFriend"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"fullName CONTAINS[c] %@",searchString];
-    
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES];
     fetchRequest.sortDescriptors = @[sortDescriptor];
     NSArray *personsArray = [NSArray new];
