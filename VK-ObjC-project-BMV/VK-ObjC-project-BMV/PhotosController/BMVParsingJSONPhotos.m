@@ -24,16 +24,16 @@
         return nil;
     }
     NSMutableArray <BMVVkPhotoModel *> *readyPhotosArray = [NSMutableArray new];
-    NSArray *photoArray = json[@"response"];
+    NSArray *photoArray = json[@"response"][@"items"];
     for (NSDictionary *netModelDictionary in photoArray)
     {
         if ([netModelDictionary isKindOfClass:[NSDictionary class]])
         {
             BMVVkPhotoModel *typicalPhotoModel = [BMVVkPhotoModel new];
-            typicalPhotoModel.photoID = netModelDictionary[@"pid"];
-            typicalPhotoModel.previewImageURL = netModelDictionary[@"src_small"];
-            typicalPhotoModel.mediumImageURL = netModelDictionary[@"src_big"];
-            typicalPhotoModel.orinalImageURL = netModelDictionary[@"src_xbig"];
+            typicalPhotoModel.photoID = netModelDictionary[@"id"];
+            typicalPhotoModel.previewImageURL = netModelDictionary[@"photo_75"];
+            typicalPhotoModel.mediumImageURL = netModelDictionary[@"photo_604"];
+            typicalPhotoModel.orinalImageURL = netModelDictionary[@"photo_130"];
             [readyPhotosArray addObject:typicalPhotoModel];
         }
     }

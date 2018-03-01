@@ -32,6 +32,11 @@ static CGFloat const BMVOffset = 10.0;
     return self;
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+}
+
 
 - (void)setMasonryConstraints
 {
