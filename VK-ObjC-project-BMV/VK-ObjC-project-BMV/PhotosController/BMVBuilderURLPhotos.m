@@ -11,11 +11,10 @@
 
 static NSString *const BMVFirstPartURL = @"https://api.vk.com/method/photos.getAll?access_token=";
 static NSString *const BMVSecondPartURL = @"&owner_id=";
-static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200";
+static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200&v=5.69";
 
 
 @implementation BMVBuilderURLPhotos
-
 
 + (NSURL *)urlForAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID
 {

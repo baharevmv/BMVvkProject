@@ -47,7 +47,6 @@ static CGFloat const BMVActivityViewDimension = 40.0;
     [self createUserInterface];
     [self preparingModel];
     self.selectedModelArray = [NSMutableArray <BMVVkPhotoModel *> new];
-    
     // Pull-to-Refresh Feature
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Обновляем..."];
