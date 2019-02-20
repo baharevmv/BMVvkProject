@@ -23,13 +23,13 @@
 @implementation BMVParsingJSONFriendsTests
 
 - (void)setUp {
-    [super setUp];
-    self.parsingJSONFriends = ([BMVParsingJSONFriends new]);
+	[super setUp];
+	self.parsingJSONFriends = ([BMVParsingJSONFriends new]);
 }
 
 - (void)tearDown {
-    self.parsingJSONFriends = nil;
-    [super tearDown];
+	self.parsingJSONFriends = nil;
+	[super tearDown];
 }
 
 
@@ -37,8 +37,8 @@
 
 - (void)testJSONToModelNilJSON
 {
-    NSArray *modelArray = [BMVParsingJSONFriends jsonToModel:nil];
-    expect(modelArray).to.beNil();
+	NSArray *modelArray = [BMVParsingJSONFriends jsonToModel:nil];
+	expect(modelArray).to.beNil();
 }
 
 
@@ -46,8 +46,8 @@
 
 - (void)testJSONToModelEmptyJSON
 {
-    NSArray *modelArray = [BMVParsingJSONFriends jsonToModel:@{}];
-    expect(modelArray).to.beEmpty();
+	NSArray *modelArray = [BMVParsingJSONFriends jsonToModel:@{}];
+	expect(modelArray).to.beEmpty();
 }
 
 
@@ -55,10 +55,10 @@
 
 - (void)testBMVParsingJSONFriendsCorrectOutputFormatType
 {
-    id arrayOfInputData = OCMClassMock([NSDictionary class]);
-    id arrayOfOutputData = [NSArray<BMVVkUserModel *> class];
-    NSArray *goingOut = [BMVParsingJSONFriends jsonToModel:arrayOfInputData];
-    expect(goingOut).to.beAKindOf(arrayOfOutputData);
+	id arrayOfInputData = OCMClassMock([NSDictionary class]);
+	id arrayOfOutputData = [NSArray<BMVVkUserModel *> class];
+	NSArray *goingOut = [BMVParsingJSONFriends jsonToModel:arrayOfInputData];
+	expect(goingOut).to.beAKindOf(arrayOfOutputData);
 }
 
 
@@ -66,15 +66,15 @@
 
 - (void)testJSONErrorHandler
 {
-    NSArray *usersArray = [NSArray new];
-    NSDictionary *jsonDictionary = @{@"error": usersArray};
-    
-    id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
-    id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
-    OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
-    NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
-    
-    expect(modelArray).to.beNil();
+	NSArray *usersArray = [NSArray new];
+	NSDictionary *jsonDictionary = @{@"error": usersArray};
+	
+	id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
+	id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
+	OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
+	NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
+	
+	expect(modelArray).to.beNil();
 }
 
 
@@ -82,23 +82,23 @@
 
 - (void)testJSONToModelParsing
 {
-    NSArray *usersArray = @[@{@"id" : @"123456", @"first_name" : @"Александр", @"last_name" : @"Александров", @"photo_50" : @"https://vk.api.com/littlephoto.jpg",
-                              @"photo_100" : @"https://vk.api.com/photo.jpg", @"photo_max_orig" : @"https://vk.api.com/bigphoto.jpg"}];
-    NSDictionary *jsonDictionary = @{@"response": @{@"count" : @"991", @"items" : usersArray}};
-    
-    id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
-    id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
-    OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
-    NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
-    
-    expect(modelArray).notTo.beNil();
-    expect(modelArray.count == 1).to.beTruthy();
-    expect(modelArray[0].firstName).to.equal(@"Александр");
-    expect(modelArray[0].lastName).to.equal(@"Александров");
-    expect(modelArray[0].userID).to.equal(@"123456");
-    expect(modelArray[0].smallImageURLString).to.equal(@"https://vk.api.com/littlephoto.jpg");
-    expect(modelArray[0].imageURLString).to.equal(@"https://vk.api.com/photo.jpg");
-    expect(modelArray[0].bigImageURLString).to.equal(@"https://vk.api.com/bigphoto.jpg");
+	NSArray *usersArray = @[@{@"id" : @"123456", @"first_name" : @"Александр", @"last_name" : @"Александров", @"photo_50" : @"https://vk.api.com/littlephoto.jpg",
+							  @"photo_100" : @"https://vk.api.com/photo.jpg", @"photo_max_orig" : @"https://vk.api.com/bigphoto.jpg"}];
+	NSDictionary *jsonDictionary = @{@"response": @{@"count" : @"991", @"items" : usersArray}};
+	
+	id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
+	id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
+	OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
+	NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
+	
+	expect(modelArray).notTo.beNil();
+	expect(modelArray.count == 1).to.beTruthy();
+	expect(modelArray[0].firstName).to.equal(@"Александр");
+	expect(modelArray[0].lastName).to.equal(@"Александров");
+	expect(modelArray[0].userID).to.equal(@"123456");
+	expect(modelArray[0].smallImageURLString).to.equal(@"https://vk.api.com/littlephoto.jpg");
+	expect(modelArray[0].imageURLString).to.equal(@"https://vk.api.com/photo.jpg");
+	expect(modelArray[0].bigImageURLString).to.equal(@"https://vk.api.com/bigphoto.jpg");
 }
 
 
@@ -106,23 +106,23 @@
 
 - (void)testJSONToModelButGotWrongJSON
 {
-    NSArray *usersArray = @[@{@"Id" : @"123456", @"firstname" : @"Александр", @"lat_name" : @"Александров", @"photo_0" : @"https://vk.api.com/littlephoto.jpg",
-                              @"ph0to_100" : @"https://vk.api.com/photo.jpg", @"photo_man_orig" : @"https://vk.api.com/bigphoto.jpg"}];
-    NSDictionary *jsonDictionary = @{@"response": @{@"count" : @"991", @"items" : usersArray}};
-    
-    id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
-    id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
-    OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
-    
-    NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
-    expect(modelArray).notTo.beNil();
-    expect(modelArray.count == 1).to.beTruthy();
-    expect(modelArray[0].firstName).to.beNil();
-    expect(modelArray[0].lastName).to.beNil();
-    expect(modelArray[0].userID).to.beNil();
-    expect(modelArray[0].smallImageURLString).to.beNil();
-    expect(modelArray[0].imageURLString).to.beNil();
-    expect(modelArray[0].bigImageURLString).to.beNil();
+	NSArray *usersArray = @[@{@"Id" : @"123456", @"firstname" : @"Александр", @"lat_name" : @"Александров", @"photo_0" : @"https://vk.api.com/littlephoto.jpg",
+							  @"ph0to_100" : @"https://vk.api.com/photo.jpg", @"photo_man_orig" : @"https://vk.api.com/bigphoto.jpg"}];
+	NSDictionary *jsonDictionary = @{@"response": @{@"count" : @"991", @"items" : usersArray}};
+	
+	id objectMockBMVVkUserModel = OCMPartialMock([BMVVkUserModel new]);
+	id classMockBMVVkUserModel = OCMClassMock([BMVVkUserModel class]);
+	OCMStub([classMockBMVVkUserModel new]).andReturn(objectMockBMVVkUserModel);
+	
+	NSArray <BMVVkUserModel *> *modelArray = [BMVParsingJSONFriends jsonToModel:jsonDictionary];
+	expect(modelArray).notTo.beNil();
+	expect(modelArray.count == 1).to.beTruthy();
+	expect(modelArray[0].firstName).to.beNil();
+	expect(modelArray[0].lastName).to.beNil();
+	expect(modelArray[0].userID).to.beNil();
+	expect(modelArray[0].smallImageURLString).to.beNil();
+	expect(modelArray[0].imageURLString).to.beNil();
+	expect(modelArray[0].bigImageURLString).to.beNil();
 }
 
 @end

@@ -9,18 +9,18 @@
 #import "BMVURLRequestGenerator.h"
 
 static NSString *const BMVSinglePartURL = @"https://oauth.vk.com/authorize?client_id=6355197"
-                                        "&scope=274438&redirect_uri=https://oauth.vk.com/blank.html&"
-                                        "display=mobile&revoke=0&response_type=token";
+											"&scope=274438&redirect_uri=https://oauth.vk.com/blank.html&"
+											"display=mobile&revoke=0&response_type=token";
 
 @implementation BMVURLRequestGenerator
 
 - (NSURLRequest *)makingRequest
 {
-    NSString *BMVUrlString = [NSString stringWithFormat:@"%@",BMVSinglePartURL];
-    NSURL *url = [NSURL URLWithString:BMVUrlString];
-    NSURLRequest *request = [NSURLRequest new];
-    request = [NSURLRequest requestWithURL:url];
-    return request;
+	NSString *BMVUrlString = [NSString stringWithFormat:@"%@",BMVSinglePartURL];
+	NSURL *url = [NSURL URLWithString:BMVUrlString];
+	NSURLRequest *request = [NSURLRequest new];
+	request = [NSURLRequest requestWithURL:url];
+	return request;
 }
 
 @end

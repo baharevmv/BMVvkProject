@@ -18,17 +18,17 @@ static NSString *const BMVThirdPartURL = @"&extended=0&photo_sizes=0&count=200&v
 
 + (NSURL *)urlForAllPhotosWithToken:(BMVVkTokenModel *)token forCurrentFriendID:(NSString *)currentFriendID
 {
-    if (!token)
-    {
-        return nil;
-    }
-    if (!currentFriendID)
-    {
-        return nil;
-    }
-    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL,
-                                                                    currentFriendID, BMVThirdPartURL];
-    return [NSURL URLWithString:urlString];
+	if (!token)
+	{
+		return nil;
+	}
+	if (!currentFriendID)
+	{
+		return nil;
+	}
+	NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@",BMVFirstPartURL, token.tokenString, BMVSecondPartURL,
+						   								currentFriendID, BMVThirdPartURL];
+	return [NSURL URLWithString:urlString];
 }
 
 @end

@@ -18,40 +18,40 @@ static CGFloat const BMVOffset = 10.0;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if(self)
-    {
-        _userPhotoImageView = [UIImageView new];
-        [self.contentView addSubview:_userPhotoImageView];
-        
-        _userNameLabel = [UILabel new];
-        [self.contentView addSubview:_userNameLabel];
-        
-        [self setMasonryConstraints];
-    }
-    return self;
+	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+	if(self)
+	{
+		_userPhotoImageView = [UIImageView new];
+		[self.contentView addSubview:_userPhotoImageView];
+		
+		_userNameLabel = [UILabel new];
+		[self.contentView addSubview:_userNameLabel];
+		
+		[self setMasonryConstraints];
+	}
+	return self;
 }
 
 - (void)prepareForReuse
 {
-    [super prepareForReuse];
+	[super prepareForReuse];
 }
 
 
 - (void)setMasonryConstraints
 {
-    [_userPhotoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView.mas_top).with.offset(BMVOffset/5);
-        make.left.mas_equalTo(self.contentView.mas_left).with.offset(BMVOffset);
-        make.size.mas_equalTo(CGSizeMake(lineSizeImageView, lineSizeImageView));
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset/5);
-    }];
-    
-    [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView.mas_top).with.offset(BMVOffset);
-        make.left.mas_equalTo(_userPhotoImageView.mas_right).with.offset(BMVOffset * 2);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset);
-    }];
+	[_userPhotoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.mas_equalTo(self.contentView.mas_top).with.offset(BMVOffset/5);
+		make.left.mas_equalTo(self.contentView.mas_left).with.offset(BMVOffset);
+		make.size.mas_equalTo(CGSizeMake(lineSizeImageView, lineSizeImageView));
+		make.bottom.mas_equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset/5);
+	}];
+	
+	[_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.top.mas_equalTo(self.contentView.mas_top).with.offset(BMVOffset);
+		make.left.mas_equalTo(_userPhotoImageView.mas_right).with.offset(BMVOffset * 2);
+		make.bottom.mas_equalTo(self.contentView.mas_bottom).with.offset(-BMVOffset);
+	}];
 }
 
 @end

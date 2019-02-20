@@ -15,17 +15,17 @@
 
 - (instancetype)initWithVKFriend:(VKFriend *)vkFriendModel
 {
-    self = [super init];
-    if (self)
-    {
-        _firstName = vkFriendModel.firstName;
-        _lastName = vkFriendModel.lastName;
-        _smallImageURLString = vkFriendModel.smallImageURLString;
-        _imageURLString = vkFriendModel.imageURLString;
-        _bigImageURLString = vkFriendModel.bigImageURLString;
-        _userID = vkFriendModel.userID;
-    }
-    return self;
+	self = [super init];
+	if (self)
+	{
+		_firstName = vkFriendModel.firstName;
+		_lastName = vkFriendModel.lastName;
+		_smallImageURLString = vkFriendModel.smallImageURLString;
+		_imageURLString = vkFriendModel.imageURLString;
+		_bigImageURLString = vkFriendModel.bigImageURLString;
+		_userID = vkFriendModel.userID;
+	}
+	return self;
 }
 
 @end

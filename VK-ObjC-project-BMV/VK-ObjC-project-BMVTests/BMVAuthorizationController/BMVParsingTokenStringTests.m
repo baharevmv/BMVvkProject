@@ -22,13 +22,13 @@
 @implementation BMVParsingTokenStringTests
 
 - (void)setUp {
-    [super setUp];
-    self.parsingTokenString = ([BMVParsingTokenString new]);
+	[super setUp];
+	self.parsingTokenString = ([BMVParsingTokenString new]);
 }
 
 - (void)tearDown {
-    self.parsingTokenString = nil;
-    [super tearDown];
+	self.parsingTokenString = nil;
+	[super tearDown];
 }
 
 
@@ -36,8 +36,8 @@
 
 - (void)testRequestToModelNilRequest
 {
-    BMVVkTokenModel *token = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:nil];
-    expect(token).to.beNil();
+	BMVVkTokenModel *token = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:nil];
+	expect(token).to.beNil();
 }
 
 
@@ -45,12 +45,12 @@
 
 - (void)testRequestToModelEmptyRequest
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@""]];
-    NSURLRequest *request = [NSURLRequest new];
-    request = [NSURLRequest requestWithURL:url];
-    BMVVkTokenModel *token = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
-    expect(request).notTo.beNil();
-    expect(token).to.beNil();
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@""]];
+	NSURLRequest *request = [NSURLRequest new];
+	request = [NSURLRequest requestWithURL:url];
+	BMVVkTokenModel *token = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
+	expect(request).notTo.beNil();
+	expect(token).to.beNil();
 }
 
 
@@ -58,13 +58,13 @@
 
 - (void)testRequestToModelParsing
 {
-    NSURL *url = [NSURL URLWithString:@"https://oauth.vk.com/blank.html#access_token=dc6490505c102d37f61c&expires_in=86400&user_id=57630"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    BMVVkTokenModel *token = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
-    expect(token).notTo.beNil();
-    expect(token.tokenString).to.equal(@"dc6490505c102d37f61c");
-    expect(token.expirationDate).notTo.beNil();
-    expect(token.userIDString).to.equal(@"57630");
+	NSURL *url = [NSURL URLWithString:@"https://oauth.vk.com/blank.html#access_token=dc6490505c102d37f61c&expires_in=86400&user_id=57630"];
+	NSURLRequest *request = [NSURLRequest requestWithURL:url];
+	BMVVkTokenModel *token = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
+	expect(token).notTo.beNil();
+	expect(token.tokenString).to.equal(@"dc6490505c102d37f61c");
+	expect(token.expirationDate).notTo.beNil();
+	expect(token.userIDString).to.equal(@"57630");
 }
 
 @end

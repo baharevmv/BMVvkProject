@@ -13,6 +13,6 @@
  */
 @interface BMVPhotosCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic,strong) UIImage *image;        /**< Фото из фотоальбома пользователя*/
+@property (nonatomic,strong) UIImage *image;			/**< Фото из фотоальбома пользователя*/
 
 @end

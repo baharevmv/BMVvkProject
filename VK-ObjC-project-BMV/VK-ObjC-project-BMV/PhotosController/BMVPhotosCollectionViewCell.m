@@ -23,25 +23,25 @@ static CGFloat const BMVOffset = 2.0;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        self.backgroundColor = [UIColor whiteColor];
-        self.imageToShow = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, BMVOffset, BMVOffset)];
-        [self.contentView addSubview:self.imageToShow];
-    
-        UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-        selectedBackgroundView.backgroundColor = [UIColor redColor];
-        self.selectedBackgroundView = selectedBackgroundView;
-    }
-    return self;
+	self = [super initWithFrame:frame];
+	if (self)
+	{
+		self.backgroundColor = [UIColor whiteColor];
+		self.imageToShow = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, BMVOffset, BMVOffset)];
+		[self.contentView addSubview:self.imageToShow];
+		
+		UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+		selectedBackgroundView.backgroundColor = [UIColor redColor];
+		self.selectedBackgroundView = selectedBackgroundView;
+	}
+	return self;
 }
 
 
 - (void)setImage:(UIImage *)image
 {
-    self.imageToShow.image = image;
-    _image = image;
+	self.imageToShow.image = image;
+	_image = image;
 }
 
 @end

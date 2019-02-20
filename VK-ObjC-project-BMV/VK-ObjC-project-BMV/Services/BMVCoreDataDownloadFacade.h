@@ -1,5 +1,5 @@
 //
-//  BMVCoreDataDownloadFunnel.h
+//  BMVCoreDataDownloadFacade.h
 //  VK-ObjC-project-BMV
 //
 //  Created by max on 05.02.18.
@@ -16,7 +16,7 @@
 /**
  Класс для слияния функционала сервисов core data и download data
  */
-@interface BMVCoreDataDownloadFunnel : NSObject
+@interface BMVCoreDataDownloadFacade : NSObject
 
 
 /**
