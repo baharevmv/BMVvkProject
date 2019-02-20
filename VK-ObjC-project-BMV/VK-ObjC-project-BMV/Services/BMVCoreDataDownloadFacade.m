@@ -6,14 +6,14 @@
 //  Copyright © 2018 Maksim Bakharev. All rights reserved.
 //
 
-#import "BMVCoreDataDownloadFunnel.h"
+#import "BMVCoreDataDownloadFacade.h"
 #import "BMVDownloadDataService.h"
 #import "BMVCoreDataService.h"
 #import "BMVVkUserModel.h"
 #import "VKFriend+CoreDataClass.h"
 
 
-@interface BMVCoreDataDownloadFunnel()
+@interface BMVCoreDataDownloadFacade()
 
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 @property (nonatomic, strong) BMVCoreDataService *coreDataService;
@@ -21,7 +21,7 @@
 @end
 
 
-@implementation BMVCoreDataDownloadFunnel
+@implementation BMVCoreDataDownloadFacade
 
 - (instancetype)init
 {
@@ -49,7 +49,7 @@
     else
     {
         [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends localToken:token
-                                                   currentUserID:token.userIDString
+                                                   currentUserID:token.userIDString offset:nil
             completeHandler:^(id dataModel) {
                 [self.coreDataService saveFriendModel:dataModel];
             if (completeHandler)

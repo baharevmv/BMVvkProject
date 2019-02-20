@@ -19,14 +19,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [UIWindow new];
-    BMVLoginViewController *loginViewController = [BMVLoginViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    
-    self.window.rootViewController = navigationController;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
+	self.window = [UIWindow new];
+	BMVLoginViewController *loginViewController = [BMVLoginViewController new];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+	
+	self.window.rootViewController = navigationController;
+	self.window.backgroundColor = [UIColor whiteColor];
+	[self.window makeKeyAndVisible];
+	return YES;
 }
 
 

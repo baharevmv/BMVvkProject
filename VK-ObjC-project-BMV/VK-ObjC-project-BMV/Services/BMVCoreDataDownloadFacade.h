@@ -16,7 +16,7 @@
 /**
  Класс для слияния функционала сервисов core data и download data
  */
-@interface BMVCoreDataDownloadFunnel : NSObject
+@interface BMVCoreDataDownloadFacade : NSObject
 
 
 /**
