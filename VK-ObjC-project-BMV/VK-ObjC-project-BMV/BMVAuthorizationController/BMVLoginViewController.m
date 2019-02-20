@@ -48,28 +48,28 @@
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    CGRect typicalRectangle = self.view.bounds;
-    typicalRectangle.origin = CGPointZero;
-    
-    self.webView = [[UIWebView alloc] initWithFrame:typicalRectangle];
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:self.webView];
-    
-    self.navigationItem.title = @"Login";
-    self.request = [self.requestGenerator makingRequest];
-
-    self.animationView = [UIView new];
-    self.animationView.backgroundColor = UIColor.whiteColor;
-    [self.view addSubview:self.animationView];
-    
-    [self.animationView addSubview:[UIImageView bmv_animationOnView:self.view]];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3
-                                                  target:self
-                                                selector:@selector(actionTimerRemoveAnimationViewAuthorization)
-                                                userInfo:nil
-                                                 repeats:NO];
+	[super viewDidLoad];
+	
+	CGRect typicalRectangle = self.view.bounds;
+	typicalRectangle.origin = CGPointZero;
+	
+	self.webView = [[UIWebView alloc] initWithFrame:typicalRectangle];
+	self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	[self.view addSubview:self.webView];
+	
+	self.navigationItem.title = @"Login";
+	self.request = [self.requestGenerator makingRequest];
+	
+	self.animationView = [UIView new];
+	self.animationView.backgroundColor = UIColor.whiteColor;
+	[self.view addSubview:self.animationView];
+	
+	[self.animationView addSubview:[UIImageView bmv_animationOnView:self.view]];
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5
+												  target:self
+												selector:@selector(actionTimerRemoveAnimationViewAuthorization)
+												userInfo:nil
+												 repeats:NO];
 }
 
 
@@ -77,30 +77,29 @@
 
 - (void)actionTimerRemoveAnimationViewAuthorization
 {
-    [self.animationView removeFromSuperview];
-    [self.timer invalidate];
-    self.webView.delegate = self;
-    [self.webView loadRequest:self.request];
+	[self.animationView removeFromSuperview];
+	[self.timer invalidate];
+	self.webView.delegate = self;
+	[self.webView loadRequest:self.request];
 }
 
 
 #pragma mark - UIWebViewDelegete
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([[[request URL] description] rangeOfString:@"#access_token="].location == NSNotFound)
-    {
-        return YES;
-    }
-    self.theToken = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    BMVFriendsViewController *friendsViewController = [BMVFriendsViewController new];
-    friendsViewController.tokenForFriendsController = self.theToken;
-    UINavigationController *friendsNavigationController = [[UINavigationController alloc] initWithRootViewController:
-                                                                                                friendsViewController];
-    friendsNavigationController.tabBarItem.title = @"Friends";
-    [self presentViewController:friendsNavigationController animated:YES completion:nil];
-    return NO;
+	if ([[[request URL] description] rangeOfString:@"#access_token="].location == NSNotFound)
+	{
+		return YES;
+	}
+	self.theToken = [self.parsingTokenString getTokenFromWebViewHandlerWithRequest:request];
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
+	BMVFriendsViewController *friendsViewController = [BMVFriendsViewController new];
+	friendsViewController.tokenForFriendsController = self.theToken;
+	UINavigationController *friendsNavigationController = [[UINavigationController alloc] initWithRootViewController:friendsViewController];
+	friendsNavigationController.tabBarItem.title = @"Friends";
+	[self presentViewController:friendsNavigationController animated:YES completion:nil];
+	return NO;
 }
 
 @end
