@@ -103,14 +103,11 @@ static CGFloat const BMVActivityViewDimension = 40.0;
 
 - (void)refreshWithPull:(UIRefreshControl *)refreshControl
 {
-    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos
-                                                  localToken:self.tokenForFriendsController
-                                               currentUserID:self.interestingUser.userID
-                                                      offset:nil
-                                             completeHandler:^(id photoModelArray) {
-         self.modelArray = photoModelArray;
-         [self.collectionView reloadData];
-     }];
+    [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos localToken:self.tokenForFriendsController
+                                    currentUserID:self.interestingUser.userID completeHandler:^(id photoModelArray) {
+        self.modelArray = photoModelArray;
+        [self.collectionView reloadData];
+    }];
     [refreshControl endRefreshing];
 }
 
@@ -146,7 +143,6 @@ static CGFloat const BMVActivityViewDimension = 40.0;
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypePhotos
                                                   localToken:self.tokenForFriendsController
                                                currentUserID:self.interestingUser.userID
-                                                      offset:nil
         completeHandler:^(id photoModelArray) {
         self.modelArray = photoModelArray;
         [self.collectionView reloadData];

@@ -10,7 +10,7 @@
 #import "BMVFriendsTableViewCell.h"
 #import "BMVVkUserModel.h"
 #import "BMVAllFriendsPhotosCollectionView.h"
-#import "BMVCoreDataDownloadFacade.h"
+#import "BMVCoreDataDownloadFunnel.h"
 #import "BMVCoreDataService.h"
 #import "BMVDownloadDataService.h"
 #import "Masonry.h"
@@ -22,7 +22,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 @interface BMVFriendsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, copy) NSArray <BMVVkUserModel *> *usersArray;
-@property (nonatomic, strong) BMVCoreDataDownloadFacade *coreDataDownloadFunnel;
+@property (nonatomic, strong) BMVCoreDataDownloadFunnel *coreDataDownloadFunnel;
 @property (nonatomic, strong) BMVDownloadDataService *downloadDataService;
 @property (nonatomic, strong) BMVCoreDataService *coreDataService;
 @property (nonatomic, strong) UISearchBar *lifeSearchBar;
@@ -38,7 +38,7 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     self = [super init];
     if (self)
     {
-        _coreDataDownloadFunnel = [BMVCoreDataDownloadFacade new];
+        _coreDataDownloadFunnel = [BMVCoreDataDownloadFunnel new];
         _downloadDataService = [BMVDownloadDataService new];
         _coreDataService = [BMVCoreDataService new];
     }
@@ -84,7 +84,6 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
     [self.downloadDataService downloadDataWithDataTypeString:BMVDownloadDataTypeFriends
                                                   localToken:self.tokenForFriendsController
                                                currentUserID:self.tokenForFriendsController.userIDString
-                                                      offset:nil
         completeHandler:^(id modelArray) {
             self.usersArray = modelArray;
             BMVCoreDataService *coreDataService = [BMVCoreDataService new];
@@ -118,10 +117,9 @@ static NSString *const BMVCellIdentifier = @"cellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     BMVFriendsTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:BMVCellIdentifier forIndexPath:indexPath];
-    [tableViewCell prepareForReuse];
+//    [tableViewCell prepareForReuse];
     // Забираем имя
-    NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",
-                                self.usersArray[indexPath.row].firstName,
+    NSString *friendFullName = [[NSString alloc] initWithFormat:@"%@ %@",self.usersArray[indexPath.row].firstName,
                                 self.usersArray[indexPath.row].lastName];
     tableViewCell.userNameLabel.text = friendFullName;
     // Забираем фото.

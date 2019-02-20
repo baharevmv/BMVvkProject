@@ -39,7 +39,7 @@
 		50B3FFA5202675FE005DE6E8 /* BMVParsingJSONFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA4202675FE005DE6E8 /* BMVParsingJSONFriends.m */; };
 		50B3FFA820267A00005DE6E8 /* BMVParsingJSONPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotos.m */; };
 		50BB5F55202C83C400AD2585 /* BMVParsingTokenString.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB5F54202C83C400AD2585 /* BMVParsingTokenString.m */; };
-		50C4A19C20288AB4008A932E /* BMVCoreDataDownloadFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFacade.m */; };
+		50C4A19C20288AB4008A932E /* BMVCoreDataDownloadFunnel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFunnel.m */; };
 		50D40106202D9E8400E15649 /* UIImageView+BMVImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D40105202D9E8400E15649 /* UIImageView+BMVImageView.m */; };
 		50F747AA20377BF900E60B17 /* BMVParsingTokenStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F747A920377BF900E60B17 /* BMVParsingTokenStringTests.m */; };
 /* End PBXBuildFile section */
@@ -112,8 +112,8 @@
 		50B3FFA720267A00005DE6E8 /* BMVParsingJSONPhotos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingJSONPhotos.m; sourceTree = "<group>"; };
 		50BB5F53202C83C400AD2585 /* BMVParsingTokenString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVParsingTokenString.h; sourceTree = "<group>"; };
 		50BB5F54202C83C400AD2585 /* BMVParsingTokenString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingTokenString.m; sourceTree = "<group>"; };
-		50C4A19A20288AB4008A932E /* BMVCoreDataDownloadFacade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVCoreDataDownloadFacade.h; sourceTree = "<group>"; };
-		50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFacade.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVCoreDataDownloadFacade.m; sourceTree = "<group>"; };
+		50C4A19A20288AB4008A932E /* BMVCoreDataDownloadFunnel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMVCoreDataDownloadFunnel.h; sourceTree = "<group>"; };
+		50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFunnel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVCoreDataDownloadFunnel.m; sourceTree = "<group>"; };
 		50D40104202D9E8400E15649 /* UIImageView+BMVImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BMVImageView.h"; sourceTree = "<group>"; };
 		50D40105202D9E8400E15649 /* UIImageView+BMVImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BMVImageView.m"; sourceTree = "<group>"; };
 		50F747A920377BF900E60B17 /* BMVParsingTokenStringTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMVParsingTokenStringTests.m; sourceTree = "<group>"; };
@@ -245,8 +245,8 @@
 		506AB82C20247B7A0025E610 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				50C4A19A20288AB4008A932E /* BMVCoreDataDownloadFacade.h */,
-				50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFacade.m */,
+				50C4A19A20288AB4008A932E /* BMVCoreDataDownloadFunnel.h */,
+				50C4A19B20288AB4008A932E /* BMVCoreDataDownloadFunnel.m */,
 				50B3FF9A20266883005DE6E8 /* BMVDownloadDataService.h */,
 				50B3FF9B20266883005DE6E8 /* BMVDownloadDataService.m */,
 				5082C821202858BF00474F0F /* BMVCoreDataService.h */,
@@ -570,7 +570,7 @@
 				50A72BEF200783DF002B6F1E /* BMVVkTokenModel.m in Sources */,
 				50BB5F55202C83C400AD2585 /* BMVParsingTokenString.m in Sources */,
 				50A72BF22007978D002B6F1E /* BMVFriendsViewController.m in Sources */,
-				50C4A19C20288AB4008A932E /* BMVCoreDataDownloadFacade.m in Sources */,
+				50C4A19C20288AB4008A932E /* BMVCoreDataDownloadFunnel.m in Sources */,
 				50A72BB320073CCE002B6F1E /* AppDelegate.m in Sources */,
 				507E6464203196B50011188C /* VKFriend+CoreDataProperties.m in Sources */,
 				507E6463203196B50011188C /* VKFriend+CoreDataClass.m in Sources */,

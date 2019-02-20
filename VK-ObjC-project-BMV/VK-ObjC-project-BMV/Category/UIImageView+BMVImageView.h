@@ -18,7 +18,7 @@
 /**
  Создает анимацию при загрузке приложения
  @param superview - вью, на которой будет располагаться image view с анимацией.
- @return imageView с анимацией
+ @return image view с анимацией
  */
 + (UIImageView *)bmv_animationOnView:(UIView *)superview;
 
